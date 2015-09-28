@@ -1,0 +1,738 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0ECD1FE11B5C510700D6CFA5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD1FE01B5C510700D6CFA5 /* main.m */; };
+		0ECD1FE41B5C510700D6CFA5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD1FE31B5C510700D6CFA5 /* AppDelegate.m */; };
+		0ECD1FE71B5C510700D6CFA5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD1FE61B5C510700D6CFA5 /* ViewController.m */; };
+		0ECD1FEA1B5C510700D6CFA5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD1FE81B5C510700D6CFA5 /* Main.storyboard */; };
+		0ECD1FEC1B5C510700D6CFA5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD1FEB1B5C510700D6CFA5 /* Images.xcassets */; };
+		0ECD1FEF1B5C510700D6CFA5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD1FED1B5C510700D6CFA5 /* LaunchScreen.xib */; };
+		0ECD1FFB1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD1FFA1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m */; };
+		0ECD200A1B5C520D00D6CFA5 /* TIELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */; };
+		0ECD200B1B5C520D00D6CFA5 /* TIELoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */; };
+		0ECD200F1B5C534100D6CFA5 /* TIESingUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */; };
+		0ECD20101B5C534100D6CFA5 /* TIESingUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */; };
+		0ECD20141B5C77AC00D6CFA5 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD20131B5C77AC00D6CFA5 /* back.png */; };
+		0ECD20461B5CC44200D6CFA5 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20351B5CC44200D6CFA5 /* AbstractActionSheetPicker.m */; };
+		0ECD20471B5CC44200D6CFA5 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20371B5CC44200D6CFA5 /* ActionSheetCustomPicker.m */; };
+		0ECD20481B5CC44200D6CFA5 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD203A1B5CC44200D6CFA5 /* ActionSheetDatePicker.m */; };
+		0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD203C1B5CC44200D6CFA5 /* ActionSheetDistancePicker.m */; };
+		0ECD204A1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD203E1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m */; };
+		0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20411B5CC44200D6CFA5 /* ActionSheetStringPicker.m */; };
+		0ECD204C1B5CC44200D6CFA5 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20431B5CC44200D6CFA5 /* DistancePickerView.m */; };
+		0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */; };
+		4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDCA82F83C00E90A923900 /* libPods.a */; };
+		CE8F3FE41BB889D1003D8CDD /* check_off.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8F3FE31BB889D1003D8CDD /* check_off.png */; settings = {ASSET_TAGS = (); }; };
+		CE8F3FE61BB889D7003D8CDD /* check_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8F3FE51BB889D7003D8CDD /* check_on.png */; settings = {ASSET_TAGS = (); }; };
+		CE8F3FF51BB8A190003D8CDD /* TIEMyScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE8F3FF61BB8A190003D8CDD /* TIEMyScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CE8F3FFA1BB8A4FF003D8CDD /* TIETravelDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F3FF81BB8A4FF003D8CDD /* TIETravelDetailsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE8F3FFB1BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F3FF91BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CE8F40041BB8C081003D8CDD /* TIEApplicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F40021BB8C081003D8CDD /* TIEApplicationsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE8F40051BB8C081003D8CDD /* TIEApplicationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CE8F400F1BB8D2C1003D8CDD /* TIESearchTravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F400D1BB8D2C1003D8CDD /* TIESearchTravelViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F400E1BB8D2C1003D8CDD /* TIESearchTravelViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD84561BAF3A6300410730 /* TIETrayTravelsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CEFD84591BAF3A6300410730 /* TIETrayTravelsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD84571BAF3A6300410730 /* TIETrayTravelsTableViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CEFD845D1BAF3B7100410730 /* TIEProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD845B1BAF3B7100410730 /* TIEProfileViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CEFD845E1BAF3B7100410730 /* TIEProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD845C1BAF3B7100410730 /* TIEProfileViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CEFD84621BAF3BFE00410730 /* TIEScheduleTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD84601BAF3BFE00410730 /* TIEScheduleTripViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CEFD84631BAF3BFE00410730 /* TIEScheduleTripViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD84611BAF3BFE00410730 /* TIEScheduleTripViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		CEFD84681BAF468400410730 /* TIETravelCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD84661BAF468400410730 /* TIETravelCustomCellTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		CEFD84691BAF468400410730 /* TIETravelCustomCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD84671BAF468400410730 /* TIETravelCustomCellTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		CEFD84701BAF4DA200410730 /* default.icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD846B1BAF4DA200410730 /* default.icon.png */; settings = {ASSET_TAGS = (); }; };
+		CEFD84711BAF4DA200410730 /* rate_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD846C1BAF4DA200410730 /* rate_empty.png */; settings = {ASSET_TAGS = (); }; };
+		CEFD84721BAF4DA200410730 /* rate_full.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD846D1BAF4DA200410730 /* rate_full.png */; settings = {ASSET_TAGS = (); }; };
+		CEFD84731BAF4DA200410730 /* seat_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD846E1BAF4DA200410730 /* seat_empty.png */; settings = {ASSET_TAGS = (); }; };
+		CEFD84741BAF4DA200410730 /* seat_full.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFD846F1BAF4DA200410730 /* seat_full.png */; settings = {ASSET_TAGS = (); }; };
+		CEFE54A01BB855F60048A556 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE549F1BB855F60048A556 /* logo.png */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0ECD1FF51B5C510700D6CFA5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0ECD1FD31B5C510600D6CFA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ECD1FDA1B5C510700D6CFA5;
+			remoteInfo = "Cuatro X Carro";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0ECD1FDB1B5C510700D6CFA5 /* Cuatro X Carro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cuatro X Carro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ECD1FDF1B5C510700D6CFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ECD1FE01B5C510700D6CFA5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0ECD1FE21B5C510700D6CFA5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0ECD1FE31B5C510700D6CFA5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0ECD1FE51B5C510700D6CFA5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0ECD1FE61B5C510700D6CFA5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0ECD1FE91B5C510700D6CFA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0ECD1FEB1B5C510700D6CFA5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0ECD1FEE1B5C510700D6CFA5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0ECD1FF41B5C510700D6CFA5 /* Cuatro X CarroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cuatro X CarroTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ECD1FF91B5C510700D6CFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ECD1FFA1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cuatro_X_CarroTests.m; sourceTree = "<group>"; };
+		0ECD20071B5C520D00D6CFA5 /* TIELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIELoginViewController.h; sourceTree = "<group>"; };
+		0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIELoginViewController.m; sourceTree = "<group>"; };
+		0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIELoginViewController.xib; sourceTree = "<group>"; };
+		0ECD200C1B5C534100D6CFA5 /* TIESingUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIESingUpViewController.h; sourceTree = "<group>"; };
+		0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIESingUpViewController.m; sourceTree = "<group>"; };
+		0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIESingUpViewController.xib; sourceTree = "<group>"; };
+		0ECD20131B5C77AC00D6CFA5 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		0ECD20341B5CC44200D6CFA5 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		0ECD20351B5CC44200D6CFA5 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		0ECD20361B5CC44200D6CFA5 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		0ECD20371B5CC44200D6CFA5 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		0ECD20381B5CC44200D6CFA5 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		0ECD20391B5CC44200D6CFA5 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		0ECD203A1B5CC44200D6CFA5 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		0ECD203B1B5CC44200D6CFA5 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		0ECD203C1B5CC44200D6CFA5 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		0ECD203D1B5CC44200D6CFA5 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		0ECD203E1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		0ECD203F1B5CC44200D6CFA5 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		0ECD20401B5CC44200D6CFA5 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		0ECD20411B5CC44200D6CFA5 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		0ECD20421B5CC44200D6CFA5 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		0ECD20431B5CC44200D6CFA5 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		0ECD20441B5CC44200D6CFA5 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		467A8D47BB8752E3F36297FB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5EBDCA82F83C00E90A923900 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CE8F3FE31BB889D1003D8CDD /* check_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_off.png; sourceTree = "<group>"; };
+		CE8F3FE51BB889D7003D8CDD /* check_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_on.png; sourceTree = "<group>"; };
+		CE8F3FF21BB8A190003D8CDD /* TIEMyScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEMyScheduleViewController.h; sourceTree = "<group>"; };
+		CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEMyScheduleViewController.m; sourceTree = "<group>"; };
+		CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEMyScheduleViewController.xib; sourceTree = "<group>"; };
+		CE8F3FF71BB8A4FF003D8CDD /* TIETravelDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIETravelDetailsViewController.h; sourceTree = "<group>"; };
+		CE8F3FF81BB8A4FF003D8CDD /* TIETravelDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIETravelDetailsViewController.m; sourceTree = "<group>"; };
+		CE8F3FF91BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIETravelDetailsViewController.xib; sourceTree = "<group>"; };
+		CE8F40011BB8C081003D8CDD /* TIEApplicationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEApplicationsViewController.h; sourceTree = "<group>"; };
+		CE8F40021BB8C081003D8CDD /* TIEApplicationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEApplicationsViewController.m; sourceTree = "<group>"; };
+		CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEApplicationsViewController.xib; sourceTree = "<group>"; };
+		CE8F400C1BB8D2C1003D8CDD /* TIESearchTravelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIESearchTravelViewController.h; sourceTree = "<group>"; };
+		CE8F400D1BB8D2C1003D8CDD /* TIESearchTravelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIESearchTravelViewController.m; sourceTree = "<group>"; };
+		CE8F400E1BB8D2C1003D8CDD /* TIESearchTravelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIESearchTravelViewController.xib; sourceTree = "<group>"; };
+		CEFD84551BAF3A6300410730 /* TIETrayTravelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIETrayTravelsTableViewController.h; sourceTree = "<group>"; };
+		CEFD84561BAF3A6300410730 /* TIETrayTravelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIETrayTravelsTableViewController.m; sourceTree = "<group>"; };
+		CEFD84571BAF3A6300410730 /* TIETrayTravelsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIETrayTravelsTableViewController.xib; sourceTree = "<group>"; };
+		CEFD845A1BAF3B7100410730 /* TIEProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEProfileViewController.h; sourceTree = "<group>"; };
+		CEFD845B1BAF3B7100410730 /* TIEProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEProfileViewController.m; sourceTree = "<group>"; };
+		CEFD845C1BAF3B7100410730 /* TIEProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEProfileViewController.xib; sourceTree = "<group>"; };
+		CEFD845F1BAF3BFE00410730 /* TIEScheduleTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEScheduleTripViewController.h; sourceTree = "<group>"; };
+		CEFD84601BAF3BFE00410730 /* TIEScheduleTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEScheduleTripViewController.m; sourceTree = "<group>"; };
+		CEFD84611BAF3BFE00410730 /* TIEScheduleTripViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEScheduleTripViewController.xib; sourceTree = "<group>"; };
+		CEFD84651BAF468400410730 /* TIETravelCustomCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIETravelCustomCellTableViewCell.h; sourceTree = "<group>"; };
+		CEFD84661BAF468400410730 /* TIETravelCustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIETravelCustomCellTableViewCell.m; sourceTree = "<group>"; };
+		CEFD84671BAF468400410730 /* TIETravelCustomCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIETravelCustomCellTableViewCell.xib; sourceTree = "<group>"; };
+		CEFD846B1BAF4DA200410730 /* default.icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.icon.png; sourceTree = "<group>"; };
+		CEFD846C1BAF4DA200410730 /* rate_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_empty.png; sourceTree = "<group>"; };
+		CEFD846D1BAF4DA200410730 /* rate_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate_full.png; sourceTree = "<group>"; };
+		CEFD846E1BAF4DA200410730 /* seat_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seat_empty.png; sourceTree = "<group>"; };
+		CEFD846F1BAF4DA200410730 /* seat_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seat_full.png; sourceTree = "<group>"; };
+		CEFE549F1BB855F60048A556 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0ECD1FD81B5C510700D6CFA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ECD1FF11B5C510700D6CFA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E516C48F2B8B668B4AB847A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */,
+				467A8D47BB8752E3F36297FB /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		0ECD1FD21B5C510600D6CFA5 = {
+			isa = PBXGroup;
+			children = (
+				0ECD1FDD1B5C510700D6CFA5 /* Cuatro X Carro */,
+				0ECD1FF71B5C510700D6CFA5 /* Cuatro X CarroTests */,
+				0ECD1FDC1B5C510700D6CFA5 /* Products */,
+				0E516C48F2B8B668B4AB847A /* Pods */,
+				5B29FEFC9C7D6D95572DE6DC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0ECD1FDC1B5C510700D6CFA5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD1FDB1B5C510700D6CFA5 /* Cuatro X Carro.app */,
+				0ECD1FF41B5C510700D6CFA5 /* Cuatro X CarroTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0ECD1FDD1B5C510700D6CFA5 /* Cuatro X Carro */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD20151B5CBFAF00D6CFA5 /* Utils */,
+				0ECD20061B5C517A00D6CFA5 /* Models */,
+				0ECD20051B5C516B00D6CFA5 /* Controllers */,
+				0ECD20041B5C515B00D6CFA5 /* Resources */,
+				0ECD1FE21B5C510700D6CFA5 /* AppDelegate.h */,
+				0ECD1FE31B5C510700D6CFA5 /* AppDelegate.m */,
+				0ECD1FE51B5C510700D6CFA5 /* ViewController.h */,
+				0ECD1FE61B5C510700D6CFA5 /* ViewController.m */,
+				0ECD1FE81B5C510700D6CFA5 /* Main.storyboard */,
+				0ECD1FEB1B5C510700D6CFA5 /* Images.xcassets */,
+				0ECD1FED1B5C510700D6CFA5 /* LaunchScreen.xib */,
+				0ECD1FDE1B5C510700D6CFA5 /* Supporting Files */,
+			);
+			path = "Cuatro X Carro";
+			sourceTree = "<group>";
+		};
+		0ECD1FDE1B5C510700D6CFA5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD1FDF1B5C510700D6CFA5 /* Info.plist */,
+				0ECD1FE01B5C510700D6CFA5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0ECD1FF71B5C510700D6CFA5 /* Cuatro X CarroTests */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD1FFA1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m */,
+				0ECD1FF81B5C510700D6CFA5 /* Supporting Files */,
+			);
+			path = "Cuatro X CarroTests";
+			sourceTree = "<group>";
+		};
+		0ECD1FF81B5C510700D6CFA5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD1FF91B5C510700D6CFA5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0ECD20041B5C515B00D6CFA5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F3FE51BB889D7003D8CDD /* check_on.png */,
+				CE8F3FE31BB889D1003D8CDD /* check_off.png */,
+				CEFE549F1BB855F60048A556 /* logo.png */,
+				CEFD846B1BAF4DA200410730 /* default.icon.png */,
+				CEFD846C1BAF4DA200410730 /* rate_empty.png */,
+				CEFD846D1BAF4DA200410730 /* rate_full.png */,
+				CEFD846E1BAF4DA200410730 /* seat_empty.png */,
+				CEFD846F1BAF4DA200410730 /* seat_full.png */,
+				0ECD20131B5C77AC00D6CFA5 /* back.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		0ECD20051B5C516B00D6CFA5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F40061BB8CEEE003D8CDD /* ScheduleTrip */,
+				CE8F3FF11BB8A12B003D8CDD /* Profile */,
+				CEFD846A1BAF4D7100410730 /* TrayTravels */,
+				0ECD20071B5C520D00D6CFA5 /* TIELoginViewController.h */,
+				0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */,
+				0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */,
+				0ECD200C1B5C534100D6CFA5 /* TIESingUpViewController.h */,
+				0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */,
+				0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */,
+				CEFD84551BAF3A6300410730 /* TIETrayTravelsTableViewController.h */,
+				CEFD84561BAF3A6300410730 /* TIETrayTravelsTableViewController.m */,
+				CEFD84571BAF3A6300410730 /* TIETrayTravelsTableViewController.xib */,
+				CEFD845A1BAF3B7100410730 /* TIEProfileViewController.h */,
+				CEFD845B1BAF3B7100410730 /* TIEProfileViewController.m */,
+				CEFD845C1BAF3B7100410730 /* TIEProfileViewController.xib */,
+				CEFD845F1BAF3BFE00410730 /* TIEScheduleTripViewController.h */,
+				CEFD84601BAF3BFE00410730 /* TIEScheduleTripViewController.m */,
+				CEFD84611BAF3BFE00410730 /* TIEScheduleTripViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0ECD20061B5C517A00D6CFA5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0ECD20151B5CBFAF00D6CFA5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0ECD20341B5CC44200D6CFA5 /* AbstractActionSheetPicker.h */,
+				0ECD20351B5CC44200D6CFA5 /* AbstractActionSheetPicker.m */,
+				0ECD20361B5CC44200D6CFA5 /* ActionSheetCustomPicker.h */,
+				0ECD20371B5CC44200D6CFA5 /* ActionSheetCustomPicker.m */,
+				0ECD20381B5CC44200D6CFA5 /* ActionSheetCustomPickerDelegate.h */,
+				0ECD20391B5CC44200D6CFA5 /* ActionSheetDatePicker.h */,
+				0ECD203A1B5CC44200D6CFA5 /* ActionSheetDatePicker.m */,
+				0ECD203B1B5CC44200D6CFA5 /* ActionSheetDistancePicker.h */,
+				0ECD203C1B5CC44200D6CFA5 /* ActionSheetDistancePicker.m */,
+				0ECD203D1B5CC44200D6CFA5 /* ActionSheetLocalePicker.h */,
+				0ECD203E1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m */,
+				0ECD203F1B5CC44200D6CFA5 /* ActionSheetPicker.h */,
+				0ECD20401B5CC44200D6CFA5 /* ActionSheetStringPicker.h */,
+				0ECD20411B5CC44200D6CFA5 /* ActionSheetStringPicker.m */,
+				0ECD20421B5CC44200D6CFA5 /* DistancePickerView.h */,
+				0ECD20431B5CC44200D6CFA5 /* DistancePickerView.m */,
+				0ECD20441B5CC44200D6CFA5 /* SWActionSheet.h */,
+				0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		5B29FEFC9C7D6D95572DE6DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EBDCA82F83C00E90A923900 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE8F3FF11BB8A12B003D8CDD /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F3FF21BB8A190003D8CDD /* TIEMyScheduleViewController.h */,
+				CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */,
+				CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		CE8F40061BB8CEEE003D8CDD /* ScheduleTrip */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F400C1BB8D2C1003D8CDD /* TIESearchTravelViewController.h */,
+				CE8F400D1BB8D2C1003D8CDD /* TIESearchTravelViewController.m */,
+				CE8F400E1BB8D2C1003D8CDD /* TIESearchTravelViewController.xib */,
+			);
+			name = ScheduleTrip;
+			sourceTree = "<group>";
+		};
+		CEFD846A1BAF4D7100410730 /* TrayTravels */ = {
+			isa = PBXGroup;
+			children = (
+				CEFD84671BAF468400410730 /* TIETravelCustomCellTableViewCell.xib */,
+				CEFD84661BAF468400410730 /* TIETravelCustomCellTableViewCell.m */,
+				CEFD84651BAF468400410730 /* TIETravelCustomCellTableViewCell.h */,
+				CE8F3FF71BB8A4FF003D8CDD /* TIETravelDetailsViewController.h */,
+				CE8F3FF81BB8A4FF003D8CDD /* TIETravelDetailsViewController.m */,
+				CE8F3FF91BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib */,
+				CE8F40011BB8C081003D8CDD /* TIEApplicationsViewController.h */,
+				CE8F40021BB8C081003D8CDD /* TIEApplicationsViewController.m */,
+				CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */,
+			);
+			name = TrayTravels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0ECD1FDA1B5C510700D6CFA5 /* Cuatro X Carro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ECD1FFE1B5C510700D6CFA5 /* Build configuration list for PBXNativeTarget "Cuatro X Carro" */;
+			buildPhases = (
+				08D5158A52CFE41AF7D0972B /* Check Pods Manifest.lock */,
+				0ECD1FD71B5C510700D6CFA5 /* Sources */,
+				0ECD1FD81B5C510700D6CFA5 /* Frameworks */,
+				0ECD1FD91B5C510700D6CFA5 /* Resources */,
+				42F133F6684CDF87F1D1C3A6 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cuatro X Carro";
+			productName = "Cuatro X Carro";
+			productReference = 0ECD1FDB1B5C510700D6CFA5 /* Cuatro X Carro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0ECD1FF31B5C510700D6CFA5 /* Cuatro X CarroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ECD20011B5C510700D6CFA5 /* Build configuration list for PBXNativeTarget "Cuatro X CarroTests" */;
+			buildPhases = (
+				0ECD1FF01B5C510700D6CFA5 /* Sources */,
+				0ECD1FF11B5C510700D6CFA5 /* Frameworks */,
+				0ECD1FF21B5C510700D6CFA5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0ECD1FF61B5C510700D6CFA5 /* PBXTargetDependency */,
+			);
+			name = "Cuatro X CarroTests";
+			productName = "Cuatro X CarroTests";
+			productReference = 0ECD1FF41B5C510700D6CFA5 /* Cuatro X CarroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0ECD1FD31B5C510600D6CFA5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "IT Economics SAS";
+				TargetAttributes = {
+					0ECD1FDA1B5C510700D6CFA5 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					0ECD1FF31B5C510700D6CFA5 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 0ECD1FDA1B5C510700D6CFA5;
+					};
+				};
+			};
+			buildConfigurationList = 0ECD1FD61B5C510600D6CFA5 /* Build configuration list for PBXProject "Cuatro X Carro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0ECD1FD21B5C510600D6CFA5;
+			productRefGroup = 0ECD1FDC1B5C510700D6CFA5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0ECD1FDA1B5C510700D6CFA5 /* Cuatro X Carro */,
+				0ECD1FF31B5C510700D6CFA5 /* Cuatro X CarroTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0ECD1FD91B5C510700D6CFA5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE8F3FF61BB8A190003D8CDD /* TIEMyScheduleViewController.xib in Resources */,
+				CEFD84591BAF3A6300410730 /* TIETrayTravelsTableViewController.xib in Resources */,
+				0ECD1FEA1B5C510700D6CFA5 /* Main.storyboard in Resources */,
+				CEFD84731BAF4DA200410730 /* seat_empty.png in Resources */,
+				CE8F3FFB1BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib in Resources */,
+				CE8F3FE41BB889D1003D8CDD /* check_off.png in Resources */,
+				0ECD200B1B5C520D00D6CFA5 /* TIELoginViewController.xib in Resources */,
+				0ECD20141B5C77AC00D6CFA5 /* back.png in Resources */,
+				CEFD84631BAF3BFE00410730 /* TIEScheduleTripViewController.xib in Resources */,
+				CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */,
+				CEFD84741BAF4DA200410730 /* seat_full.png in Resources */,
+				0ECD20101B5C534100D6CFA5 /* TIESingUpViewController.xib in Resources */,
+				CE8F40051BB8C081003D8CDD /* TIEApplicationsViewController.xib in Resources */,
+				0ECD1FEF1B5C510700D6CFA5 /* LaunchScreen.xib in Resources */,
+				CEFD84691BAF468400410730 /* TIETravelCustomCellTableViewCell.xib in Resources */,
+				CE8F3FE61BB889D7003D8CDD /* check_on.png in Resources */,
+				CEFD84721BAF4DA200410730 /* rate_full.png in Resources */,
+				0ECD1FEC1B5C510700D6CFA5 /* Images.xcassets in Resources */,
+				CEFE54A01BB855F60048A556 /* logo.png in Resources */,
+				CEFD84701BAF4DA200410730 /* default.icon.png in Resources */,
+				CEFD845E1BAF3B7100410730 /* TIEProfileViewController.xib in Resources */,
+				CEFD84711BAF4DA200410730 /* rate_empty.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ECD1FF21B5C510700D6CFA5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08D5158A52CFE41AF7D0972B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		42F133F6684CDF87F1D1C3A6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0ECD1FD71B5C510700D6CFA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEFD845D1BAF3B7100410730 /* TIEProfileViewController.m in Sources */,
+				CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */,
+				0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */,
+				0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */,
+				0ECD204A1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m in Sources */,
+				CE8F400F1BB8D2C1003D8CDD /* TIESearchTravelViewController.m in Sources */,
+				CE8F3FFA1BB8A4FF003D8CDD /* TIETravelDetailsViewController.m in Sources */,
+				CE8F40041BB8C081003D8CDD /* TIEApplicationsViewController.m in Sources */,
+				0ECD204C1B5CC44200D6CFA5 /* DistancePickerView.m in Sources */,
+				0ECD1FE71B5C510700D6CFA5 /* ViewController.m in Sources */,
+				CEFD84621BAF3BFE00410730 /* TIEScheduleTripViewController.m in Sources */,
+				0ECD200A1B5C520D00D6CFA5 /* TIELoginViewController.m in Sources */,
+				0ECD200F1B5C534100D6CFA5 /* TIESingUpViewController.m in Sources */,
+				CE8F3FF51BB8A190003D8CDD /* TIEMyScheduleViewController.m in Sources */,
+				CEFD84681BAF468400410730 /* TIETravelCustomCellTableViewCell.m in Sources */,
+				0ECD20461B5CC44200D6CFA5 /* AbstractActionSheetPicker.m in Sources */,
+				0ECD1FE41B5C510700D6CFA5 /* AppDelegate.m in Sources */,
+				0ECD20481B5CC44200D6CFA5 /* ActionSheetDatePicker.m in Sources */,
+				0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */,
+				0ECD1FE11B5C510700D6CFA5 /* main.m in Sources */,
+				0ECD20471B5CC44200D6CFA5 /* ActionSheetCustomPicker.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ECD1FF01B5C510700D6CFA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ECD1FFB1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0ECD1FF61B5C510700D6CFA5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0ECD1FDA1B5C510700D6CFA5 /* Cuatro X Carro */;
+			targetProxy = 0ECD1FF51B5C510700D6CFA5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0ECD1FE81B5C510700D6CFA5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ECD1FE91B5C510700D6CFA5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0ECD1FED1B5C510700D6CFA5 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ECD1FEE1B5C510700D6CFA5 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0ECD1FFC1B5C510700D6CFA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0ECD1FFD1B5C510700D6CFA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0ECD1FFF1B5C510700D6CFA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Cuatro X Carro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0ECD20001B5C510700D6CFA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 467A8D47BB8752E3F36297FB /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Cuatro X Carro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0ECD20021B5C510700D6CFA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Cuatro X CarroTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cuatro X Carro.app/Cuatro X Carro";
+			};
+			name = Debug;
+		};
+		0ECD20031B5C510700D6CFA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Cuatro X CarroTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cuatro X Carro.app/Cuatro X Carro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0ECD1FD61B5C510600D6CFA5 /* Build configuration list for PBXProject "Cuatro X Carro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ECD1FFC1B5C510700D6CFA5 /* Debug */,
+				0ECD1FFD1B5C510700D6CFA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ECD1FFE1B5C510700D6CFA5 /* Build configuration list for PBXNativeTarget "Cuatro X Carro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ECD1FFF1B5C510700D6CFA5 /* Debug */,
+				0ECD20001B5C510700D6CFA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ECD20011B5C510700D6CFA5 /* Build configuration list for PBXNativeTarget "Cuatro X CarroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ECD20021B5C510700D6CFA5 /* Debug */,
+				0ECD20031B5C510700D6CFA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0ECD1FD31B5C510600D6CFA5 /* Project object */;
+}
