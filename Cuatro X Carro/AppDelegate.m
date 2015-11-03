@@ -46,6 +46,7 @@
     //Add the tab bar controller to the window
     TIELoginViewController *loginVC = [[TIELoginViewController alloc]init];
     [self.window setRootViewController:loginVC];
+    [self.window setBackgroundColor: [UIColor whiteColor]];
     
     [self.window makeKeyAndVisible];
     

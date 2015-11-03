@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RadioButton.h"
 
 @interface TIEMyScheduleViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet RadioButton* radioButton;
+- (IBAction)onRadioBtn:(RadioButton*)sender;
 
 @end

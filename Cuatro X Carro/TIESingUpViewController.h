@@ -27,4 +27,14 @@
 
 - (IBAction)saveSingUpForm:(id)sender;
 
+@property (strong, nonatomic) NSMutableArray *countryItems;
+@property (strong, nonatomic) NSMutableArray *stateItems;
+@property (strong, nonatomic) NSMutableArray *cityItems;
+@property (strong, nonatomic) NSMutableArray *groupItems;
+@property (strong, nonatomic) NSMutableDictionary *countryItemsIds;
+@property (strong, nonatomic) NSMutableDictionary *stateItemsIds;
+@property (strong, nonatomic) NSMutableDictionary *cityItemsIds;
+@property (strong, nonatomic) NSMutableDictionary *groupItemsIds;
+@property (strong, nonatomic) NSMutableDictionary *groupItemsDomains;
+
 @end

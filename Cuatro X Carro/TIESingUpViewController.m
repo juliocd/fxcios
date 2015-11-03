@@ -8,6 +8,7 @@
 
 #import "TIESingUpViewController.h"
 #import "ActionSheetPicker.h"
+#import "NSString+MD5.h"
 
 @class AbstractActionSheetPicker;
 @interface TIESingUpViewController ()
@@ -16,7 +17,9 @@
 
 @implementation TIESingUpViewController
 
-@synthesize countryTextInput, stateTextInput, cityTextInput, groupTextInput, fullUserNameTextInput, passwordTextInput, confirmPasswordTextInput, emailInput, groupHost;
+@synthesize countryTextInput, stateTextInput, cityTextInput, groupTextInput,
+    fullUserNameTextInput, passwordTextInput, confirmPasswordTextInput, emailInput, groupHost,
+    countryItems, stateItems, cityItems, groupItems, countryItemsIds, stateItemsIds, cityItemsIds, groupItemsIds, groupItemsDomains;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +31,21 @@
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
     
+    //Se cargan datos de ubicacion geografica
+    countryItems = [[NSMutableArray alloc] init];
+    stateItems = [[NSMutableArray alloc] init];
+    cityItems = [[NSMutableArray alloc] init];
+    countryItemsIds = [[NSMutableDictionary alloc] init];
+    stateItemsIds = [[NSMutableDictionary alloc] init];
+    cityItemsIds = [[NSMutableDictionary alloc] init];
+    [self loadGeograpichData];
+    
+    //Cargar grupos
+    groupItems = [[NSMutableArray alloc] init];
+    groupItemsIds = [[NSMutableDictionary alloc] init];
+    groupItemsDomains = [[NSMutableDictionary alloc] init];
+    [self loadGroups];
+    
     //Declaro delegados de campos, con el fin de que lo encuentren en la vista
     [self.countryTextInput delegate];
     [self.stateTextInput delegate];
@@ -37,6 +55,83 @@
     [self.passwordTextInput delegate];
     [self.confirmPasswordTextInput delegate];
     [self.emailInput delegate];
+}
+
+//Se cargan grupos
+-(void) loadGroups{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://127.0.0.1:5000/queryAllTenants"]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        NSLog(@"requestReply: %@", requestReply);
+        
+        //Se convierte respuesta en JSON
+        NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+        id isValid = [jsonData valueForKey:@"valid"];
+        
+        if (isValid ? [isValid boolValue] : NO) {
+            NSArray *result = [jsonData objectForKey:@"result"];
+            for (int k=0; k<[result count]; k++) {
+                NSDictionary *jsonGroup= result[k];
+                [groupItems addObject:[jsonGroup objectForKey:@"name"]];
+                [groupItemsIds setValue:[jsonGroup objectForKey:@"id"] forKey:[jsonGroup objectForKey:@"name"]];
+                [groupItemsDomains setValue:[jsonGroup objectForKey:@"domain"] forKey:[jsonGroup objectForKey:@"name"]];
+            }
+        }
+        else{
+            UIAlertView *alertErrorConnectingServer = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                                 message:@"Error conectando a servidor. Verifique su estado de conexión a internet."
+                                                                                delegate:nil
+                                                                       cancelButtonTitle:@"OK"
+                                                                       otherButtonTitles:nil];
+            [alertErrorConnectingServer show];
+        }
+        
+    }] resume];
+}
+
+//Se recupera infromacion de datos geograficos
+- (void) loadGeograpichData{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://127.0.0.1:5000/queryAllAntioquiaInfo"]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        NSLog(@"requestReply: %@", requestReply);
+        
+        //Se convierte respuesta en JSON
+        NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+        id isValid = [jsonData valueForKey:@"valid"];
+        
+        if (isValid ? [isValid boolValue] : NO) {
+            NSArray *result = [jsonData objectForKey:@"result"];
+            NSDictionary *jsonCountry = result[0];
+            [countryItems addObject:[jsonCountry objectForKey:@"name"]];
+            [countryItemsIds setValue:[jsonCountry objectForKey:@"id"] forKey:[jsonCountry objectForKey:@"name"]];
+            
+            NSArray *states = [jsonCountry objectForKey:@"states"];
+            for (int i=0; i<[states count]; i++) {
+                NSDictionary *jsonState = states[i];
+                [stateItems addObject:[jsonState objectForKey:@"name"]];
+                [stateItemsIds setValue:[jsonState objectForKey:@"id"] forKey:[jsonState objectForKey:@"name"]];
+                
+                NSArray *cities = [jsonState objectForKey:@"cities"];
+                for (int j=0; j<[cities count]; j++) {
+                    NSDictionary *jsonCity= cities[j];
+                    [cityItems addObject:[jsonCity objectForKey:@"name"]];
+                    [cityItemsIds setValue:[jsonCity objectForKey:@"id"] forKey:[jsonCity objectForKey:@"name"]];
+                }
+            }
+        }
+        
+    }] resume];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,8 +164,9 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    NSArray *colors = @[@"Colombia", @"Ecuador", @"Panama", @"Brasil"];
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:colors initialSelection:0 doneBlock:done cancelBlock:cancel origin:sender];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:countryItems initialSelection:0
+                                       doneBlock:done cancelBlock:cancel origin:sender];
     [self.countryTextInput setEnabled:NO];
 }
 
@@ -85,8 +181,8 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    NSArray *colors = @[@"Cordoba", @"Choco", @"Antioquia", @"Amazonas"];
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:colors initialSelection:0 doneBlock:done cancelBlock:cancel origin:sender];
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:stateItems initialSelection:0
+                                       doneBlock:done cancelBlock:cancel origin:sender];
     [self.stateTextInput  setEnabled:NO];
 }
 
@@ -101,8 +197,8 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    NSArray *colors = @[@"Medellin", @"Monteria", @"Leticia", @"Quibdo"];
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:colors initialSelection:0 doneBlock:done cancelBlock:cancel origin:sender];
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:cityItems initialSelection:0
+                                       doneBlock:done cancelBlock:cancel origin:sender];
     [self.cityTextInput  setEnabled:NO];
 }
 
@@ -111,25 +207,113 @@
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         if ([sender respondsToSelector:@selector(setText:)]) {
             [sender performSelector:@selector(setText:) withObject:selectedValue];
-            groupHost.text = [NSString stringWithFormat:@"%@",selectedValue];
+            groupHost.text = [groupItemsDomains objectForKey:selectedValue];
         }
         [self.groupTextInput  setEnabled:YES];
     };
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    NSArray *colors = @[@"Universidad de Antioaquia", @"EAFIT", @"Universidoad Nacional", @"CES"];
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:colors initialSelection:0 doneBlock:done cancelBlock:cancel origin:sender];
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:groupItems initialSelection:0
+                                       doneBlock:done cancelBlock:cancel origin:sender];
     [self.groupTextInput  setEnabled:NO];
 }
 
 #pragma Botones
 - (IBAction)saveSingUpForm:(id)sender {
-    UIAlertView *alertSave = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                    message:@"Usuario guardado correctamente. Revise su correo para completar el registro."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alertSave show];
+    
+    //Se ejecuta almacenamiento de usuario
+    NSLog(@"Se inicia almacenamiento de usuario");
+    NSString *urlServer = @"http://127.0.0.1:5000/saveUser";
+    NSLog(@"url saveUser: %@", urlServer);
+    
+    //Configurar password
+    NSString *passwordTextField = [self.passwordTextInput text];
+    NSString *passwordConfirmTextField = [self.confirmPasswordTextInput text];
+    NSString *password = @"";
+    
+    //Se valida que los campos no esten vacios
+    if (![[self.cityTextInput text] isEqualToString:@""] || ![[self.fullUserNameTextInput text] isEqualToString:@""]
+        || ![[self.emailInput text] isEqualToString:@""] || ![[self.groupTextInput text] isEqualToString:@""]
+        || ![[self.passwordTextInput text] isEqualToString:@""]) {
+    
+        //Se valida que las claves coincidan
+        if ([passwordTextField isEqualToString:passwordConfirmTextField]) {
+        
+            NSString *email = [NSString stringWithFormat:@"%@%@",[self.emailInput text],[self.groupHost text]];
+            NSString *passwordTextFieldMD5 = [passwordTextField MD5];
+            password = [NSString stringWithFormat:@"%@%@",passwordTextFieldMD5, email];
+            password = [password MD5];
+            
+            //Se configura data a enviar
+            NSString *post = [NSString stringWithFormat:
+                          @"city_id=%ld&name=%@&email=%@&password=%@&tenant_id=%ld",
+                          [[cityItemsIds objectForKey:[self.cityTextInput text]] longValue],
+                          [self.fullUserNameTextInput text],
+                          email,
+                          password,
+                          [[groupItemsIds objectForKey:[self.groupTextInput text]] longValue]];
+            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+            //Se captura numero d eparametros a enviar
+            NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        
+            //Se configura request
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:[NSURL URLWithString: urlServer]];
+            [request setHTTPMethod:@"POST"];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            [request setHTTPBody:postData];
+        
+            //Se ejecuta request
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                NSLog(@"requestReply: %@", requestReply);
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self responseSaveUser:requestReply];
+                });
+            }] resume];
+            
+        }
+        else{
+            UIAlertView *alertErrorPassword = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                            message:@"Las contraseñas no coinciden."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alertErrorPassword show];
+        }
+    }
+    else{
+        UIAlertView *alertEmptyField = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                     message:@"Existen campos obligatorios vacíos."
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil];
+        [alertEmptyField show];
+    }
+
 }
+
+-(void) responseSaveUser: (NSString *) requestReply {
+    //Se convierte respuesta en JSON
+    NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+    id isValid = [jsonData valueForKey:@"valid"];
+    
+    NSString *message = @"Usuario guardado correctamente. Revise su correo para completar el registro.";
+    if (!isValid ? [isValid boolValue] : NO) {
+        message = [jsonData objectForKey:@"error"];
+    }
+    
+    UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                            message:message
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+    [alertSaveUser show];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

@@ -43,6 +43,13 @@
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGRect tableFrame = tableView.frame;
+    tableFrame.origin.y = 20;
+    tableFrame.size.height = UIScreen.mainScreen.bounds.size.height - 25 -45;
+    tableFrame.size.width = tableView.contentSize.width; // if you would allow horiz scrolling
+    tableView.frame = tableFrame;
+    
     //Se crea instancia de celda
     TIETravelCustomCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
     //Se valida que la celda esta vacia para llenarla
