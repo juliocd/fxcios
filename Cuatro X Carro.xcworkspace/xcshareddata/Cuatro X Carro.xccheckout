@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ED180E3F-1B0D-46B9-A636-34E3F48B738B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Cuatro X Carro</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>62D260F5C408E1FA4A2570A3C1389851DFF107DC</key>
+		<string>https://github.com/juliocd/fxcios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cuatro X Carro.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>62D260F5C408E1FA4A2570A3C1389851DFF107DC</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/juliocd/fxcios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>62D260F5C408E1FA4A2570A3C1389851DFF107DC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>62D260F5C408E1FA4A2570A3C1389851DFF107DC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fxcios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
