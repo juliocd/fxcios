@@ -55,16 +55,6 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="7pU-34-qcC"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="xVs-Sf-xO1">
-                    <rect key="frame" x="139" y="113" width="173" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <action selector="selectState:" destination="-1" eventType="touchDown" id="HWs-r6-Jzh"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="SCr-1Q-N4u"/>
-                    </connections>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="vhz-HU-5h5">
                     <rect key="frame" x="139" y="151" width="173" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -175,6 +165,16 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="namePhonePad" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="TIv-gJ-dJ2"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="xVs-Sf-xO1">
+                    <rect key="frame" x="139" y="113" width="173" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="selectState:" destination="-1" eventType="touchDown" id="HWs-r6-Jzh"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="SCr-1Q-N4u"/>
                     </connections>
                 </textField>
             </subviews>

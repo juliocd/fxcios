@@ -29,6 +29,8 @@
 		0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */; };
 		4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDCA82F83C00E90A923900 /* libPods.a */; };
 		CE0427301BE71BAE0098BA62 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */; settings = {ASSET_TAGS = (); }; };
+		CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AAB9D1BEED90F00C321DF /* Util.m */; settings = {ASSET_TAGS = (); }; };
+		CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CE6825DD1BE87D3100513135 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6825DC1BE87D3100513135 /* RadioButton.m */; settings = {ASSET_TAGS = (); }; };
 		CE6825E21BE87D9300513135 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6825DE1BE87D9300513135 /* checked.png */; settings = {ASSET_TAGS = (); }; };
 		CE6825E31BE87D9300513135 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6825DF1BE87D9300513135 /* checked@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -114,6 +116,10 @@
 		6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04272E1BE71BAE0098BA62 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		CE4AAB9C1BEED90F00C321DF /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		CE4AAB9D1BEED90F00C321DF /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		CE4AABA21BEEDCA300C321DF /* DefaultRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRequest.h; sourceTree = "<group>"; };
+		CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultRequest.m; sourceTree = "<group>"; };
 		CE6825DB1BE87D3100513135 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
 		CE6825DC1BE87D3100513135 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		CE6825DE1BE87D9300513135 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -324,6 +330,10 @@
 				0ECD20431B5CC44200D6CFA5 /* DistancePickerView.m */,
 				0ECD20441B5CC44200D6CFA5 /* SWActionSheet.h */,
 				0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */,
+				CE4AAB9C1BEED90F00C321DF /* Util.h */,
+				CE4AAB9D1BEED90F00C321DF /* Util.m */,
+				CE4AABA21BEEDCA300C321DF /* DefaultRequest.h */,
+				CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -531,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEFD845D1BAF3B7100410730 /* TIEProfileViewController.m in Sources */,
+				CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */,
 				CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */,
 				0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */,
 				0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */,
@@ -553,6 +564,7 @@
 				0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */,
 				0ECD1FE11B5C510700D6CFA5 /* main.m in Sources */,
 				0ECD20471B5CC44200D6CFA5 /* ActionSheetCustomPicker.m in Sources */,
+				CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

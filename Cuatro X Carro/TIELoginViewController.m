@@ -10,6 +10,7 @@
 #import "TIESingUpViewController.h"
 #import "AppDelegate.h"
 #import "NSString+MD5.h"
+#import "Util.h"
 
 @interface TIELoginViewController ()
 
@@ -17,13 +18,22 @@
 
 @implementation TIELoginViewController
 
-@synthesize usernameTextField, passwordTextField;
+@synthesize usernameTextField, passwordTextField, userName, password;
 
 - (void)viewDidLoad {
     
-    
+    [self userHaveOpenSession];
     
     [super viewDidLoad];
+}
+
+-(void) userHaveOpenSession{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+//    if (dataUser != nil) {
+//        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//        [appDelegate.window setRootViewController:appDelegate.tabBarController];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,70 +53,79 @@
 
 - (IBAction)LoginButton:(id)sender {
     
-//    //Se ejecuta validacion de usuario
-//    NSLog(@"Se inicia almacenamiento de usuario");
-//    NSString *urlServer = @"http://127.0.0.1:5000/userLogin";
-//    NSLog(@"url saveUser: %@", urlServer);
-//    
-//    if (![[self.usernameTextField text] isEqualToString:@""] || ![[self.passwordTextField text] isEqualToString:@""]) {
-//        
-//        NSString *passwordTextFieldMD5 = [[self.passwordTextField text] MD5];
-//        NSString *password = [NSString stringWithFormat:@"%@%@",passwordTextFieldMD5, [self.usernameTextField text]];
-//        password = [password MD5];
-//        
-//        //Se configura data a enviar
-//        NSString *post = [NSString stringWithFormat:
-//                          @"email=%@&password=%@",
-//                          [self.usernameTextField text],
-//                          password];
-//        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//        
-//        //Se captura numero d eparametros a enviar
-//        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-//        
-//        //Se configura request
-//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//        [request setURL:[NSURL URLWithString: urlServer]];
-//        [request setHTTPMethod:@"POST"];
-//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//        [request setHTTPBody:postData];
-//        
-//        //Se ejecuta request
-//        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-//            NSLog(@"requestReply: %@", requestReply);
-//            dispatch_async(dispatch_get_main_queue(),^{
-//                //Se convierte respuesta en JSON
-//                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-//                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
-//                id isValid = [jsonData valueForKey:@"valid"];
-//                
-//                if (isValid ? [isValid boolValue] : NO) {
+    //Se ejecuta validacion de usuario
+    NSLog(@"Se inicia almacenamiento de usuario");
+    NSString *urlServer = @"http://127.0.0.1:5000/userLogin";
+    NSLog(@"url saveUser: %@", urlServer);
+    
+    if (![userName isEqualToString:@""] || ![[self.passwordTextField text] isEqualToString:@""]) {
+        
+        userName = [self.usernameTextField text];
+        
+        NSString *passwordTextFieldMD5 = [[self.passwordTextField text] MD5];
+        password = [NSString stringWithFormat:@"%@%@",passwordTextFieldMD5, userName];
+        password = [password MD5];
+        
+        //Se configura data a enviar
+        NSString *post = [NSString stringWithFormat:
+                          @"email=%@&password=%@",
+                          userName,
+                          password];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        //Se captura numero d eparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        
+        //Se configura request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString: urlServer]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:postData];
+        
+        //Se ejecuta request
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSLog(@"requestReply: %@", requestReply);
+            dispatch_async(dispatch_get_main_queue(),^{
+                //Se convierte respuesta en JSON
+                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                id isValid = [jsonData valueForKey:@"valid"];
+                
+                if (isValid ? [isValid boolValue] : NO) {
+                    //Se almacena datos de usuario
+                    Util *util=[Util getInstance];
+                    [util constructUserDefaults:jsonData];
+                    
+                    //Se carga vista principal
                     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
                     [appDelegate.window setRootViewController:appDelegate.tabBarController];
-//                }
-//                else{
-//                    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-//                                                                              message:[jsonData valueForKey:@"description"]
-//                                                                             delegate:nil
-//                                                                    cancelButtonTitle:@"OK"
-//                                                                    otherButtonTitles:nil];
-//                    [alertErrorLogin show];
-//                }
-//            });
-//        }] resume];
-//        
-//    }
-//    else{
-//        UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-//                                                                message:@"Existen campos obligatorios vacíos."
-//                                                               delegate:nil
-//                                                      cancelButtonTitle:@"OK"
-//                                                      otherButtonTitles:nil];
-//        [alertErrorLogin show];
-//    }
+                }
+                else{
+                    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                              message:[jsonData valueForKey:@"description"]
+                                                                             delegate:nil
+                                                                    cancelButtonTitle:@"OK"
+                                                                    otherButtonTitles:nil];
+                    [alertErrorLogin show];
+                }
+            });
+        }] resume];
+        
+    }
+    else{
+        UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                message:@"Existen campos obligatorios vacíos."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+        [alertErrorLogin show];
+    }
 }
+
+
 
 - (IBAction)SingupButton:(id)sender {
     TIESingUpViewController *viewController = [[TIESingUpViewController alloc] init];
