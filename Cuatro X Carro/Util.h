@@ -10,7 +10,13 @@
 
 @interface Util : NSObject
 
+@property (nonatomic, strong) NSString *userEmail;
+
 +(Util*)getInstance;
-- (NSMutableDictionary *) constructUserDefaults:(NSDictionary * )theNumber;
+- (NSMutableDictionary *) constructUserDefaults:(NSDictionary * )userData;
+- (void) updateUserDefaults;
+- (NSString *) ampmTimeToMilitaryTime:(NSString *) time;
+- (NSString *) militaryTimeToAMPMTime:(NSString *) time;
+- (NSString *) nextDateByDay:(int) day;
 
 @end

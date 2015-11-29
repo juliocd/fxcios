@@ -20,6 +20,7 @@
 - (IBAction)selectDepartTime:(id)sender;
 - (IBAction)selectReturnTime:(id)sender;
 
+//Select de horas
 @property (weak, nonatomic) IBOutlet UITextField *dayTextInput;
 @property (weak, nonatomic) IBOutlet UITextField *departTimeTextInput;
 @property (weak, nonatomic) IBOutlet UITextField *returnTimeTextInput;

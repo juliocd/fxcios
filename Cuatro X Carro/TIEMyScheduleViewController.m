@@ -10,9 +10,13 @@
 #import "RadioButton.h"
 #import "ActionSheetPicker.h"
 #import "DefaultRequest.h"
+#import "Util.h"
 
 @class AbstractActionSheetPicker;
-@interface TIEMyScheduleViewController ()
+@interface TIEMyScheduleViewController (){
+    //Se declara variable de utilidades
+    Util *util;
+}
 
 @end
 
@@ -30,43 +34,45 @@
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
     
+    //Se inicializa funcion de utilidades
+    util = [Util getInstance];
+    
     //Declaro delegados de campos, con el fin de que lo encuentren en la vista
     [self.dayTextInput delegate];
     [self.departTimeTextInput delegate];
     [self.returnTimeTextInput delegate];
     
     //Se inicializa calendario
-    DefaultRequest *defaultRequest=[DefaultRequest getInstance];
-    NSMutableDictionary *dataUser = [defaultRequest getUserDefault];
-    schedule = [dataUser objectForKey:@"schedule"];
-    if (schedule != nil && ![schedule isEqual:@""]) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+    NSString *strSchedule = [dataUser objectForKey:@"schedule"];
+    schedule = [[NSMutableDictionary alloc] init];
+    if (![strSchedule isEqual:@""]) {
+        schedule = [NSJSONSerialization JSONObjectWithData:[strSchedule dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
         [self loadSchedule];
-    }
-    else{
-        schedule = [[NSMutableDictionary alloc] init];
     }
     
 }
 
 //Funcion que carga ultimo horario configurado en vista
 -(void) loadSchedule{
-    mondayDepartTime.text = [[schedule objectForKey:@"monday_going"] isEmpty] ? @"" : [schedule objectForKey:@"monday_going"];
-    mondayReturnTime.text = [[schedule objectForKey:@"monday_return"] isEmpty] ? @"" : [schedule objectForKey:@"monday_return"];
+    mondayDepartTime.text = ([schedule valueForKey:@"monday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"monday_going"]];
+    mondayReturnTime.text = ([schedule valueForKey:@"monday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"monday_return"]];
+  
+    tuesdayDepartTime.text = ([schedule valueForKey:@"tuesday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"tuesday_going"]];
+    tuesdayReturnTime.text = ([schedule valueForKey:@"tuesday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"tuesday_return"]];
 
-    tuesdayDepartTime.text = [[schedule objectForKey:@"tuesday_going"] isEmpty] ? @"" : [schedule objectForKey:@"tuesday_going"];
-    tuesdayReturnTime.text = [[schedule objectForKey:@"tuesday_return"] isEmpty] ? @"" : [schedule objectForKey:@"tuesday_return"];
-
-    wednesdayDepartTime.text = [[schedule objectForKey:@"wednesday_going"] isEmpty] ? @"" : [schedule objectForKey:@"wednesday_going"];
-    wednesdayReturnTime.text = [[schedule objectForKey:@"wednesday_return"] isEmpty] ? @"" : [schedule objectForKey:@"wednesday_return"];
+    wednesdayDepartTime.text = ([schedule valueForKey:@"wednesday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"wednesday_going"]];
+    wednesdayReturnTime.text = ([schedule valueForKey:@"wednesday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"wednesday_return"]];
     
-    thursdayDepartTime.text = [[schedule objectForKey:@"thursday_going"] isEmpty] ? @"" : [schedule objectForKey:@"thursday_going"];
-    thursdayReturnTime.text = [[schedule objectForKey:@"thursday_return"] isEmpty] ? @"" : [schedule objectForKey:@"thursday_return"];
+    thursdayDepartTime.text = ([schedule valueForKey:@"thursday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"thursday_going"]];
+    thursdayReturnTime.text = ([schedule valueForKey:@"thursday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"thursday_return"]];
 
-    fridayDepartTime.text = [[schedule objectForKey:@"friday_going"] isEmpty] ? @"" : [schedule objectForKey:@"friday_going"];
-    fridayReturnTime.text = [[schedule objectForKey:@"friday_return"] isEmpty] ? @"" : [schedule objectForKey:@"friday_return"];
+    fridayDepartTime.text = ([schedule valueForKey:@"friday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"friday_going"]];
+    fridayReturnTime.text = ([schedule valueForKey:@"friday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"friday_return"]];
 
-    saturdayDepartTime.text = [[schedule objectForKey:@"saturday_going"] isEmpty] ? @"" : [schedule objectForKey:@"saturday_going"];
-    saturdayReturnTime.text = [[schedule objectForKey:@"saturday_return"] isEmpty] ? @"" : [schedule objectForKey:@"saturday_return"];
+    saturdayDepartTime.text = ([schedule valueForKey:@"saturday_going"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"saturday_going"]];
+    saturdayReturnTime.text = ([schedule valueForKey:@"saturday_return"] == (id)[NSNull null]) ? @"" : [util militaryTimeToAMPMTime:[schedule valueForKey:@"saturday_return"]];
 }
 
 //Personalizar boton atras
@@ -167,21 +173,11 @@
     
     //Convertir hora de ida a hora militar
     NSString *AMPMDepartTime = [self.departTimeTextInput text];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    NSDate *AMPMDepartTimeFormat = [dateFormatter dateFromString: AMPMDepartTime];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *militaryDepartTime = [dateFormatter stringFromDate:AMPMDepartTimeFormat];
+    NSString *militaryDepartTime = [util ampmTimeToMilitaryTime:AMPMDepartTime];
     
     //Convertir hora de vuelta a hora militar
     NSString *AMPMReturnTime = [self.returnTimeTextInput text];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    NSDate *AMPMReturnTimeFormat = [dateFormatter dateFromString: AMPMReturnTime];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    NSString *militaryReturnTime = [dateFormatter stringFromDate:AMPMReturnTimeFormat];
+    NSString *militaryReturnTime = [util ampmTimeToMilitaryTime:AMPMReturnTime];
     
     if ([[self.dayTextInput text] isEqualToString:@"Lunes"]) {
         [schedule setValue:militaryDepartTime forKey:@"monday_going"];
@@ -268,6 +264,9 @@
             NSString *message = @"Calendario almacenado correctamente.";
             if (!isValid ? [isValid boolValue] : NO) {
                 message = [jsonData objectForKey:@"error"];
+            }
+            else{
+                [util updateUserDefaults];
             }
             
             UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"

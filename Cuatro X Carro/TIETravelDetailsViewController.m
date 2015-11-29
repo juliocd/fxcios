@@ -8,7 +8,8 @@
 
 #import "TIETravelDetailsViewController.h"
 #import "TIEApplicationsViewController.h"
-@import GoogleMaps;
+#import <GoogleMaps/GoogleMaps.h>
+
 
 @interface TIETravelDetailsViewController ()
 

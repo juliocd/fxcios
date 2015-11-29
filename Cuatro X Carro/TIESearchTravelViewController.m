@@ -7,7 +7,7 @@
 //
 
 #import "TIESearchTravelViewController.h"
-@import GoogleMaps;
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface TIESearchTravelViewController ()
 

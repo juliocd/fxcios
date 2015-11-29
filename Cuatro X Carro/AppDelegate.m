@@ -12,7 +12,6 @@
 #import "TIETrayTravelsTableViewController.h"
 #import "TIEProfileViewController.h"
 #import "TIEScheduleTripViewController.h"
-@import GoogleMaps;
 
 @interface AppDelegate ()
 

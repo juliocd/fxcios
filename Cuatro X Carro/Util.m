@@ -10,6 +10,8 @@
 
 @implementation Util
 
+@synthesize userEmail;
+
 static Util *instance =nil;
 +(Util *)getInstance {
     @synchronized(self) {
@@ -48,6 +50,108 @@ static Util *instance =nil;
     [userDefault setObject:userDataDefault forKey:@"userData"];
     
     return userDataDefault;
+}
+
+- (void) updateUserDefaults{
+    
+    //Se recupera email de usuario
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+    userEmail = [dataUser objectForKey:@"email"];
+    
+    //Se recupera informacion de usuario
+    NSString *urlServer = @"http://127.0.0.1:5000/getUserDataByEmail";
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"email=%@",
+                      userEmail];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+
+            if (isValid ? [isValid boolValue] : NO) {
+                [self constructUserDefaults:jsonData];
+                NSLog(@"requestReply: %@", requestReply);
+            }
+            else{
+                NSLog(@"requestReply: %@", requestReply);
+            }
+        });
+     }] resume];
+}
+
+- (NSString *) ampmTimeToMilitaryTime:(NSString *) time{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSDate *AMPMDepartTimeFormat = [dateFormatter dateFromString: time];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *militaryDepartTime = [dateFormatter stringFromDate:AMPMDepartTimeFormat];
+    
+    return militaryDepartTime;
+}
+
+- (NSString *) militaryTimeToAMPMTime:(NSString *) time{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSDate *MilitaryDepartTimeFormat = [dateFormatter dateFromString: time];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSString *AMPMDepartTime = [dateFormatter stringFromDate:MilitaryDepartTimeFormat];
+    
+    return AMPMDepartTime;
+}
+
+- (NSString *) nextDateByDay:(int) day{
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *date = [NSDate date];
+    NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:date];
+    NSInteger todayWeekday = [weekdayComponents weekday];
+    
+    enum Weeks {
+        SUNDAY = 1,
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY
+    };
+    
+    NSInteger moveDays=day-todayWeekday;
+    if (moveDays<=0) {
+        moveDays+=7;
+    }
+    
+    NSDateComponents *components = [NSDateComponents new];
+    components.day=moveDays;
+    
+    NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+    NSDate* newDate = [calendar dateByAddingComponents:components toDate:date options:0];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy/MM/dd"];
+    NSString *dateString = [dateFormat stringFromDate:newDate];
+    
+    return dateString;
 }
 
 @end
