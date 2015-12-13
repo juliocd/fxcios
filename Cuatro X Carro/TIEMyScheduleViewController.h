@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSMutableDictionary *schedule;
 
 @property (nonatomic, strong) IBOutlet RadioButton* radioButton;
+@property (weak, nonatomic) IBOutlet RadioButton *departRB;
+@property (weak, nonatomic) IBOutlet RadioButton *returnRB;
+@property (weak, nonatomic) IBOutlet RadioButton *departReturnRB;
 
 - (IBAction)selectDay:(id)sender;
 - (IBAction)selectDepartTime:(id)sender;

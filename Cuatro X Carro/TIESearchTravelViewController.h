@@ -11,9 +11,13 @@
 
 @interface TIESearchTravelViewController : UIViewController
 
-@property (strong, nonatomic) NSArray *results;
+- (id)initWithSearchData:(NSMutableArray *) aScheduleDayArray withSecond:(NSMutableArray *) aStepArray withThird:(NSNumber *) aIsGoing withFourth:(NSMutableArray *) aDaysArray;
 
 @property (weak, nonatomic) IBOutlet UITableView *resultTableView;
 @property (weak, nonatomic) IBOutlet GMSMapView *searchRouteMap;
+- (IBAction)DaySelect:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *daySelect;
+@property (weak, nonatomic) IBOutlet UILabel *driverName;
+- (IBAction)RequestTrip:(id)sender;
 
 @end

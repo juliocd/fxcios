@@ -44,7 +44,7 @@
                         <action selector="SingupButton:" destination="-1" eventType="touchUpInside" id="YNe-y5-G75"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="qwe" borderStyle="roundedRect" minimumFontSize="17" id="o3c-GT-Z6q">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" minimumFontSize="17" id="o3c-GT-Z6q">
                     <rect key="frame" x="81" y="269" width="231" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
@@ -70,7 +70,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asd@gmail.com" borderStyle="roundedRect" minimumFontSize="17" id="Q8B-3t-wgN">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa@gmail.com" borderStyle="roundedRect" minimumFontSize="17" id="Q8B-3t-wgN">
                     <rect key="frame" x="81" y="221" width="231" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>

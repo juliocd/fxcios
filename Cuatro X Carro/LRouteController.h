@@ -19,5 +19,6 @@ typedef enum tagTravelMode
 
 - (void)getPolylineWithLocations:(NSArray *)locations withsecond:(long)tenant_id travelMode:(TravelMode)travelMode andCompletitionBlock:(void (^)(GMSPolyline *polyline, NSError *error))completitionBlock;
 - (void)getPolylineWithLocations:(NSArray *)locations withsecond:(long)tenant_id andCompletitionBlock:(void (^)(GMSPolyline *polyline, NSError *error))completitionBlock;
-- (NSString *)getStepArrayString;
+- (NSString *) getStepArrayString;
+- (NSMutableArray *) getStepArray;
 @end

@@ -19,9 +19,6 @@
     
     NSMutableArray *detailedSteps;
     
-    NSNumber *origLatitude;
-    NSNumber *origLongitude;
-    
     NSMutableArray *_coordinates;
     LRouteController *_routeController;
     GMSPolyline *_polyline;
@@ -47,8 +44,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *travelTypeSelect;
 - (IBAction)SelectTravelType:(id)sender;
 - (IBAction)ClearMap:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *availableSeats;
+@property (weak, nonatomic) IBOutlet UILabel *availableSeatsLabel;
 
 - (IBAction)SaveDriverTravel:(id)sender;
-- (IBAction)SearchPassengerTravels:(id)sender;
 
 @end

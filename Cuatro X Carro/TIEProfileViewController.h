@@ -8,12 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TIEProfileViewController : UIViewController
+@interface TIEProfileViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *schedule;
 
 - (IBAction)EditProfile:(id)sender;
 - (IBAction)updateSchedue:(id)sender;
+
+//Tomar foto
+@property (weak, nonatomic) IBOutlet UIImageView *profilePricture;
+- (IBAction) PictureOptions:(id)sender;
+
+//Calificacion
+@property (weak, nonatomic) IBOutlet UIImageView *rateOneIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateTwoIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateThreeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateFourIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateFiveIcon;
+
+//Datos de usuario
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (weak, nonatomic) IBOutlet UILabel *userEmail;
+@property (weak, nonatomic) IBOutlet UILabel *userPhone;
+
 
 //Hora ida
 @property (weak, nonatomic) IBOutlet UILabel *mondayDepartTime;
@@ -30,5 +47,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *thursdayReturnTime;
 @property (weak, nonatomic) IBOutlet UILabel *fridayReturnTime;
 @property (weak, nonatomic) IBOutlet UILabel *saturdayReturnTime;
+
+//Cerrar sesion
+- (IBAction)LogOut:(id)sender;
 
 @end

@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TIEScheduleTripViewController">
             <connections>
+                <outlet property="availableSeats" destination="Ko6-Z2-Jih" id="fKP-ih-YKR"/>
+                <outlet property="availableSeatsLabel" destination="32Y-CR-YKV" id="EO2-Ue-AU3"/>
                 <outlet property="saveDriverTravel" destination="FSu-eU-ldO" id="H39-fW-fH1"/>
                 <outlet property="searchPassengerTravels" destination="dlP-w8-BmK" id="lSd-NK-Ec0"/>
                 <outlet property="selectRouteMap" destination="dkE-Ci-CHn" id="9sq-47-EZg"/>
@@ -162,7 +164,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FSu-eU-ldO">
-                    <rect key="frame" x="123" y="489" width="74" height="30"/>
+                    <rect key="frame" x="37" y="489" width="74" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <state key="normal" title="Guardar"/>
@@ -177,7 +179,7 @@
                     <color key="backgroundColor" red="0.76293420665427392" green="1" blue="0.72672292436022756" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="txu-v3-qd9">
-                    <rect key="frame" x="212" y="131" width="100" height="30"/>
+                    <rect key="frame" x="181" y="489" width="100" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <state key="normal" title="Limpiar mapa"/>
@@ -186,19 +188,33 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dlP-w8-BmK">
-                    <rect key="frame" x="126" y="489" width="68" height="30"/>
+                    <rect key="frame" x="40" y="489" width="68" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <state key="normal" title="Buscar"/>
                     <connections>
-                        <action selector="SearchPassengerTravels:" destination="-1" eventType="touchUpInside" id="rsE-Fa-7ca"/>
                         <action selector="searchRoute:" destination="-1" eventType="touchUpInside" id="dht-au-Hlu"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="Ko6-Z2-Jih">
+                    <rect key="frame" x="249" y="132" width="62" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cupos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="32Y-CR-YKV">
+                    <rect key="frame" x="191" y="136" width="53" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="327" y="448"/>
+            <point key="canvasLocation" x="244" y="369"/>
         </view>
     </objects>
     <resources>

@@ -11,9 +11,15 @@
 
 @interface TIETravelDetailsViewController : UIViewController
 
+- (id)initWithTripData:(NSMutableDictionary *) aTripData;
+
 - (IBAction)viewApplications:(id)sender;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *routeMap;
+@property (weak, nonatomic) IBOutlet UILabel *driverName;
+@property (weak, nonatomic) IBOutlet UILabel *dateTrip;
+@property (weak, nonatomic) IBOutlet UILabel *hourTrip;
+@property (weak, nonatomic) IBOutlet UILabel *seatsState;
 
 
 @end

@@ -10,8 +10,14 @@
 
 @interface TIEApplicationsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray *applications;
+- (id)initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats;
 
 @property (weak, nonatomic) IBOutlet UITableView *applicationsTableView;
 
+@property (weak, nonatomic) IBOutlet UILabel *applicantName;
+@property (weak, nonatomic) IBOutlet UILabel *applicantEmail;
+@property (weak, nonatomic) IBOutlet UILabel *applicantPhone;
+@property (weak, nonatomic) IBOutlet UITextView *applicantAddress;
+- (IBAction)AcceptingApplication:(id)sender;
+- (IBAction)CancelApplication:(id)sender;
 @end

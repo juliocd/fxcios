@@ -8,24 +8,26 @@
 
 #import "TIEApplicationsViewController.h"
 
-@interface TIEApplicationsViewController ()
+@interface TIEApplicationsViewController (){
+    NSString *tripId;
+    NSString *maxSeats;
+    NSMutableArray *applications;
+    NSMutableDictionary *selectedApplication;
+}
 
 @end
 
 @implementation TIEApplicationsViewController
 
-@synthesize applications;
+@synthesize applicantName, applicantEmail, applicantPhone, applicantAddress;
 
-- (NSArray *)applications
-{
-    if (!applications)
-    {
-        NSMutableArray * arr = [NSMutableArray arrayWithCapacity:7];
-        for (NSInteger i=0; i<7; i++)
-            [arr addObject:[NSString stringWithFormat:@"Solicitud %ld", (long)i]];
-        applications = arr;
+- (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats{
+    self = [super initWithNibName:@"TIEApplicationsViewController" bundle:nil];
+    if (self) {
+        tripId = aTripId;
+        maxSeats = aMaxSeats;
     }
-    return applications;
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -37,6 +39,57 @@
                                     target:self
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
+    
+    //Se inicalizan variables locales
+    applications = [[NSMutableArray alloc] init];
+    selectedApplication = [[NSMutableDictionary alloc] init];
+    
+    [self getApplications];
+}
+
+- (void) getApplications{
+    //Se recupera informacion de usuario
+    NSString *urlServer = @"http://127.0.0.1:5000/queryRequestTrips";
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"id=%@",
+                      tripId];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                applications = [jsonData valueForKey:@"result"];
+                [self.applicationsTableView reloadData];
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
 }
 
 //Personalizar boton atras
@@ -51,7 +104,7 @@
 
 //Se determina numero de filas de la tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.applications count];
+    return  [applications count];
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,62 +117,93 @@
         //Se agrega vista cargada con celda a tabla
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.textLabel.text = [applications objectAtIndex:indexPath.row];
+    if ([applications count] > 0) {
+        NSMutableDictionary *application = [applications objectAtIndex:indexPath.row];
+        cell.textLabel.text = [application valueForKey:@"name"];
+    }
     
     return cell;
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
 
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
+    NSMutableDictionary *application = [applications objectAtIndex:indexPath.row];
+    selectedApplication = application;
+    applicantName.text = [application valueForKey:@"name"];
+    applicantEmail.text = [application valueForKey:@"email"];
+    applicantPhone.text = ([application valueForKey:@"phone"] != (id)[NSNull null]) ? [application valueForKey:@"phone"] : @"000000000";
+    applicantAddress.text = ([application valueForKey:@"address"] != (id)[NSNull null]) ? [application valueForKey:@"address"] : @"Clle XXX Nro XX-XXXX";
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)AcceptingApplication:(id)sender {
+    if ([selectedApplication count] > 0) {
+        //Se recupera informacion de usuario
+        NSString *urlServer = @"http://127.0.0.1:5000/saveRequestTripIOS";
+        //Se configura data a enviar
+        NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+        [driverTrip setValue:maxSeats forKey:@"max_seats"];
+        [driverTrip setValue:tripId forKey:@"id"];
+        NSData * jsonData1 = [NSJSONSerialization  dataWithJSONObject:driverTrip options:0 error:nil];
+        NSString *driverTripString = [[NSString alloc] initWithData:jsonData1   encoding:NSUTF8StringEncoding];
+        NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
+        [passengerTrip setValue:[selectedApplication valueForKey:@"passenger_trip_id"] forKey:@"passenger_trip_id"];
+        NSData * jsonData2 = [NSJSONSerialization  dataWithJSONObject:passengerTrip options:0 error:nil];
+        NSString *passengerTripString = [[NSString alloc] initWithData:jsonData2   encoding:NSUTF8StringEncoding];
+        NSString *post = [NSString stringWithFormat:
+                          @"trip=%@&passenger=%@",
+                          driverTripString, passengerTripString];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        //Se captura numero d eparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        
+        //Se configura request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString: urlServer]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:postData];
+        
+        //Se ejecuta request
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            dispatch_async(dispatch_get_main_queue(),^{
+                //Se convierte respuesta en JSON
+                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                id isValid = [jsonData valueForKey:@"valid"];
+                
+                NSString *message = @"Solicitud alamcenada correctamnte";
+                if (!(isValid ? [isValid boolValue] : NO)) {
+                    message = [jsonData valueForKey:@"description"];
+                }
+                else{
+                    [self getApplications];
+                    applications = [[NSMutableArray alloc] init];
+                    selectedApplication = [[NSMutableDictionary alloc] init];
+                }
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message: message
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            });
+        }] resume];
+    }
+    else{
+        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                message: @"Debe seleccionar una solicitud."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+        [alertSaveUser show];
+    }
 }
-*/
 
+- (IBAction)CancelApplication:(id)sender {
+}
 @end

@@ -22,7 +22,7 @@
 
 @implementation TIEMyScheduleViewController
 
-@synthesize dayTextInput, departTimeTextInput, returnTimeTextInput, selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule;
+@synthesize dayTextInput, departTimeTextInput, returnTimeTextInput, selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule, radioButton, departRB, returnRB, departReturnRB;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +52,8 @@
         [self loadSchedule];
     }
     
+    //Se inhabilita hora de regreso por el radiobuton
+    [returnTimeTextInput setEnabled:NO];
 }
 
 //Funcion que carga ultimo horario configurado en vista
@@ -167,8 +169,21 @@
 
 #pragma Radiobutton
 - (IBAction) onRadioBtn:(id)sender {
+    if ([departRB isSelected]) {
+        [returnTimeTextInput setEnabled:NO];
+        [departTimeTextInput setEnabled:YES];
+    }
+    else if([returnRB isSelected]){
+        [departTimeTextInput setEnabled:NO];
+        [returnTimeTextInput setEnabled:YES];
+    }
+    else{
+        [returnTimeTextInput setEnabled:YES];
+        [departTimeTextInput setEnabled:YES];
+    }
 }
 
+#pragma Horario
 - (IBAction) setDayTime:(id)sender {
     
     //Convertir hora de ida a hora militar
@@ -180,40 +195,64 @@
     NSString *militaryReturnTime = [util ampmTimeToMilitaryTime:AMPMReturnTime];
     
     if ([[self.dayTextInput text] isEqualToString:@"Lunes"]) {
-        [schedule setValue:militaryDepartTime forKey:@"monday_going"];
-        mondayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"monday_return"];
-        mondayReturnTime.text = AMPMReturnTime;
+        if ([departTimeTextInput isEnabled]) {
+            [schedule setValue:militaryDepartTime forKey:@"monday_going"];
+            mondayDepartTime.text = AMPMDepartTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"monday_return"];
+            mondayReturnTime.text = AMPMReturnTime;
+        }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Martes"]) {
-        [schedule setValue:militaryDepartTime forKey:@"tuesday_going"];
-        tuesdayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"tuesday_return"];
-        tuesdayReturnTime.text = AMPMReturnTime;
+        if ([departTimeTextInput isEnabled]) {
+            [schedule setValue:militaryDepartTime forKey:@"tuesday_going"];
+            tuesdayDepartTime.text = AMPMDepartTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"tuesday_return"];
+            tuesdayReturnTime.text = AMPMReturnTime;
+        }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Miercoles"]) {
+        if ([departTimeTextInput isEnabled]) {
         [schedule setValue:militaryDepartTime forKey:@"wednesday_going"];
         wednesdayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"wednesday_return"];
-        wednesdayReturnTime.text = AMPMReturnTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"wednesday_return"];
+            wednesdayReturnTime.text = AMPMReturnTime;
+        }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Jueves"]) {
+        if ([departTimeTextInput isEnabled]) {
         [schedule setValue:militaryDepartTime forKey:@"thursday_going"];
         thursdayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"thursday_return"];
-        thursdayReturnTime.text = AMPMReturnTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"thursday_return"];
+            thursdayReturnTime.text = AMPMReturnTime;
+        }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Viernes"]) {
-        [schedule setValue:militaryDepartTime forKey:@"friday_going"];
-        fridayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"friday_return"];
-        fridayReturnTime.text = AMPMReturnTime;
+        if ([departTimeTextInput isEnabled]) {
+            [schedule setValue:militaryDepartTime forKey:@"friday_going"];
+            fridayDepartTime.text = AMPMDepartTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"friday_return"];
+            fridayReturnTime.text = AMPMReturnTime;
+        }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Sabado"]) {
-        [schedule setValue:militaryDepartTime forKey:@"saturday_going"];
-        saturdayDepartTime.text = AMPMDepartTime;
-        [schedule setValue:militaryReturnTime forKey:@"saturday_return"];
-        saturdayReturnTime.text = AMPMReturnTime;
+        if ([departTimeTextInput isEnabled]) {
+            [schedule setValue:militaryDepartTime forKey:@"saturday_going"];
+            saturdayDepartTime.text = AMPMDepartTime;
+        }
+        if ([returnTimeTextInput isEnabled]) {
+            [schedule setValue:militaryReturnTime forKey:@"saturday_return"];
+            saturdayReturnTime.text = AMPMReturnTime;
+        }
     }
     
 }
@@ -281,13 +320,6 @@
 }
 
 - (IBAction)closeSchedule:(id)sender {
-}
-
--(void) onRadioButtonValueChanged:(RadioButton*)sender
-{
-    // Lets handle ValueChanged event only for selected button, and ignore for deselected
-    if(sender.selected) {
-        NSLog(@"Selected color: %@", sender.titleLabel.text);
-    }
+    
 }
 @end

@@ -11,7 +11,9 @@
 #import "NSString+MD5.h"
 
 @class AbstractActionSheetPicker;
-@interface TIESingUpViewController ()
+@interface TIESingUpViewController (){
+    NSMutableDictionary *userData;
+}
 
 @end
 
@@ -20,6 +22,15 @@
 @synthesize countryTextInput, stateTextInput, cityTextInput, groupTextInput,
     fullUserNameTextInput, passwordTextInput, confirmPasswordTextInput, emailInput, groupHost,
     countryItems, stateItems, cityItems, groupItems, countryItemsIds, stateItemsIds, cityItemsIds, groupItemsIds, groupItemsDomains;
+
+- (id)initWithUserData:(NSMutableDictionary *) aUserData {
+    self = [super initWithNibName:@"TIESingUpViewController" bundle:nil];
+    if (self) {
+        userData = aUserData;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +66,13 @@
     [self.passwordTextInput delegate];
     [self.confirmPasswordTextInput delegate];
     [self.emailInput delegate];
+    
+    if (userData != nil) {
+        fullUserNameTextInput.text = [userData valueForKey:@"name"];
+        NSArray<NSString * > *emaiArr = [[userData valueForKey:@"email"] componentsSeparatedByString:@"@"];
+        emailInput.text = emaiArr[0];
+    }
+    
 }
 
 //Se cargan grupos
@@ -80,6 +98,15 @@
                 [groupItems addObject:[jsonGroup objectForKey:@"name"]];
                 [groupItemsIds setValue:[jsonGroup objectForKey:@"id"] forKey:[jsonGroup objectForKey:@"name"]];
                 [groupItemsDomains setValue:[jsonGroup objectForKey:@"domain"] forKey:[jsonGroup objectForKey:@"name"]];
+                
+                //Se actualiza grupo y dominio
+                if (userData != nil) {
+                    if ([jsonGroup objectForKey:@"id"] == [userData objectForKey:@"tenant_id"]) {
+                        groupTextInput.text = [jsonGroup objectForKey:@"name"];
+                        [self.groupTextInput  setEnabled:YES];
+                        groupHost.text = [jsonGroup objectForKey:@"domain"];
+                    }
+                }
             }
         }
         else{
@@ -116,7 +143,20 @@
             [countryItems addObject:[jsonCountry objectForKey:@"name"]];
             [countryItemsIds setValue:[jsonCountry objectForKey:@"id"] forKey:[jsonCountry objectForKey:@"name"]];
             
+            //Se actualiza pais
+            if (userData != nil) {
+                countryTextInput.text = @"Colombia";
+                [self.countryTextInput  setEnabled:YES];
+            }
+            
             NSArray *states = [jsonCountry objectForKey:@"states"];
+            
+            //Se actualiza departamento
+            if (userData != nil) {
+                stateTextInput.text = @"Antioquia";
+                [self.stateTextInput  setEnabled:YES];
+            }
+            
             for (int i=0; i<[states count]; i++) {
                 NSDictionary *jsonState = states[i];
                 [stateItems addObject:[jsonState objectForKey:@"name"]];
@@ -127,6 +167,15 @@
                     NSDictionary *jsonCity= cities[j];
                     [cityItems addObject:[jsonCity objectForKey:@"name"]];
                     [cityItemsIds setValue:[jsonCity objectForKey:@"id"] forKey:[jsonCity objectForKey:@"name"]];
+                    
+                    //Se actualiza ciudad
+                    if (userData != nil) {
+                        if ([jsonCity objectForKey:@"id"] == [userData objectForKey:@"city_id"]) {
+                            //[cityTextInput.text performSelector:@selector(setText:) withObject:[jsonCity objectForKey:@"name"]];
+                            cityTextInput.text = [jsonCity objectForKey:@"name"];
+                            [self.cityTextInput  setEnabled:YES];
+                        }
+                    }
                 }
             }
         }
@@ -236,7 +285,9 @@
     if (![[self.cityTextInput text] isEqualToString:@""] || ![[self.fullUserNameTextInput text] isEqualToString:@""]
         || ![[self.emailInput text] isEqualToString:@""] || ![[self.groupTextInput text] isEqualToString:@""]
         || ![[self.passwordTextInput text] isEqualToString:@""]) {
-    
+        
+        //Se valida que la password
+        
         //Se valida que las claves coincidan
         if ([passwordTextField isEqualToString:passwordConfirmTextField]) {
         

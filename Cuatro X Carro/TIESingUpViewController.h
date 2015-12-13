@@ -10,6 +10,8 @@
 
 @interface TIESingUpViewController : UIViewController <UITextFieldDelegate>
 
+- (id)initWithUserData:(NSMutableDictionary *) aUserData;
+
 - (IBAction)selectCountry:(id)sender;
 - (IBAction)selectState:(id)sender;
 - (IBAction)selectCity:(id)sender;

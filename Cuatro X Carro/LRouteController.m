@@ -6,6 +6,7 @@
 
 @implementation LRouteController{
     NSString *scheduleString;
+    NSMutableArray *stepsArray;
 }
 
 
@@ -72,7 +73,7 @@
         if (!error)
         {
             NSArray *routesArray = [json objectForKey:@"routes"];
-            NSMutableArray *stepsArray = [[NSMutableArray alloc] init];
+            stepsArray = [[NSMutableArray alloc] init];
             
             if ([routesArray count] > 0)
             {
@@ -89,7 +90,7 @@
                     [step setValue:[NSNumber numberWithInteger: p] forKey:@"step"];
                     [step setValue:[NSNumber numberWithDouble: strCoord.latitude] forKey:@"latitude"];
                     [step setValue:[NSNumber numberWithDouble: strCoord.longitude] forKey:@"longitude"];
-                    [step setValue:[NSNumber numberWithInteger: tenant_id] forKey:@"tenant"];
+                    [step setValue:[NSNumber numberWithInteger: tenant_id] forKey:@"tenant_id"];
                     [stepsArray addObject:step];
                 }
                 GMSPolyline *polyline = [GMSPolyline polylineWithPath:pathArray];
@@ -121,5 +122,7 @@
     return scheduleString;
 };
 
-
+- (NSMutableArray *) getStepArray{
+    return stepsArray;
+};
 @end

@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userPictureImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tripType;
 @property (weak, nonatomic) IBOutlet UIImageView *seatOneImage;
 @property (weak, nonatomic) IBOutlet UIImageView *SeatTwoImage;
 @property (weak, nonatomic) IBOutlet UIImageView *SeatThreeImage;
@@ -23,8 +24,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *rateThreeImage;
 @property (weak, nonatomic) IBOutlet UIImageView *rateFourImage;
 @property (weak, nonatomic) IBOutlet UIImageView *rateFiveImage;
+@property (weak, nonatomic) IBOutlet UILabel *tripId;
+@property (weak, nonatomic) IBOutlet UILabel *userType;
+@property (weak, nonatomic) IBOutlet UIButton *notificationButton;
+@property (weak, nonatomic) IBOutlet UIButton *requestButton;
 
 
 - (IBAction)NotificationButton:(id)sender;
+- (IBAction)RequestButton:(id)sender;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Util.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation Util
 
@@ -148,10 +149,63 @@ static Util *instance =nil;
     NSCalendar *calendar=[[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
     NSDate* newDate = [calendar dateByAddingComponents:components toDate:date options:0];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy/MM/dd"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:newDate];
     
     return dateString;
+}
+
+-(void) buildRoute:(NSMutableArray *) steps withSecond:(long) tenantId withThird:(GMSPolyline *) polyline withFourth:(GMSMarker *) markerStart withFifth:(GMSMarker *) markerFinish withSixth:(GMSMapView *) routeMap {
+    NSMutableDictionary *initialPosition = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *finalPosition = [[NSMutableDictionary alloc] init];
+    GMSMutablePath *path = [GMSMutablePath path];
+    for (int i=0; i<steps.count; i++) {
+        NSMutableDictionary *step = [[NSMutableDictionary alloc] init];
+        step = [steps objectAtIndex:i];
+        [path addCoordinate:CLLocationCoordinate2DMake([[step valueForKey:@"latitude"] doubleValue], [[step valueForKey:@"longitude"] doubleValue])];
+        if (i == 0) {
+            initialPosition = step;
+        }
+        if (i == (steps.count - 1)) {
+            finalPosition = step;
+        }
+    }
+    
+    polyline.map = nil;
+    markerStart.map = nil;
+    markerFinish.map = nil;
+    
+    if ([steps count] > 1){
+        
+        //Se actualiza posicion de camara en mapa con primer puento de aprtida
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[[initialPosition valueForKey:@"latitude"] doubleValue]
+                                                                longitude:[[initialPosition valueForKey:@"longitude"] doubleValue]
+                                                                     zoom:14];
+        routeMap.camera = camera;
+        
+        //Se construye polilinea
+        GMSPolyline *routPolyline = [GMSPolyline polylineWithPath:path];
+        polyline = routPolyline;
+        //Color de linea por gradiente
+        GMSStrokeStyle *greenToRed = [GMSStrokeStyle gradientFromColor:[UIColor greenColor] toColor:[UIColor blueColor]];
+        polyline.spans = @[[GMSStyleSpan spanWithStyle:greenToRed]];
+        polyline.strokeWidth = 3.f;
+        polyline.map = routeMap;
+        //Marca final
+        CLLocationCoordinate2D finalPositionLocation = CLLocationCoordinate2DMake([[finalPosition valueForKey:@"latitude"] doubleValue], [[finalPosition valueForKey:@"longitude"] doubleValue]);
+        markerFinish.position = finalPositionLocation;
+        markerFinish.map = routeMap;
+        markerFinish.title = @"Llegada";
+        markerFinish.snippet = @"Medellin";
+        markerFinish.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+        //Marca inicial
+        CLLocationCoordinate2D initialPositionLocation = CLLocationCoordinate2DMake([[initialPosition valueForKey:@"latitude"] doubleValue], [[initialPosition valueForKey:@"longitude"] doubleValue]);
+        markerStart.position = initialPositionLocation;
+        markerStart.map = routeMap;
+        markerStart.title = @"Salida";
+        markerStart.snippet = @"Medellin";
+        markerStart.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+    }
 }
 
 @end

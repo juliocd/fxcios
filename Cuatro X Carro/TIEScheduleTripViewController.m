@@ -14,28 +14,31 @@
 @implementation TIEScheduleTripViewController{
     NSMutableDictionary *dataUser;
     Util *util;
+    NSNumber *staticLatitude;
+    NSNumber *staticLongitude;
+    NSMutableArray *daysArray;
 }
 
-@synthesize  selectRouteMap, travelTypeSelect, searchPassengerTravels, switchUserType, saveDriverTravel;
+@synthesize  selectRouteMap, travelTypeSelect, searchPassengerTravels, switchUserType, saveDriverTravel, availableSeats, availableSeatsLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Se inicializa selector de filtro de dias
+    daysArray = [[NSMutableArray alloc] init];
+    [daysArray addObject:@"Seleccione día"];
+    
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
     
-    //Se obtiene informacion de usuario
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    dataUser = [defaults objectForKey:@"userData"];
-    
     //Se fijan coodenadas inciales
-    origLatitude = [NSNumber numberWithDouble:6.249710];
-    origLongitude = [NSNumber numberWithDouble:-75.592273];
+    staticLatitude = [NSNumber numberWithDouble:6.2000649];
+    staticLongitude = [NSNumber numberWithDouble:-75.5791193];
     
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[origLatitude doubleValue]
-                                                            longitude:[origLongitude doubleValue]
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[staticLatitude doubleValue]
+                                                            longitude:[staticLongitude doubleValue]
                                                                  zoom:16];
     selectRouteMap.camera = camera;
     selectRouteMap.myLocationEnabled = YES;
@@ -44,10 +47,7 @@
     _routeController = [LRouteController new];
     
     _markerStart = [GMSMarker new];
-    _markerStart.title = @"Start";
-    
     _markerFinish = [GMSMarker new];
-    _markerFinish.title = @"Finish";
     
     //Se cargan valores de dias seleccionados;
     [buttonMonday setSelected:NO];
@@ -57,27 +57,18 @@
     [buttonFriday setSelected:NO];
     [buttonSaturday setSelected:NO];
     
-    //Se actualiza valor de switch
-    if([switchUserType isOn]){
-        [searchPassengerTravels setHidden:NO];
-        [saveDriverTravel setHidden:YES];
-    }
-    else{
-        //Se crea marca inicial en caso de ser conductor para definir destino por tenant
-        GMSMarker *rootMarker = [[GMSMarker alloc] init];
-        rootMarker.position = CLLocationCoordinate2DMake([origLatitude doubleValue], [origLongitude doubleValue]);
-        NSMutableDictionary *markPosition = [[NSMutableDictionary alloc] init];
-        [markPosition setValue:[NSString stringWithFormat:@"%f", [origLatitude doubleValue]] forKey:@"latitude"];
-        [markPosition setValue:[NSString stringWithFormat:@"%f", [origLongitude doubleValue]] forKey:@"longitude"];
-        [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[origLatitude doubleValue] longitude:[origLongitude doubleValue]]];
-        rootMarker.title = @"Partida";
-        rootMarker.snippet = @"Medellin";
-        rootMarker.map = self.selectRouteMap;
-        
-        [searchPassengerTravels setHidden:YES];
-        [saveDriverTravel setHidden:NO];
-    }
-    
+    [self reloadMarkersByUserType];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    //Se inicializa nuevamente arreglo de filtro de dias
+    daysArray = [[NSMutableArray alloc] init];
+    [daysArray addObject:@"Seleccione día"];
+    //Se obtiene informacion de usuario
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    dataUser = [defaults objectForKey:@"userData"];
+    [self clearMap];
+    [self reloadMarkersByUserType];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,39 +76,56 @@
 }
 
 - (IBAction)searchRoute:(id)sender {
-    TIESearchTravelViewController *searchTravelsVC = [[TIESearchTravelViewController alloc] init];
-    UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:searchTravelsVC];
-    [self presentViewController:trasformerNavC animated:YES completion:nil];
+    //Se envia a vista el horario seleccionado, segun configuarcion de usuario en perfiles y ruta para armar cada passangerTrip
+    //Se crea arreglo de viajes de conductor
+    NSMutableArray *driverTripArray = [[NSMutableArray alloc] init];
+    
+    //Se obtiene tipo de viaje
+    NSString *travelType = @"_going";
+    NSNumber *isGoing = [NSNumber numberWithInt:1];
+    if (![[self.travelTypeSelect text] isEqualToString:@"Ida"]) {
+        travelType = @"_return";
+        isGoing = [NSNumber numberWithInt:0];
+    }
+    //Construir formato de hora a parti de horario
+    NSString *strSchedule = [dataUser objectForKey:@"schedule"];
+    if (![strSchedule isEqual:@""]) {
+        //Se organiza horario de usuario
+        [self getUserSchedule:strSchedule withSecond:travelType withThird:isGoing withFourth:driverTripArray];
+        //Se recupera data de arreglo de puntos
+        NSMutableArray *stepArray = [_routeController getStepArray];
+        //Se valida que exista una ruta
+        if (stepArray.count > 0 && driverTripArray.count > 0) {
+            //Se envia parametros a siguinete controlador
+            TIESearchTravelViewController *searchTravelsVC = [[TIESearchTravelViewController alloc] initWithSearchData:driverTripArray withSecond:stepArray withThird:isGoing withFourth:daysArray];
+            UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:searchTravelsVC];
+            [self presentViewController:trasformerNavC animated:YES completion:nil];
+        }
+        else{
+            UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                      message:@"Debe indicar en el mapa su punto de salida o llegada, y seleccionar los dias correspondientes."
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"OK"
+                                                            otherButtonTitles:nil];
+            [alertErrorLogin show];
+        }
+    }
+    else{
+        UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                  message:@"Debe configurar inicalmente un horario en perfil de usuario."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+        [alertErrorLogin show];
+    }
 }
 
 #pragma Switch para seleccionar tipo de pasajero
 - (IBAction)SwitchUserType:(id)sender {
-    if ([sender isOn]) {
-        [searchPassengerTravels setHidden:NO];
-        [saveDriverTravel setHidden:YES];
-        [self.selectRouteMap clear];
-    }
-    else{
-        
-        [self.selectRouteMap clear];
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[origLatitude doubleValue]
-                                                                longitude:[origLongitude doubleValue]
-                                                                     zoom:16];
-        selectRouteMap.camera = camera;
-        //Se crea marca inicial en caso de ser conductor para definir destino por tenant
-        GMSMarker *rootMarker = [[GMSMarker alloc] init];
-        rootMarker.position = CLLocationCoordinate2DMake([origLatitude doubleValue], [origLongitude doubleValue]);
-        NSMutableDictionary *markPosition = [[NSMutableDictionary alloc] init];
-        [markPosition setValue:[NSString stringWithFormat:@"%f", [origLatitude doubleValue]] forKey:@"latitude"];
-        [markPosition setValue:[NSString stringWithFormat:@"%f", [origLongitude doubleValue]] forKey:@"longitude"];
-        [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[origLatitude doubleValue] longitude:[origLongitude doubleValue]]];
-        rootMarker.title = @"Partida";
-        rootMarker.snippet = @"Medellin";
-        rootMarker.map = self.selectRouteMap;
-        
-        [searchPassengerTravels setHidden:YES];
-        [saveDriverTravel setHidden:NO];
-    }
+    self.travelTypeSelect.text = @"Ida";
+    [self.travelTypeSelect  setEnabled:YES];
+    [self clearMap];
+    [self reloadMarkersByUserType];
 }
 
 #pragma Botones de chekbox
@@ -198,6 +206,8 @@
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         if ([sender respondsToSelector:@selector(setText:)]) {
             [sender performSelector:@selector(setText:) withObject:selectedValue];
+            [self clearMap];
+            [self reloadMarkersByUserType];
         }
         [self.travelTypeSelect  setEnabled:YES];
     };
@@ -213,35 +223,8 @@
 
 #pragma Botone para limpiar mapa
 - (IBAction)ClearMap:(id)sender {
-    
-    [self.selectRouteMap clear];
-    
-    // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[origLatitude doubleValue]
-                                                            longitude:[origLongitude doubleValue]
-                                                                 zoom:16];
-    selectRouteMap.camera = camera;
-    selectRouteMap.myLocationEnabled = YES;
-    _coordinates = [NSMutableArray new];
-    _routeController = [LRouteController new];
-    
-    _markerStart = [GMSMarker new];
-    _markerStart.title = @"Start";
-    
-    _markerFinish = [GMSMarker new];
-    _markerFinish.title = @"Finish";
-    
-    // Creates a marker in the center of the map.
-    GMSMarker *rootMarker = [[GMSMarker alloc] init];
-    rootMarker.position = CLLocationCoordinate2DMake([origLatitude doubleValue], [origLongitude doubleValue]);
-    NSMutableDictionary *markPosition = [[NSMutableDictionary alloc] init];
-    [markPosition setValue:[NSString stringWithFormat:@"%f", [origLatitude doubleValue]] forKey:@"latitude"];
-    [markPosition setValue:[NSString stringWithFormat:@"%f", [origLongitude doubleValue]] forKey:@"longitude"];
-    [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[origLatitude doubleValue] longitude:[origLongitude doubleValue]]];
-    rootMarker.title = @"Partida";
-    rootMarker.snippet = @"Medellin";
-    rootMarker.map = self.selectRouteMap;
+    [self clearMap];
+    [self reloadMarkersByUserType];
 }
 
 #pragma Botones guardar, buscar y cancelar
@@ -257,188 +240,103 @@
         travelType = @"_return";
         isGoing = [NSNumber numberWithInt:0];
     }
-    //Construir formato de hora a parti de horario
-    NSString *dateHour = @"";
-    NSString *strSchedule = [dataUser objectForKey:@"schedule"];
-    NSMutableDictionary *schedule = [[NSMutableDictionary alloc] init];
-    if (![strSchedule isEqual:@""]) {
-        schedule = [NSJSONSerialization JSONObjectWithData:[strSchedule dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-        NSString *daySchedule = @"";
-        //Lunes
-        if ([buttonMonday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:2],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        //Martes
-        if ([buttonTuesday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:3],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        //Miercoles
-        if ([buttonWednesday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:4],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        //Jueves
-        if ([buttonThursday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:5],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        //Viernes
-        if ([buttonFriday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:1],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        //Sabado
-        if ([buttonSaturday isSelected]) {
-            //Se recupera hora para dia lunes
-            daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]];
-            //Se valida que tenga horario programado para ese dia
-            if (![daySchedule isEqualToString:@""]) {
-                //Se recupera fecha del procimo dia seleccionado
-                dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:6],daySchedule];
-                NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-                [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"user_id"];
-                [driverTrip setValue:dateHour forKey:@"date_hour"];
-                [driverTrip setValue:isGoing forKey:@"is_going"];
-                [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
-                [driverTripArray addObject:driverTrip];
-            }
-        }
-        
-        NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:driverTripArray options:0 error:nil];
-        NSString *driverTripString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
-        
-        //Se recupera data de arreglo de puntos
-        NSString *stepsString = [_routeController getStepArrayString];
-        
-        if (![stepsString isEqualToString:@""] && ![driverTripString isEqualToString:@"[]"]) {
+    //Se valida que los cupos no sean cero o mayor a seis
+    if ([availableSeats.text intValue] > 0 && [availableSeats.text intValue] < 5) {
+    
+        //Construir formato de hora a parti de horario
+        NSString *strSchedule = [dataUser objectForKey:@"schedule"];
+        if (![strSchedule isEqual:@""]) {
+            [self getUserSchedule:strSchedule withSecond:travelType withThird:isGoing withFourth:driverTripArray];
             
-            //Se envia peticion por POST
-            NSString *urlServer = @"http://127.0.0.1:5000/saveSchedule";
-            //Se configura data a enviar
-            NSString *post = [NSString stringWithFormat:
-                              @"schedule=%@&id=%@&tenant_id=%@",
-                              @"",
-                              [dataUser objectForKey:@"id"],
-                              [dataUser objectForKey:@"tenant_id"]];
-            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+            NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:driverTripArray options:0 error:nil];
+            NSString *driverTripString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
             
-            //Se captura numero d eparametros a enviar
-            NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+            //Se recupera data de arreglo de puntos
+            NSString *stepsArrayString = [_routeController getStepArrayString];
             
-            //Se configura request
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-            [request setURL:[NSURL URLWithString: urlServer]];
-            [request setHTTPMethod:@"POST"];
-            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-            [request setHTTPBody:postData];
+            if (![stepsArrayString isEqualToString:@""] && ![driverTripString isEqualToString:@"[]"]) {
+                
+                //Se envia peticion por POST
+                NSString *urlServer = @"http://127.0.0.1:5000/saveDriverTripsIOS";
+                //Se configura data a enviar
+                NSString *post = [NSString stringWithFormat:
+                                  @"trips=%@&route=%@",
+                                  driverTripString,
+                                  stepsArrayString];
+                NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                
+                //Se captura numero d eparametros a enviar
+                NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+                
+                //Se configura request
+                NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+                [request setURL:[NSURL URLWithString: urlServer]];
+                [request setHTTPMethod:@"POST"];
+                [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+                [request setHTTPBody:postData];
+                
+                //Se ejecuta request
+                NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                    NSLog(@"requestReply: %@", requestReply);
+                    dispatch_async(dispatch_get_main_queue(),^{
+                        
+                        //Se convierte respuesta en JSON
+                        NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                        id isValid = [jsonData valueForKey:@"valid"];
+                        
+                        NSString *message = @"Viaje almacenado correctamente.";
+                        if (!isValid ? [isValid boolValue] : NO) {
+                            message = [jsonData objectForKey:@"error"];
+                        }
+                        else{
+                            [util updateUserDefaults];
+                            [self clearMap];
+                            [self reloadMarkersByUserType];
+                        }
+                        
+                        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                                message:message
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                        [alertSaveUser show];
+                    });
+                }] resume];
             
-            //Se ejecuta request
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-            [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                NSLog(@"requestReply: %@", requestReply);
-                dispatch_async(dispatch_get_main_queue(),^{
-                    
-                    //Se convierte respuesta en JSON
-                    NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
-                    id isValid = [jsonData valueForKey:@"valid"];
-                    
-                    NSString *message = @"Calendario almacenado correctamente.";
-                    if (!isValid ? [isValid boolValue] : NO) {
-                        message = [jsonData objectForKey:@"error"];
-                    }
-                    else{
-                        [util updateUserDefaults];
-                    }
-                    
-                    UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                            message:message
-                                                                           delegate:nil
-                                                                  cancelButtonTitle:@"OK"
-                                                                  otherButtonTitles:nil];
-                    [alertSaveUser show];
-                });
-            }] resume];
-        
-        }else{
+            }else{
+                NSString *messagePassengerOrDriver = @"Debe crear una ruta en el mapa y seleccionar los dias correspondientes.";
+                if([switchUserType isOn]){
+                    messagePassengerOrDriver = @"Debe indicar su posicion de origen/destino y seleccionar los dias correspondientes.";
+                }
+                UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                          message:messagePassengerOrDriver
+                                                                         delegate:nil
+                                                                cancelButtonTitle:@"OK"
+                                                                otherButtonTitles:nil];
+                [alertErrorLogin show];
+            }
+            
+        }
+        else{
             UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                      message:@"Debe crear una ruta en el mapa y seleccionar los dias correspondientes."
+                                                                      message:@"Debe configurar inicalmente un horario en perfil de usuario."
                                                                      delegate:nil
                                                             cancelButtonTitle:@"OK"
                                                             otherButtonTitles:nil];
             [alertErrorLogin show];
         }
-        
     }
     else{
         UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                  message:@"Debe configurar inicalmente un horario en perfil de usuario."
+                                                                  message:@"El número de cupos no debe ser inferior a 1 o superior a 4."
                                                                  delegate:nil
                                                         cancelButtonTitle:@"OK"
                                                         otherButtonTitles:nil];
         [alertErrorLogin show];
     }
-}
-
-- (IBAction)SearchPassengerTravels:(id)sender {
 }
 
 #pragma Metodos de Google Maps
@@ -447,19 +345,58 @@
     //Accion si es pasajero (solo poner funto de destino)
     if([switchUserType isOn]){
         [self.selectRouteMap clear];
+        [self reloadMarkersByUserType];
+        _coordinates = [NSMutableArray new];
+        GMSMarker *personalMarker = [[GMSMarker alloc] init];
         
-        CLLocationCoordinate2D position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
-        GMSMarker *marker = [GMSMarker markerWithPosition:position];
-        marker.title = @"Llegada";
-        marker.snippet = @"Medellin";
-        marker.map = selectRouteMap;
+        //Se evalua si es de ida o de vuelta el viaje
+        if ([[self.travelTypeSelect text] isEqualToString:@"Ida"]) {
+            //Se agrega coordenada seleccionada y final (tenant), apra generar ruta y generar coincidencias
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude]];
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[staticLatitude doubleValue] longitude:[staticLongitude doubleValue]]];
+            //Se agrega marca
+            personalMarker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+            personalMarker.title = @"Salida";
+            personalMarker.snippet = @"Medellin";
+            personalMarker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+            personalMarker.map = self.selectRouteMap;
+        }
+        else{
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[staticLatitude doubleValue] longitude:[staticLongitude doubleValue]]];
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude]];
+            //Se agrega marca
+            personalMarker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+            personalMarker.title = @"Llegada";
+            personalMarker.snippet = @"Medellin";
+            personalMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+            personalMarker.map = self.selectRouteMap;
+        }
+        
+        //Se solicita ruta
+        if ([_coordinates count] == 2){
+            [_routeController getPolylineWithLocations:_coordinates withsecond:[[dataUser objectForKey:@"tenant_id"] longValue] travelMode:TravelModeDriving andCompletitionBlock:^(GMSPolyline *polyline, NSError *error) {
+            }];
+        }
+        
     }
     else{
         _polyline.map = nil;
         _markerStart.map = nil;
         _markerFinish.map = nil;
-    
-        [_coordinates addObject:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude]];
+        
+        //Se debe agregar la posicion del tenant al final cuando es ida, pero ya se ha agregado por
+        //cada punto, por tal motivo debe elimianrse antes y volverlo a agregar
+        if ([[self.travelTypeSelect text] isEqualToString:@"Ida"]) {
+            [_coordinates removeLastObject];
+            //Se agrega punto intermedio
+            [_coordinates insertObject:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] atIndex:0];
+            //Se agrega la del tenant
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[staticLatitude doubleValue] longitude:[staticLongitude doubleValue]]];
+        }
+        else{
+            //Si es de regreso se agregan sin problema, pq la final es la seleccionada
+            [_coordinates addObject:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude]];
+        }
     
         if ([_coordinates count] > 1){
             [_routeController getPolylineWithLocations:_coordinates withsecond:[[dataUser objectForKey:@"tenant_id"] longValue] travelMode:TravelModeDriving andCompletitionBlock:^(GMSPolyline *polyline, NSError *error) {
@@ -474,25 +411,213 @@
                     GMSStrokeStyle *greenToRed = [GMSStrokeStyle gradientFromColor:[UIColor greenColor] toColor:[UIColor blueColor]];
                     _polyline.spans = @[[GMSStyleSpan spanWithStyle:greenToRed]];
                     _polyline.map = selectRouteMap;
-                    //Marca final
-                    _markerFinish.position = [[_coordinates lastObject] coordinate];
-                    _markerFinish.map = selectRouteMap;
-                    _markerFinish.title = @"Llegada";
-                    _markerFinish.snippet = @"Medellin";
-                    //Marcas intermedias
-                    for (int i = 0;i < [_coordinates count]; i++) {
-                        if (i !=0 && i != ([_coordinates count] -1)) {
-                            GMSMarker *marker = [GMSMarker markerWithPosition:[[_coordinates objectAtIndex:i] coordinate]];
-                            marker.title = [NSString stringWithFormat:@"Punto %d", i];
-                            marker.map = selectRouteMap;
-                        }
+                    //Pintar marcas
+                    if (![[self.travelTypeSelect text] isEqualToString:@"Ida"]) {
+                        //Marca final
+                        _markerStart.position = [[_coordinates lastObject] coordinate];
+                        _markerStart.map = selectRouteMap;
+                        _markerStart.title = @"Llegada";
+                        _markerStart.snippet = @"Medellin";
+                        _markerStart.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+                        //Marca inicial
+                        _markerFinish.position = [[_coordinates objectAtIndex:0] coordinate];
+                        _markerFinish.map = selectRouteMap;
+                        _markerFinish.title = @"Salida";
+                        _markerFinish.snippet = @"Medellin";
+                        _markerFinish.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
                     }
-                    //Marca inicial
-                    _markerStart.position = [[_coordinates objectAtIndex:0] coordinate];
-                    _markerStart.map = selectRouteMap;
+                    else{
+                        //Marca inicial
+                        _markerStart.position = [[_coordinates objectAtIndex:0] coordinate];
+                        _markerStart.map = selectRouteMap;
+                        _markerStart.title = @"Salida";
+                        _markerStart.snippet = @"Medellin";
+                        _markerStart.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+                        //Marca final
+                        _markerFinish.position = [[_coordinates lastObject] coordinate];
+                        _markerFinish.map = selectRouteMap;
+                        _markerFinish.title = @"Llegada";
+                        _markerFinish.snippet = @"Medellin";
+                        _markerFinish.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+                    }
                 }
             }];
         }
+    }
+}
+
+#pragma Metodos propios
+-(void) getUserSchedule:(NSString *) strSchedule withSecond:(NSString *) travelType withThird:(NSNumber *) isGoing withFourth: (NSMutableArray *) driverTripArray{
+    NSMutableDictionary *schedule = [[NSMutableDictionary alloc] init];
+    schedule = [NSJSONSerialization JSONObjectWithData:[strSchedule dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    NSString *daySchedule = @"";
+    NSString *dateHour = @"";
+    //Lunes
+    if ([buttonMonday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:2],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Lunes"];
+        }
+    }
+    //Martes
+    if ([buttonTuesday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:3],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Martes"];
+        }
+    }
+    //Miercoles
+    if ([buttonWednesday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:4],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Miércoles"];
+        }
+    }
+    //Jueves
+    if ([buttonThursday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:5],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Jueves"];
+        }
+    }
+    //Viernes
+    if ([buttonFriday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:1],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Viernes"];
+        }
+    }
+    //Sabado
+    if ([buttonSaturday isSelected]) {
+        //Se recupera hora para dia lunes
+        daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]];
+        //Se valida que tenga horario programado para ese dia
+        if (![daySchedule isEqualToString:@""]) {
+            //Se recupera fecha del procimo dia seleccionado
+            dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:6],daySchedule];
+            NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:dateHour forKey:@"date_hour"];
+            [driverTrip setValue:isGoing forKey:@"is_going"];
+            [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
+            [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTripArray addObject:driverTrip];
+            [daysArray addObject:@"Sabado"];
+        }
+    }
+}
+
+-(void) clearMap {
+    [self.selectRouteMap clear];
+    
+    // Create a GMSCameraPosition that tells the map to display the
+    // coordinate -33.86,151.20 at zoom level 6.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[staticLatitude doubleValue]
+                                                            longitude:[staticLongitude doubleValue]
+                                                                 zoom:16];
+    selectRouteMap.camera = camera;
+    selectRouteMap.myLocationEnabled = YES;
+    _coordinates = [NSMutableArray new];
+    _routeController = [LRouteController new];
+    
+    _markerStart = [GMSMarker new];
+    _markerFinish = [GMSMarker new];
+}
+
+-(void) reloadMarkersByUserType{
+    //Se actualiza valor de switch
+    if([switchUserType isOn]){
+        [searchPassengerTravels setHidden:NO];
+        [saveDriverTravel setHidden:YES];
+        [availableSeats setHidden:YES];
+        [availableSeatsLabel setHidden:YES];
+    }
+    else{
+        [searchPassengerTravels setHidden:YES];
+        [saveDriverTravel setHidden:NO];
+        [availableSeats setHidden:NO];
+        [availableSeatsLabel setHidden:NO];
+    }
+    
+    //Se crea marca inicial en caso de ser conductor para definir destino por tenant
+    GMSMarker *rootMarker = [[GMSMarker alloc] init];
+    rootMarker.position = CLLocationCoordinate2DMake([staticLatitude doubleValue], [staticLongitude doubleValue]);
+    NSMutableDictionary *markPosition = [[NSMutableDictionary alloc] init];
+    [markPosition setValue:[NSString stringWithFormat:@"%f", [staticLatitude doubleValue]] forKey:@"latitude"];
+    [markPosition setValue:[NSString stringWithFormat:@"%f", [staticLongitude doubleValue]] forKey:@"longitude"];
+    if (![[self.travelTypeSelect text] isEqualToString:@"Ida"]) {
+        [_coordinates addObject:[[CLLocation alloc] initWithLatitude:[staticLatitude doubleValue] longitude:[staticLongitude doubleValue]]];
+        rootMarker.title = @"Salida";
+        rootMarker.snippet = @"Medellin";
+        rootMarker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+        rootMarker.map = self.selectRouteMap;
+    }
+    else{
+        rootMarker.title = @"Llegada";
+        rootMarker.snippet = @"Medellin";
+        rootMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+        rootMarker.map = self.selectRouteMap;
     }
 }
 

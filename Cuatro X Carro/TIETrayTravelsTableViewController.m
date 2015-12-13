@@ -9,8 +9,11 @@
 #import "TIETrayTravelsTableViewController.h"
 #import "TIETravelCustomCellTableViewCell.h"
 #import "TIETravelDetailsViewController.h"
+#import "Util.h"
 
-@interface TIETrayTravelsTableViewController ()
+@interface TIETrayTravelsTableViewController (){
+    Util *util;
+}
 
 @end
 
@@ -22,19 +25,74 @@
 {
     if (!items)
     {
-        NSMutableArray * arr = [NSMutableArray arrayWithCapacity:20];
-        for (NSInteger i=0; i<20; i++)
-            [arr addObject:[NSString stringWithFormat:@"Nombre %ld", (long)i]];
-        items = arr;
+        items = [[NSArray alloc] init];
     }
     return items;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Se inicializa funcion de utilidades
+    util = [Util getInstance];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [self loadTrips];
+    //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
+}
+
+- (void) loadTrips{
+    //Se recupera email de usuario
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+    int userId = [[dataUser objectForKey:@"id"] integerValue];
+    
+    //Se recupera informacion de usuario
+    NSString *urlServer = @"http://127.0.0.1:5000/queryAllUserTrips";
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"userId=%i",
+                      userId];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                items = [jsonData valueForKey:@"result"];
+                [self.tableView reloadData];
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
 }
 
 //Se determina numero de filas de la tabla
@@ -66,69 +124,165 @@
 //Se configuran datos de la celda
 - (void)tableView:(UITableView *)tableView willDisplayCell:(TIETravelCustomCellTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.userNameLabel.text = [self.items objectAtIndex:indexPath.row];
+    if ([items count] > 0) {
+        NSMutableDictionary *item = [items objectAtIndex:indexPath.row];
+        //Datos comunes
+        cell.tripId.text = [[item valueForKey:@"id"] stringValue];
+        cell.userType.text = [item valueForKey:@"trip_type"];
+        cell.userNameLabel.text = [item valueForKey:@"driver_name"];
+        if ([item valueForKey:@"is_going"] ? [[item valueForKey:@"is_going"] boolValue] : NO) {
+            cell.tripType.text = @"Ida";
+        }
+        else{
+            cell.tripType.text = @"Regreso";
+        }
+        cell.dateLabel.text = [[item valueForKey:@"date_hour"] substringToIndex:10];
+        cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
+        //Datos de conductor
+        if ([[item valueForKey:@"trip_type"] isEqualToString:@"Conductor"]) {
+            //////////////////Sillas disponibles
+            int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
+            int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;
+            [self updateSeats:availableSeats withSecond:maxSeats withThirds:cell];
+            //////////////////Calificacion de conductor
+            int rating = [item valueForKey:@"driver_rating"] != nil ? [[item valueForKey:@"driver_rating"] intValue] : 0;
+            [self updateDriverRating:rating withSecond:cell];
+            //////////////////Solicitudes
+            int request = [[item valueForKey:@"request"] intValue];
+            if (request > 0) {
+                cell.requestButton.tintColor = [UIColor orangeColor];
+            }
+            else{
+                cell.requestButton.tintColor = [UIColor whiteColor];
+            }
+            //////////////////Notificaciones
+            int notifications = [[item valueForKey:@"notifications"] intValue];
+            if (notifications > 0) {
+                cell.notificationButton.tintColor = [UIColor yellowColor];
+            }
+            else{
+                cell.notificationButton.tintColor = [UIColor whiteColor];
+            }
+            cell.backgroundColor = [UIColor blueColor];
+        }
+        else{
+            //Se oculta notificacion de solicitud
+            cell.requestButton.hidden = YES;
+            cell.backgroundColor = [UIColor greenColor];
+        }
+        //Notificaciones
+        //int notification = [[item valueForKey:@"notification"] intValue];
+        int notification = 1;
+        if (notification > 0) {
+            cell.notificationButton.tintColor = [UIColor redColor];
+        }
+    }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    
-    TIETravelDetailsViewController *detailViewController = [[TIETravelDetailsViewController alloc] init];
-    
-    // Pass the selected object to the new view controller.
+    NSMutableDictionary *item = [items objectAtIndex:indexPath.row];
+    TIETravelDetailsViewController *detailViewController = [[TIETravelDetailsViewController alloc] initWithTripData:item];
     
     // Push the view controller.
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:detailViewController];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
-    //[self.navigationController pushViewController:trasformerNavC animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Funciones propias
+- (void) updateSeats:(int) availableSeats withSecond:(int) maxSeats withThirds: (TIETravelCustomCellTableViewCell *) cell{
+    for (int i=1; i<=maxSeats; i++) {
+        switch (i) {
+            case 1:
+                if(availableSeats >= i){
+                    [cell.seatOneImage setImage:[UIImage imageNamed:@"seat_full.png"]];
+                }
+                else{
+                    [cell.seatOneImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
+                }
+                break;
+            case 2:
+                if(availableSeats >= i){
+                    [cell.SeatTwoImage setImage:[UIImage imageNamed:@"seat_full.png"]];
+                }
+                else{
+                    [cell.SeatTwoImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
+                }
+                break;
+            case 3:
+                if(availableSeats >= i){
+                    [cell.SeatThreeImage setImage:[UIImage imageNamed:@"seat_full.png"]];
+                }
+                else{
+                    [cell.SeatThreeImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
+                }
+                break;
+            case 4:
+                if(availableSeats >= i){
+                    [cell.SeatFourImage setImage:[UIImage imageNamed:@"seat_full.png"]];
+                }
+                else{
+                    [cell.SeatFourImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
-*/
+
+-(void) updateDriverRating:(int) rating withSecond:(TIETravelCustomCellTableViewCell *) cell{
+    for (int i=1; i<=5; i++) {
+        switch (i) {
+            case 1:
+                if(rating >= i){
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                }
+                else{
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                }
+                break;
+            case 2:
+                if(rating >= i){
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                }
+                else{
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                }
+                break;
+            case 3:
+                if(rating >= i){
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                }
+                else{
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                }
+                break;
+            case 4:
+                if(rating >= i){
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                }
+                else{
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                }
+                break;
+            case 5:
+                if(rating >= i){
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                }
+                else{
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 @end
