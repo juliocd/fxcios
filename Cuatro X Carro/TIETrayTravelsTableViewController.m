@@ -49,7 +49,7 @@
     //Se recupera email de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
-    int userId = [[dataUser objectForKey:@"id"] integerValue];
+    int userId = [[dataUser objectForKey:@"id"] intValue];
     
     //Se recupera informacion de usuario
     NSString *urlServer = @"http://127.0.0.1:5000/queryAllUserTrips";
@@ -60,7 +60,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
     //Se configura request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -125,6 +125,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(TIETravelCustomCellTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([items count] > 0) {
+        
+        
+        
         NSMutableDictionary *item = [items objectAtIndex:indexPath.row];
         //Datos comunes
         cell.tripId.text = [[item valueForKey:@"id"] stringValue];
@@ -176,6 +179,11 @@
         if (notification > 0) {
             cell.notificationButton.tintColor = [UIColor redColor];
         }
+        UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 277, 58)];
+        av.backgroundColor = [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0];
+        av.opaque = NO;
+        av.image = [UIImage imageNamed:@"viajes_box.png"];
+        cell.backgroundView = av;
     }
 }
 

@@ -73,8 +73,8 @@
                           password];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
-        //Se captura numero d eparametros a enviar
-        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        //Se captura numero de deparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         
         //Se configura request
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

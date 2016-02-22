@@ -30,23 +30,30 @@
     
     //Bandeja de viajes
     TIETrayTravelsTableViewController *trayTravelsTableVC = [[TIETrayTravelsTableViewController alloc]init];
-    trayTravelsTableVC.tabBarItem.title = @"Viajes";
+    trayTravelsTableVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"viajes_on@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    trayTravelsTableVC.tabBarItem.image = [[UIImage imageNamed:@"viajes_off@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    trayTravelsTableVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     //Perfil de usuario
     TIEProfileViewController *profileVC = [[TIEProfileViewController alloc]init];
-    profileVC.tabBarItem.title = @"Perfil";
+    profileVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"perfil_on@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    profileVC.tabBarItem.image = [[UIImage imageNamed:@"perfil_off@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    profileVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     //Programar viaje
     TIEScheduleTripViewController *scheduleTripVC = [[TIEScheduleTripViewController alloc]init];
-    scheduleTripVC.tabBarItem.title = @"Programar";
+    scheduleTripVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"program_on@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    scheduleTripVC.tabBarItem.image = [[UIImage imageNamed:@"program_off@2x~iphone.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    scheduleTripVC.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     //Inicializar UITabBarController
     self.tabBarController = [[UITabBarController alloc]init];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0];
+    self.tabBarController.tabBar.translucent = NO;
     self.tabBarController.viewControllers = @[trayTravelsTableVC, profileVC, scheduleTripVC];
     
     //Add the tab bar controller to the window
     TIELoginViewController *loginVC = [[TIELoginViewController alloc]init];
     [self.window setRootViewController:loginVC];
-    [self.window setBackgroundColor: [UIColor whiteColor]];
-    
+    [self.window setBackgroundColor: [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0]];
     [self.window makeKeyAndVisible];
     
     return YES;

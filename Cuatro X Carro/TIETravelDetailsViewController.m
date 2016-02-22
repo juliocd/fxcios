@@ -10,13 +10,15 @@
 #import "TIEApplicationsViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "Util.h"
+#import "Cuatro_X_Carro-Swift.h"
 
-@interface TIETravelDetailsViewController (){
+@interface TIETravelDetailsViewController () <LGChatControllerDelegate> {
     NSMutableDictionary *tripData;
     Util *util;
     GMSPolyline *polyline;
     GMSMarker *markerStart;
     GMSMarker *markerFinish;
+    NSMutableDictionary *trackTripData;
 }
 
 @end
@@ -74,7 +76,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
     //Se configura request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -116,6 +118,15 @@
                 int availableSeats = [tripInfo valueForKey:@"available_seats"] == nil ? [[tripInfo valueForKey:@"available_seats"] intValue] : 0;
                 int maxSeats = [tripInfo valueForKey:@"max_seats"] == nil ? [[tripInfo valueForKey:@"max_seats"] intValue] : 0;
                 seatsState.text = [NSString stringWithFormat:@"(%i/%i)", availableSeats, maxSeats];
+                
+                //Se incia traking de pasajero
+                trackTripData = tripInfo;
+//                [NSTimer scheduledTimerWithTimeInterval:5
+//                                                 target:self
+//                                               selector: @selector(driverPositionTrack:)
+//                                               userInfo:nil
+//                                                repeats:YES];
+                
             }
             else{
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
@@ -127,6 +138,16 @@
             }
         });
     }] resume];
+}
+
+//se actualiza valor de traking
+- (void)driverPositionTrack:(NSTimer *)timer {
+    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                              message:[trackTripData valueForKey:@"date_hour"]
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+    [alertErrorLogin show];
 }
 
 //Personalizar boton atras
@@ -143,5 +164,30 @@
     TIEApplicationsViewController *applicationsVC =[[TIEApplicationsViewController alloc] initWithTripId:[tripData valueForKey:@"id"] withSecond:[tripData valueForKey:@"max_seats"]];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:applicationsVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
+}
+- (IBAction)goChatButton:(id)sender {
+    
+    LGChatController *chatController = [LGChatController new];
+    chatController.opponentImage = [UIImage imageNamed:@"User"];
+    chatController.delegate = self;
+    [self.navigationController pushViewController:chatController animated:YES];
+}
+
+#pragma mark - LGChatControllerDelegate
+
+- (void)chatController:(LGChatController *)chatController didAddNewMessage:(LGChatMessage *)message
+{
+    NSLog(@"Did Add Message: %@", message.content);
+}
+
+- (BOOL)shouldChatController:(LGChatController *)chatController addMessage:(LGChatMessage *)message
+{
+    /*
+     This is implemented just for demonstration so the sent by is randomized.  This way, the full functionality can be demonstrated.
+     */
+    message.userName = @"Andres";
+    message.date = @"3:45pm";
+    message.sentByString = arc4random_uniform(2) == 0 ? [LGChatMessage SentByOpponentString] : [LGChatMessage SentByUserString];
+    return YES;
 }
 @end

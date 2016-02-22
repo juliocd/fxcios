@@ -266,7 +266,7 @@
                 NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
                 
                 //Se captura numero d eparametros a enviar
-                NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+                NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
                 
                 //Se configura request
                 NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -466,7 +466,7 @@
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Lunes"];
         }
@@ -480,12 +480,12 @@
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:3],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
-            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] longValue]] forKey:@"user_id"];
+            [driverTrip setValue:[NSNumber numberWithLong:[[dataUser objectForKey:@"id"] intValue]] forKey:@"user_id"];
             [driverTrip setValue:dateHour forKey:@"date_hour"];
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Martes"];
         }
@@ -504,7 +504,7 @@
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Miércoles"];
         }
@@ -523,7 +523,7 @@
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Jueves"];
         }
@@ -542,7 +542,7 @@
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Viernes"];
         }
@@ -561,7 +561,7 @@
             [driverTrip setValue:isGoing forKey:@"is_going"];
             [driverTrip setValue:availableSeats.text forKey:@"max_seats"];
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
-            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] longValue]] forKey:@"tenant_id"];
+            [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
             [daysArray addObject:@"Sabado"];
         }

@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *hourTrip;
 @property (weak, nonatomic) IBOutlet UILabel *seatsState;
 
+- (IBAction)goChatButton:(id)sender;
 
 @end

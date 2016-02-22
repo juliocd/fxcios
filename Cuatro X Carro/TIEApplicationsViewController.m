@@ -57,7 +57,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
     //Se configura request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -157,7 +157,7 @@
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
         //Se captura numero d eparametros a enviar
-        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         
         //Se configura request
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
