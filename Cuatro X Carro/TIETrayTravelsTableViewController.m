@@ -131,7 +131,6 @@
         NSMutableDictionary *item = [items objectAtIndex:indexPath.row];
         //Datos comunes
         cell.tripId.text = [[item valueForKey:@"id"] stringValue];
-        cell.userType.text = [item valueForKey:@"trip_type"];
         cell.userNameLabel.text = [item valueForKey:@"driver_name"];
         if ([item valueForKey:@"is_going"] ? [[item valueForKey:@"is_going"] boolValue] : NO) {
             cell.tripType.text = @"Ida";
@@ -139,14 +138,20 @@
         else{
             cell.tripType.text = @"Regreso";
         }
-        cell.dateLabel.text = [[item valueForKey:@"date_hour"] substringToIndex:10];
+        NSString *dateTrip = [[item valueForKey:@"date_hour"] substringToIndex:10];
+        NSArray *dateTripArray = [dateTrip componentsSeparatedByString:@"-"];
+        cell.dateDayLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[2]];
+        cell.dateMonthLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[1]];
+        cell.dateYearLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[0]];
         cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
         //Datos de conductor
         if ([[item valueForKey:@"trip_type"] isEqualToString:@"Conductor"]) {
+            cell.userType.text = @"CONDUCTOR";
             //////////////////Sillas disponibles
             int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
             int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;
-            [self updateSeats:availableSeats withSecond:maxSeats withThirds:cell];
+            cell.seatsAvailableLabel.text = [NSString stringWithFormat:@"%i/%i",availableSeats,maxSeats];
+            //[self updateSeats:availableSeats withSecond:maxSeats withThirds:cell];
             //////////////////Calificacion de conductor
             int rating = [item valueForKey:@"driver_rating"] != nil ? [[item valueForKey:@"driver_rating"] intValue] : 0;
             [self updateDriverRating:rating withSecond:cell];
@@ -170,6 +175,7 @@
         }
         else{
             //Se oculta notificacion de solicitud
+            cell.userType.text = @"PASAJERO";
             cell.requestButton.hidden = YES;
             cell.backgroundColor = [UIColor greenColor];
         }
@@ -202,45 +208,6 @@
 
 #pragma mark - Funciones propias
 - (void) updateSeats:(int) availableSeats withSecond:(int) maxSeats withThirds: (TIETravelCustomCellTableViewCell *) cell{
-    for (int i=1; i<=maxSeats; i++) {
-        switch (i) {
-            case 1:
-                if(availableSeats >= i){
-                    [cell.seatOneImage setImage:[UIImage imageNamed:@"seat_full.png"]];
-                }
-                else{
-                    [cell.seatOneImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
-                }
-                break;
-            case 2:
-                if(availableSeats >= i){
-                    [cell.SeatTwoImage setImage:[UIImage imageNamed:@"seat_full.png"]];
-                }
-                else{
-                    [cell.SeatTwoImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
-                }
-                break;
-            case 3:
-                if(availableSeats >= i){
-                    [cell.SeatThreeImage setImage:[UIImage imageNamed:@"seat_full.png"]];
-                }
-                else{
-                    [cell.SeatThreeImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
-                }
-                break;
-            case 4:
-                if(availableSeats >= i){
-                    [cell.SeatFourImage setImage:[UIImage imageNamed:@"seat_full.png"]];
-                }
-                else{
-                    [cell.SeatFourImage setImage:[UIImage imageNamed:@"seat_empty.png"]];
-                }
-                break;
-                
-            default:
-                break;
-        }
-    }
 }
 
 -(void) updateDriverRating:(int) rating withSecond:(TIETravelCustomCellTableViewCell *) cell{
@@ -248,42 +215,42 @@
         switch (i) {
             case 1:
                 if(rating >= i){
-                    [cell.rateOneImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [cell.rateOneImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 2:
                 if(rating >= i){
-                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 3:
                 if(rating >= i){
-                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 4:
                 if(rating >= i){
-                    [cell.rateFourImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [cell.rateFourImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 5:
                 if(rating >= i){
-                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
                 

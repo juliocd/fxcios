@@ -13,11 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userPictureImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tripType;
-@property (weak, nonatomic) IBOutlet UIImageView *seatOneImage;
-@property (weak, nonatomic) IBOutlet UIImageView *SeatTwoImage;
-@property (weak, nonatomic) IBOutlet UIImageView *SeatThreeImage;
-@property (weak, nonatomic) IBOutlet UIImageView *SeatFourImage;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *rateOneImage;
 @property (weak, nonatomic) IBOutlet UIImageView *rateTwoImage;
@@ -28,6 +23,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIButton *notificationButton;
 @property (weak, nonatomic) IBOutlet UIButton *requestButton;
+
+//Nuevos campos por estilos
+@property (weak, nonatomic) IBOutlet UILabel *dateDayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateMonthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateYearLabel;
+@property (weak, nonatomic) IBOutlet UILabel *seatsAvailableLabel;
 
 
 - (IBAction)NotificationButton:(id)sender;
