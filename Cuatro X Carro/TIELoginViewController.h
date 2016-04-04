@@ -12,6 +12,7 @@
 
 - (IBAction)LoginButton:(id)sender;
 - (IBAction)SingupButton:(id)sender;
+- (IBAction)ForgetPassword:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;

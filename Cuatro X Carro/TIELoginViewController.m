@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "NSString+MD5.h"
 #import "Util.h"
+#import "TestViewController.h"
 
 @interface TIELoginViewController ()
 
@@ -129,6 +130,12 @@
 
 - (IBAction)SingupButton:(id)sender {
     TIESingUpViewController *viewController = [[TIESingUpViewController alloc] init];
+    UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:viewController];
+    [self presentViewController:trasformerNavC animated:YES completion:nil];
+}
+
+- (IBAction)ForgetPassword:(id)sender {
+    TestViewController *viewController = [[TestViewController alloc] init];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:viewController];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }

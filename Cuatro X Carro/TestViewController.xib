@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="8kT-gY-5uP">
+                    <rect key="frame" x="11" y="133" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="8kT-gY-5uP" secondAttribute="height" multiplier="2:1" id="UZh-0j-ETO"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="9ZG-Et-fuP">
+                    <rect key="frame" x="11" y="182" width="100" height="50"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="8rK-jZ-6sS">
+                    <rect key="frame" x="110" y="133" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="8rK-jZ-6sS" secondAttribute="height" multiplier="2:1" id="SQW-n3-OFI"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="FFR-C5-FXX">
+                    <rect key="frame" x="110" y="182" width="100" height="50"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="eaO-3A-g96">
+                    <rect key="frame" x="209" y="133" width="100" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="eaO-3A-g96" secondAttribute="height" multiplier="2:1" id="2Ma-pE-Woj"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="S2V-iZ-IZh">
+                    <rect key="frame" x="209" y="182" width="100" height="50"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="FFR-C5-FXX" firstAttribute="width" secondItem="8rK-jZ-6sS" secondAttribute="width" id="0oC-mR-Gf8"/>
+                <constraint firstItem="8kT-gY-5uP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="133" id="12l-G8-oFA"/>
+                <constraint firstItem="8rK-jZ-6sS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="133" id="3e5-4l-7Yy"/>
+                <constraint firstItem="FFR-C5-FXX" firstAttribute="height" secondItem="8rK-jZ-6sS" secondAttribute="height" id="7MF-kj-acB"/>
+                <constraint firstItem="8rK-jZ-6sS" firstAttribute="centerY" secondItem="eaO-3A-g96" secondAttribute="centerY" id="Emr-AE-IPR"/>
+                <constraint firstItem="8kT-gY-5uP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="11" id="FyY-RU-iqa"/>
+                <constraint firstItem="eaO-3A-g96" firstAttribute="leading" secondItem="8rK-jZ-6sS" secondAttribute="trailing" constant="-1" id="IJc-fb-wsR"/>
+                <constraint firstItem="9ZG-Et-fuP" firstAttribute="top" secondItem="8kT-gY-5uP" secondAttribute="bottom" constant="-1" id="RKE-fZ-Y74"/>
+                <constraint firstItem="S2V-iZ-IZh" firstAttribute="width" secondItem="eaO-3A-g96" secondAttribute="width" id="Sq8-rk-xPN"/>
+                <constraint firstItem="FFR-C5-FXX" firstAttribute="top" secondItem="8rK-jZ-6sS" secondAttribute="bottom" constant="-1" id="TIP-HA-OaW"/>
+                <constraint firstItem="S2V-iZ-IZh" firstAttribute="centerX" secondItem="eaO-3A-g96" secondAttribute="centerX" id="WYe-sE-Iu7"/>
+                <constraint firstItem="9ZG-Et-fuP" firstAttribute="centerX" secondItem="8kT-gY-5uP" secondAttribute="centerX" id="XhV-C2-S2A"/>
+                <constraint firstAttribute="trailing" secondItem="eaO-3A-g96" secondAttribute="trailing" constant="11" id="ez7-jr-l4Y"/>
+                <constraint firstItem="S2V-iZ-IZh" firstAttribute="height" secondItem="eaO-3A-g96" secondAttribute="height" id="hV1-2z-gcI"/>
+                <constraint firstItem="S2V-iZ-IZh" firstAttribute="top" secondItem="eaO-3A-g96" secondAttribute="bottom" constant="-1" id="hzj-qH-Ajs"/>
+                <constraint firstItem="FFR-C5-FXX" firstAttribute="centerX" secondItem="8rK-jZ-6sS" secondAttribute="centerX" id="jZb-Hg-QoU"/>
+                <constraint firstItem="9ZG-Et-fuP" firstAttribute="width" secondItem="8kT-gY-5uP" secondAttribute="width" id="m6a-4w-QAe"/>
+                <constraint firstItem="8rK-jZ-6sS" firstAttribute="leading" secondItem="8kT-gY-5uP" secondAttribute="trailing" constant="-1" id="oPK-IJ-ZAH"/>
+                <constraint firstItem="eaO-3A-g96" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="133" id="tnt-FZ-8kL"/>
+                <constraint firstItem="9ZG-Et-fuP" firstAttribute="height" secondItem="8kT-gY-5uP" secondAttribute="height" id="wBE-I8-Ehh"/>
+                <constraint firstItem="8rK-jZ-6sS" firstAttribute="centerY" secondItem="8kT-gY-5uP" secondAttribute="centerY" id="yog-RH-beX"/>
+            </constraints>
+            <point key="canvasLocation" x="40" y="331"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="fondo_tab_1.png" width="2017" height="332"/>
+    </resources>
+</document>

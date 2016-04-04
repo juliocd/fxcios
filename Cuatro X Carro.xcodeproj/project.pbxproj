@@ -29,7 +29,6 @@
 		0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */; };
 		4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDCA82F83C00E90A923900 /* libPods.a */; };
 		CE0427301BE71BAE0098BA62 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */; };
-		CE093F581C7A3CFC00E839D1 /* logo_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F571C7A3CFC00E839D1 /* logo_menu.png */; };
 		CE093F5A1C7A3DED00E839D1 /* login_boton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F591C7A3DED00E839D1 /* login_boton.png */; };
 		CE093F5C1C7A3E2800E839D1 /* pasajero_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */; };
 		CE093F5E1C7A3E8F00E839D1 /* email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5D1C7A3E8F00E839D1 /* email_icon.png */; };
@@ -47,6 +46,9 @@
 		CE093F9A1C7ABC6400E839D1 /* program_on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F981C7ABC6400E839D1 /* program_on@2x~iphone.png */; };
 		CE093F9E1C7AC4AD00E839D1 /* viajes_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F9D1C7AC4AD00E839D1 /* viajes_box.png */; };
 		CE0ADCA11C02DD3F004B22DD /* LRouteController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0ADCA01C02DD3F004B22DD /* LRouteController.m */; };
+		CE1163D41CAB709C00E582F5 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1163D21CAB709C00E582F5 /* TestViewController.m */; };
+		CE1163D51CAB709C00E582F5 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1163D31CAB709C00E582F5 /* TestViewController.xib */; };
+		CE11ACAD1CA796AC005FC4CB /* logo_menu@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */; };
 		CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AAB9D1BEED90F00C321DF /* Util.m */; };
 		CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */; };
 		CE6825DD1BE87D3100513135 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6825DC1BE87D3100513135 /* RadioButton.m */; };
@@ -160,7 +162,6 @@
 		6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04272E1BE71BAE0098BA62 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		CE093F571C7A3CFC00E839D1 /* logo_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_menu.png; sourceTree = "<group>"; };
 		CE093F591C7A3DED00E839D1 /* login_boton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_boton.png; sourceTree = "<group>"; };
 		CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pasajero_box.png; sourceTree = "<group>"; };
 		CE093F5D1C7A3E8F00E839D1 /* email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_icon.png; sourceTree = "<group>"; };
@@ -179,6 +180,10 @@
 		CE093F9D1C7AC4AD00E839D1 /* viajes_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viajes_box.png; sourceTree = "<group>"; };
 		CE0ADC9F1C02DD3F004B22DD /* LRouteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRouteController.h; sourceTree = "<group>"; };
 		CE0ADCA01C02DD3F004B22DD /* LRouteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRouteController.m; sourceTree = "<group>"; };
+		CE1163D11CAB709C00E582F5 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		CE1163D21CAB709C00E582F5 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		CE1163D31CAB709C00E582F5 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_menu@2x~iphone.png"; sourceTree = "<group>"; };
 		CE4AAB9C1BEED90F00C321DF /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		CE4AAB9D1BEED90F00C321DF /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		CE4AABA21BEEDCA300C321DF /* DefaultRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRequest.h; sourceTree = "<group>"; };
@@ -386,6 +391,9 @@
 				CEFD845F1BAF3BFE00410730 /* TIEScheduleTripViewController.h */,
 				CEFD84601BAF3BFE00410730 /* TIEScheduleTripViewController.m */,
 				CEFD84611BAF3BFE00410730 /* TIEScheduleTripViewController.xib */,
+				CE1163D11CAB709C00E582F5 /* TestViewController.h */,
+				CE1163D21CAB709C00E582F5 /* TestViewController.m */,
+				CE1163D31CAB709C00E582F5 /* TestViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -438,8 +446,8 @@
 		CE093F491C7A361100E839D1 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
+				CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */,
 				CE093F5F1C7A3E9900E839D1 /* fondo.png */,
-				CE093F571C7A3CFC00E839D1 /* logo_menu.png */,
 			);
 			name = Launch;
 			sourceTree = "<group>";
@@ -634,6 +642,7 @@
 				TargetAttributes = {
 					0ECD1FDA1B5C510700D6CFA5 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 34B5467H2T;
 					};
 					0ECD1FF31B5C510700D6CFA5 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -691,6 +700,7 @@
 				CE79AE141C83A33000440475 /* image_perfil_1.png in Resources */,
 				CE79AE1C1C83BACA00440475 /* star_on.png in Resources */,
 				CE79AE491C83F9CE00440475 /* cancel_boton.png in Resources */,
+				CE11ACAD1CA796AC005FC4CB /* logo_menu@2x~iphone.png in Resources */,
 				CE093F5C1C7A3E2800E839D1 /* pasajero_box.png in Resources */,
 				CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */,
 				CE79AE4E1C83FC5500440475 /* check_off.png in Resources */,
@@ -719,11 +729,11 @@
 				CE79AE451C83F98500440475 /* slider_circle.png in Resources */,
 				CE093F9A1C7ABC6400E839D1 /* program_on@2x~iphone.png in Resources */,
 				CEFD84701BAF4DA200410730 /* default.icon.png in Resources */,
+				CE1163D51CAB709C00E582F5 /* TestViewController.xib in Resources */,
 				CE79AE381C83F35800440475 /* add_boton.png in Resources */,
 				CE093F5A1C7A3DED00E839D1 /* login_boton.png in Resources */,
 				CE79AE411C83F95D00440475 /* conductor_on.png in Resources */,
 				CE093F991C7ABC6400E839D1 /* program_off@2x~iphone.png in Resources */,
-				CE093F581C7A3CFC00E839D1 /* logo_menu.png in Resources */,
 				CE093F5E1C7A3E8F00E839D1 /* email_icon.png in Resources */,
 				CE79AE301C83EEBE00440475 /* dia_icon.png in Resources */,
 				CE79AE2A1C83EA0900440475 /* fondo_tab_2.png in Resources */,
@@ -785,6 +795,7 @@
 			files = (
 				CEFD845D1BAF3B7100410730 /* TIEProfileViewController.m in Sources */,
 				CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */,
+				CE1163D41CAB709C00E582F5 /* TestViewController.m in Sources */,
 				CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */,
 				0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */,
 				0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */,
@@ -937,8 +948,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Cuatro",
@@ -951,6 +965,7 @@
 				INFOPLIST_FILE = "Cuatro X Carro/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cuatro X Carro/Cuatro X Carro-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -962,8 +977,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Cuatro",
@@ -976,6 +994,7 @@
 				INFOPLIST_FILE = "Cuatro X Carro/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cuatro X Carro/Cuatro X Carro-Bridging-Header.h";
 			};
 			name = Release;
