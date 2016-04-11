@@ -638,7 +638,7 @@
                 <constraint firstItem="vdb-Vp-neV" firstAttribute="centerY" secondItem="Fug-Je-ybg" secondAttribute="centerY" id="zm0-e1-X7i"/>
                 <constraint firstItem="7vd-5U-qpm" firstAttribute="centerX" secondItem="8Sv-kn-gDz" secondAttribute="centerX" id="zxL-bk-9G7"/>
             </constraints>
-            <point key="canvasLocation" x="454" y="217"/>
+            <point key="canvasLocation" x="646" y="214"/>
         </view>
         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XAL-kZ-L51">
             <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>

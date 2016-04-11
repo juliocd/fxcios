@@ -26,8 +26,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextInput;
 @property (weak, nonatomic) IBOutlet UITextField *emailInput;
 @property (weak, nonatomic) IBOutlet UILabel *groupHost;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *changePasswordButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerLocationLoad;
 
 - (IBAction)saveSingUpForm:(id)sender;
+- (IBAction)changePassword:(id)sender;
+
 
 @property (strong, nonatomic) NSMutableArray *countryItems;
 @property (strong, nonatomic) NSMutableArray *stateItems;
@@ -38,5 +43,6 @@
 @property (strong, nonatomic) NSMutableDictionary *cityItemsIds;
 @property (strong, nonatomic) NSMutableDictionary *groupItemsIds;
 @property (strong, nonatomic) NSMutableDictionary *groupItemsDomains;
+@property (strong, nonatomic) NSString *urlServer;
 
 @end

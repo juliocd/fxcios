@@ -37,14 +37,11 @@
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="kTq-Ju-PnN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0jt-cQ-HUW"/>
-                <constraint firstAttribute="bottom" secondItem="kTq-Ju-PnN" secondAttribute="bottom" constant="166" id="7QO-Fp-bfJ"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="8" id="Wa2-qk-Vne"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cS2-jn-9OC"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="fwg-se-lHY"/>
-                <constraint firstAttribute="trailing" secondItem="kTq-Ju-PnN" secondAttribute="trailing" constant="24" id="oWf-c9-7ZC"/>
                 <constraint firstItem="kTq-Ju-PnN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="166" id="v7a-IL-2tx"/>
                 <constraint firstItem="kTq-Ju-PnN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wiv-pg-cXY"/>
-                <constraint firstItem="kTq-Ju-PnN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="zcM-NW-1vI"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

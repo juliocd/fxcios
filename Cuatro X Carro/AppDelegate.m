@@ -48,7 +48,7 @@
     self.tabBarController = [[UITabBarController alloc]init];
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0];
     self.tabBarController.tabBar.translucent = NO;
-    self.tabBarController.viewControllers = @[trayTravelsTableVC, profileVC, scheduleTripVC];
+    self.tabBarController.viewControllers = @[profileVC,trayTravelsTableVC,  scheduleTripVC];
     
     //Add the tab bar controller to the window
     TIELoginViewController *loginVC = [[TIELoginViewController alloc]init];

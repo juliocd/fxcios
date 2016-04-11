@@ -29,6 +29,8 @@
 		0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */; };
 		4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDCA82F83C00E90A923900 /* libPods.a */; };
 		CE0427301BE71BAE0098BA62 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */; };
+		CE04A2F61CBB3239000FD03E /* RecoverPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */; };
+		CE04A2F71CBB3239000FD03E /* RecoverPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */; };
 		CE093F5A1C7A3DED00E839D1 /* login_boton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F591C7A3DED00E839D1 /* login_boton.png */; };
 		CE093F5C1C7A3E2800E839D1 /* pasajero_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */; };
 		CE093F5E1C7A3E8F00E839D1 /* email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5D1C7A3E8F00E839D1 /* email_icon.png */; };
@@ -162,6 +164,9 @@
 		6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04272E1BE71BAE0098BA62 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		CE04A2F31CBB3239000FD03E /* RecoverPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoverPasswordViewController.h; sourceTree = "<group>"; };
+		CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoverPasswordViewController.m; sourceTree = "<group>"; };
+		CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecoverPasswordViewController.xib; sourceTree = "<group>"; };
 		CE093F591C7A3DED00E839D1 /* login_boton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_boton.png; sourceTree = "<group>"; };
 		CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pasajero_box.png; sourceTree = "<group>"; };
 		CE093F5D1C7A3E8F00E839D1 /* email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_icon.png; sourceTree = "<group>"; };
@@ -394,6 +399,9 @@
 				CE1163D11CAB709C00E582F5 /* TestViewController.h */,
 				CE1163D21CAB709C00E582F5 /* TestViewController.m */,
 				CE1163D31CAB709C00E582F5 /* TestViewController.xib */,
+				CE04A2F31CBB3239000FD03E /* RecoverPasswordViewController.h */,
+				CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */,
+				CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -686,6 +694,7 @@
 				CE093F661C7A44EB00E839D1 /* key_icon.png in Resources */,
 				CEFD84731BAF4DA200410730 /* seat_empty.png in Resources */,
 				CE79AE441C83F98500440475 /* slider_boton.png in Resources */,
+				CE04A2F71CBB3239000FD03E /* RecoverPasswordViewController.xib in Resources */,
 				CE8F3FFB1BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib in Resources */,
 				CE79AE181C83A80D00440475 /* chat_on.png in Resources */,
 				0ECD200B1B5C520D00D6CFA5 /* TIELoginViewController.xib in Resources */,
@@ -813,6 +822,7 @@
 				0ECD200A1B5C520D00D6CFA5 /* TIELoginViewController.m in Sources */,
 				0ECD200F1B5C534100D6CFA5 /* TIESingUpViewController.m in Sources */,
 				CE8F3FF51BB8A190003D8CDD /* TIEMyScheduleViewController.m in Sources */,
+				CE04A2F61CBB3239000FD03E /* RecoverPasswordViewController.m in Sources */,
 				CEFD84681BAF468400410730 /* TIETravelCustomCellTableViewCell.m in Sources */,
 				0ECD20461B5CC44200D6CFA5 /* AbstractActionSheetPicker.m in Sources */,
 				0ECD1FE41B5C510700D6CFA5 /* AppDelegate.m in Sources */,

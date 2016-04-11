@@ -12,6 +12,7 @@
 #import "NSString+MD5.h"
 #import "Util.h"
 #import "TestViewController.h"
+#import "RecoverPasswordViewController.h"
 
 @interface TIELoginViewController ()
 
@@ -135,7 +136,7 @@
 }
 
 - (IBAction)ForgetPassword:(id)sender {
-    TestViewController *viewController = [[TestViewController alloc] init];
+    RecoverPasswordViewController *viewController = [[RecoverPasswordViewController alloc] init];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:viewController];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }

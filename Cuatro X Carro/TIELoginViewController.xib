@@ -19,9 +19,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prj-Gm-DoY">
-                    <rect key="frame" x="14" y="504" width="131" height="33"/>
+                    <rect key="frame" x="14" y="504" width="100" height="33"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="131" id="bqo-A8-kZS"/>
+                        <constraint firstAttribute="width" constant="100" id="bqo-A8-kZS"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OU0-nT-ggj">
-                    <rect key="frame" x="159" y="506" width="147" height="33"/>
+                    <rect key="frame" x="193" y="506" width="113" height="33"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="¿Contraseña?">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,6 +96,7 @@
                 <constraint firstItem="Q8B-3t-wgN" firstAttribute="trailing" secondItem="o3c-GT-Z6q" secondAttribute="trailing" id="B01-Wc-gR1"/>
                 <constraint firstItem="OU0-nT-ggj" firstAttribute="top" secondItem="e4G-La-NAM" secondAttribute="bottom" constant="19" id="CkY-id-JpQ"/>
                 <constraint firstItem="Lxh-x0-60p" firstAttribute="leading" secondItem="LUf-Bb-B5i" secondAttribute="leading" id="DX6-7D-nTF"/>
+                <constraint firstItem="prj-Gm-DoY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="14" id="EJO-G0-vWH"/>
                 <constraint firstItem="ChU-Cx-Rhe" firstAttribute="top" secondItem="o3c-GT-Z6q" secondAttribute="top" id="ElJ-8L-sWi"/>
                 <constraint firstItem="LUf-Bb-B5i" firstAttribute="top" secondItem="Lxh-x0-60p" secondAttribute="bottom" constant="40" id="Gps-B8-2v5"/>
                 <constraint firstItem="o3c-GT-Z6q" firstAttribute="trailing" secondItem="e4G-La-NAM" secondAttribute="trailing" id="ISk-oc-n22"/>
@@ -107,11 +108,11 @@
                 <constraint firstItem="Lxh-x0-60p" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="aMY-xD-QDN"/>
                 <constraint firstItem="e4G-La-NAM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="14" id="b36-f3-T2f"/>
                 <constraint firstItem="o3c-GT-Z6q" firstAttribute="leading" secondItem="ChU-Cx-Rhe" secondAttribute="trailing" constant="8" symbolic="YES" id="emM-KG-50k"/>
-                <constraint firstItem="OU0-nT-ggj" firstAttribute="leading" secondItem="prj-Gm-DoY" secondAttribute="trailing" constant="14" id="fFD-Zj-e3p"/>
                 <constraint firstAttribute="bottom" secondItem="prj-Gm-DoY" secondAttribute="bottom" constant="31" id="fYt-ZQ-FXg"/>
                 <constraint firstItem="e4G-La-NAM" firstAttribute="top" secondItem="ChU-Cx-Rhe" secondAttribute="bottom" constant="18" id="jpA-7e-dcj"/>
                 <constraint firstItem="Lxh-x0-60p" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="oHT-vm-NfT"/>
                 <constraint firstItem="e4G-La-NAM" firstAttribute="trailing" secondItem="OU0-nT-ggj" secondAttribute="trailing" id="qrf-Oa-gMn"/>
+                <constraint firstAttribute="trailing" secondItem="OU0-nT-ggj" secondAttribute="trailing" constant="14" id="tgu-yX-AvG"/>
                 <constraint firstItem="LUf-Bb-B5i" firstAttribute="top" secondItem="Q8B-3t-wgN" secondAttribute="top" id="viu-Qn-I39"/>
                 <constraint firstItem="LUf-Bb-B5i" firstAttribute="bottom" secondItem="Q8B-3t-wgN" secondAttribute="bottom" id="xV9-iN-Ee2"/>
                 <constraint firstItem="e4G-La-NAM" firstAttribute="leading" secondItem="prj-Gm-DoY" secondAttribute="leading" id="xyW-iO-gQe"/>

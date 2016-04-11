@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "477807371.466052"
+            timestampString = "481926171.986095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "-selectCountry:"
             landmarkType = "5">
          </BreakpointContent>
