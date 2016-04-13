@@ -32,7 +32,7 @@
                         <action selector="SingupButton:" destination="-1" eventType="touchUpInside" id="YNe-y5-G75"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="aaa" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="o3c-GT-Z6q">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="kkk8" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="o3c-GT-Z6q">
                     <rect key="frame" x="54" y="379" width="252" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -62,7 +62,7 @@
                         <action selector="ForgetPassword:" destination="-1" eventType="touchUpInside" id="hg2-nn-r2X"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="aaa@gmail.com" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8B-3t-wgN">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="kkkop@gmail.com" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8B-3t-wgN">
                     <rect key="frame" x="54" y="328" width="252" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
@@ -83,7 +83,7 @@
                         <constraint firstAttribute="height" constant="38" id="PQt-0d-vqg"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lxh-x0-60p">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lxh-x0-60p">
                     <rect key="frame" x="8" y="30" width="304" height="258"/>
                 </imageView>
             </subviews>

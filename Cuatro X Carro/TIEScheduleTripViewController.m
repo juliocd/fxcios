@@ -26,7 +26,6 @@
     
     //Se inicializa selector de filtro de dias
     daysArray = [[NSMutableArray alloc] init];
-    [daysArray addObject:@"Seleccione día"];
     
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
@@ -63,7 +62,6 @@
 - (void) viewWillAppear:(BOOL)animated{
     //Se inicializa nuevamente arreglo de filtro de dias
     daysArray = [[NSMutableArray alloc] init];
-    [daysArray addObject:@"Seleccione día"];
     //Se obtiene informacion de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     dataUser = [defaults objectForKey:@"userData"];
@@ -87,7 +85,7 @@
         travelType = @"_return";
         isGoing = [NSNumber numberWithInt:0];
     }
-    //Construir formato de hora a parti de horario
+    //Construir formato de hora a partir de horario
     NSString *strSchedule = [dataUser objectForKey:@"schedule"];
     if (![strSchedule isEqual:@""]) {
         //Se organiza horario de usuario
@@ -96,6 +94,13 @@
         NSMutableArray *stepArray = [_routeController getStepArray];
         //Se valida que exista una ruta
         if (stepArray.count > 0 && driverTripArray.count > 0) {
+            //Se cargan dias disponibles en filtro
+            if(buttonMonday.isSelected){[daysArray addObject:@"Lunes"];};
+            if(buttonTuesday.isSelected){[daysArray addObject:@"Martes"];};
+            if(buttonWednesday.isSelected){[daysArray addObject:@"Miércoles"];};
+            if(buttonThursday.isSelected){[daysArray addObject:@"Jueves"];};
+            if(buttonFriday.isSelected){[daysArray addObject:@"Viernes"];};
+            if(buttonSaturday.isSelected){[daysArray addObject:@"Sábado"];};
             //Se envia parametros a siguinete controlador
             TIESearchTravelViewController *searchTravelsVC = [[TIESearchTravelViewController alloc] initWithSearchData:driverTripArray withSecond:stepArray withThird:isGoing withFourth:daysArray];
             UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:searchTravelsVC];
@@ -133,11 +138,11 @@
     buttonMonday = sender;
     if([buttonMonday isSelected]){
         [buttonMonday setSelected:NO];
-        [buttonMonday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonMonday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonMonday setSelected:YES];
-        [buttonMonday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonMonday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -145,11 +150,11 @@
     buttonTuesday = sender;
     if([buttonTuesday isSelected]){
         [buttonTuesday setSelected:NO];
-        [buttonTuesday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonTuesday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonTuesday setSelected:YES];
-        [buttonTuesday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonTuesday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -157,11 +162,11 @@
     buttonWednesday = sender;
     if([buttonWednesday isSelected]){
         [buttonWednesday setSelected:NO];
-        [buttonWednesday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonWednesday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonWednesday setSelected:YES];
-        [buttonWednesday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonWednesday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -169,11 +174,11 @@
     buttonThursday = sender;
     if([buttonThursday isSelected]){
         [buttonThursday setSelected:NO];
-        [buttonThursday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonThursday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonThursday setSelected:YES];
-        [buttonThursday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonThursday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -181,11 +186,11 @@
     buttonFriday = sender;
     if([buttonFriday isSelected]){
         [buttonFriday setSelected:NO];
-        [buttonFriday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonFriday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonFriday setSelected:YES];
-        [buttonFriday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonFriday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -193,11 +198,11 @@
     buttonSaturday = sender;
     if([buttonSaturday isSelected]){
         [buttonSaturday setSelected:NO];
-        [buttonSaturday setBackgroundImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
+        [buttonSaturday setImage:[UIImage imageNamed:@"check_off.png"] forState:UIControlStateNormal];
     }
     else{
         [buttonSaturday setSelected:YES];
-        [buttonSaturday setBackgroundImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
+        [buttonSaturday setImage:[UIImage imageNamed:@"check_on.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -457,7 +462,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"monday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:2],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -468,7 +473,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Lunes"];
         }
     }
     //Martes
@@ -476,7 +480,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"tuesday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:3],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -487,7 +491,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Martes"];
         }
     }
     //Miercoles
@@ -495,7 +498,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"wednesday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:4],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -506,7 +509,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Miércoles"];
         }
     }
     //Jueves
@@ -514,7 +516,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"thursday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:5],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -525,7 +527,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Jueves"];
         }
     }
     //Viernes
@@ -533,7 +534,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"friday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:1],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -544,7 +545,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Viernes"];
         }
     }
     //Sabado
@@ -552,7 +552,7 @@
         //Se recupera hora para dia lunes
         daySchedule = ([schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]] == (id)[NSNull null]) ? @"" : [schedule valueForKey:[NSString stringWithFormat:@"saturday%@", travelType]];
         //Se valida que tenga horario programado para ese dia
-        if (![daySchedule isEqualToString:@""]) {
+        if (![daySchedule isEqualToString:@""] && daySchedule != nil) {
             //Se recupera fecha del procimo dia seleccionado
             dateHour = [NSString stringWithFormat:@"%@ %@:00",[util nextDateByDay:6],daySchedule];
             NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
@@ -563,7 +563,6 @@
             [driverTrip setValue:availableSeats.text forKey:@"available_seats"];
             [driverTrip setValue:[NSNumber numberWithInt:[[dataUser objectForKey:@"tenant_id"] intValue]] forKey:@"tenant_id"];
             [driverTripArray addObject:driverTrip];
-            [daysArray addObject:@"Sabado"];
         }
     }
 }

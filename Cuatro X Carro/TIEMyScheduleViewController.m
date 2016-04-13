@@ -95,7 +95,7 @@
         NSLog(@"Block Picker Canceled");
     };
     
-    NSArray *dayItems = [NSArray arrayWithObjects:@"Lunes", @"Martes", @"Miercoles", @"Jueves", @"Viernes", @"Sabado", nil];
+    NSArray *dayItems = [NSArray arrayWithObjects:@"Lunes", @"Martes", @"Miercoles", @"Jueves", @"Viernes", nil];
     [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:dayItems initialSelection:0
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.dayTextInput setEnabled:NO];
@@ -181,6 +181,7 @@
         [returnTimeTextInput setEnabled:YES];
         [departTimeTextInput setEnabled:YES];
     }
+    [self clearCombos];
 }
 
 #pragma Horario
@@ -258,7 +259,13 @@
 }
 
 - (IBAction) clearTimeCombos:(id)sender {
-    
+    [self clearCombos];
+}
+
+- (void) clearCombos{
+    dayTextInput.text = @"";
+    departTimeTextInput.text = @"";
+    returnTimeTextInput.text = @"";
 }
 
 - (IBAction)saveSchedule:(id)sender {
@@ -278,7 +285,7 @@
                       [dataUser objectForKey:@"tenant_id"]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
-    //Se captura numero d eparametros a enviar
+    //Se captura numero de parametros a enviar
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
     //Se configura request

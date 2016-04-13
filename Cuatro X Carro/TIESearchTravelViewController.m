@@ -153,7 +153,6 @@
         NSString *indexStr = [@([daysArray indexOfObject:dayOfWeek]) stringValue];
         //Se obtiene el arreglo almacenado ultimamente para este indice
         NSMutableArray *filterArray = [searchResultsFilterByDay objectForKey:indexStr] != nil ? [searchResultsFilterByDay objectForKey:indexStr] : [[NSMutableArray alloc] init];
-        [filterArray addObject:result];
         [searchResultsFilterByDay setValue:filterArray forKey:indexStr];
     }
         
@@ -207,8 +206,7 @@
             }
             else{
                 NSData *data = [[jsonData objectForKey:@"result"] dataUsingEncoding:NSUTF8StringEncoding];
-                searchResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                if (searchResults.count == 0) {
+                if (searchResults == nil) {
                     UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                             message:@"No se encontraron viajes disponibles."
                                                                            delegate:nil
@@ -218,6 +216,7 @@
                 }
                 else{
                     //Se carga elemnto con todos los viajes
+                    searchResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     [searchResultsFilterByDay setValue:searchResults forKey:@"0"];
                     [self.resultTableView reloadData];
                 }

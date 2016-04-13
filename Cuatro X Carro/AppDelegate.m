@@ -48,13 +48,29 @@
     self.tabBarController = [[UITabBarController alloc]init];
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0];
     self.tabBarController.tabBar.translucent = NO;
-    self.tabBarController.viewControllers = @[profileVC,trayTravelsTableVC,  scheduleTripVC];
+    self.tabBarController.viewControllers = @[trayTravelsTableVC, profileVC, scheduleTripVC];
     
     //Add the tab bar controller to the window
     TIELoginViewController *loginVC = [[TIELoginViewController alloc]init];
     [self.window setRootViewController:loginVC];
     [self.window setBackgroundColor: [UIColor colorWithRed:(30/255.0) green:(190/255.0) blue:(219/255.0)alpha:1.0]];
     [self.window makeKeyAndVisible];
+    
+    //Se configuran notificacion
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
     
     return YES;
 }
@@ -79,6 +95,21 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    NSLog(@"My token is: %@", deviceToken);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // Detect if APN is received on Background or Foreground state
+    NSString *opa = @"asdasd";
 }
 
 @end

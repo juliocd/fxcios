@@ -315,7 +315,7 @@
                 <constraint firstItem="55V-SJ-fiu" firstAttribute="top" secondItem="dkE-Ci-CHn" secondAttribute="bottom" constant="33" id="x5t-3j-w4m"/>
                 <constraint firstItem="3Wk-YI-b7x" firstAttribute="centerY" secondItem="3hU-fX-dh2" secondAttribute="centerY" id="zVF-zG-7gA"/>
             </constraints>
-            <point key="canvasLocation" x="150" y="332"/>
+            <point key="canvasLocation" x="-332" y="419"/>
         </view>
         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JfS-jD-VKn">
             <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>

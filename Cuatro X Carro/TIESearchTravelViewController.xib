@@ -20,18 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filtro por día:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxZ-cL-e48">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Filtro por día:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxZ-cL-e48">
                     <rect key="frame" x="8" y="305" width="107" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="gxZ-cL-e48" secondAttribute="height" multiplier="107:21" id="6MJ-xY-9pT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrH-o7-3d3">
                     <rect key="frame" x="107" y="533" width="107" height="30"/>
-                    <state key="normal" title="Solicitar cupo"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Solicitar cupo">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="RequestTrip:" destination="-1" eventType="touchUpInside" id="MJe-GJ-2ZT"/>
                     </connections>
@@ -48,23 +51,14 @@
                     <rect key="frame" x="8" y="70" width="304" height="197"/>
                     <color key="backgroundColor" red="0.76293420670000001" green="1" blue="0.72672292439999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conductor: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-fA-Jn0">
-                    <rect key="frame" x="8" y="273" width="96" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="vQ6-fA-Jn0" secondAttribute="height" multiplier="32:7" id="dqh-P3-lcM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pablo perez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp9-h1-DVN">
-                    <rect key="frame" x="100" y="273" width="212" height="21"/>
+                    <rect key="frame" x="100" y="275" width="212" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62L-4X-Kgy">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Seleccione día" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="62L-4X-Kgy">
                     <rect key="frame" x="123" y="301" width="189" height="30"/>
+                    <color key="tintColor" red="0.43392986909999998" green="1" blue="0.22720768920000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
@@ -72,6 +66,15 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="5Tf-Cr-6oH"/>
                     </connections>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conductor: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-fA-Jn0">
+                    <rect key="frame" x="8" y="273" width="96" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="vQ6-fA-Jn0" secondAttribute="height" multiplier="32:7" id="dqh-P3-lcM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -80,7 +83,7 @@
                 <constraint firstItem="ACs-o3-f5V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="2lz-d2-bWy"/>
                 <constraint firstAttribute="trailing" secondItem="ca5-gE-7Nd" secondAttribute="trailing" constant="8" id="628-Np-UwI"/>
                 <constraint firstItem="ACs-o3-f5V" firstAttribute="top" secondItem="ca5-gE-7Nd" secondAttribute="bottom" constant="72" id="77P-hk-ph2"/>
-                <constraint firstItem="jp9-h1-DVN" firstAttribute="top" secondItem="ca5-gE-7Nd" secondAttribute="bottom" constant="6" id="7Kk-MD-SYy"/>
+                <constraint firstItem="jp9-h1-DVN" firstAttribute="top" secondItem="ca5-gE-7Nd" secondAttribute="bottom" constant="8" id="7Kk-MD-SYy"/>
                 <constraint firstItem="YrH-o7-3d3" firstAttribute="top" secondItem="ACs-o3-f5V" secondAttribute="bottom" constant="3" id="8W6-0b-yhz"/>
                 <constraint firstItem="gxZ-cL-e48" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="CYQ-8b-OSP"/>
                 <constraint firstAttribute="bottom" secondItem="ca5-gE-7Nd" secondAttribute="bottom" constant="301" id="FUg-0R-X0f"/>
@@ -91,16 +94,19 @@
                 <constraint firstItem="ca5-gE-7Nd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="WJE-JW-zfC"/>
                 <constraint firstAttribute="trailing" secondItem="ca5-gE-7Nd" secondAttribute="trailing" constant="8" id="clc-9I-Vhb"/>
                 <constraint firstAttribute="trailing" secondItem="ACs-o3-f5V" secondAttribute="trailing" constant="8" id="dyc-cf-2vb"/>
-                <constraint firstItem="jp9-h1-DVN" firstAttribute="centerY" secondItem="vQ6-fA-Jn0" secondAttribute="centerY" id="e4f-wd-SRw"/>
+                <constraint firstItem="jp9-h1-DVN" firstAttribute="centerY" secondItem="vQ6-fA-Jn0" secondAttribute="centerY" constant="2" id="e4f-wd-SRw"/>
                 <constraint firstItem="jp9-h1-DVN" firstAttribute="leading" secondItem="vQ6-fA-Jn0" secondAttribute="trailing" constant="-4" id="k5Q-IS-jme"/>
-                <constraint firstItem="62L-4X-Kgy" firstAttribute="top" secondItem="jp9-h1-DVN" secondAttribute="bottom" constant="7" id="mLF-iV-10W"/>
+                <constraint firstItem="62L-4X-Kgy" firstAttribute="top" secondItem="jp9-h1-DVN" secondAttribute="bottom" constant="5" id="mLF-iV-10W"/>
                 <constraint firstItem="ca5-gE-7Nd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="qf5-sG-yB9"/>
                 <constraint firstAttribute="trailing" secondItem="YrH-o7-3d3" secondAttribute="trailing" constant="106" id="rLf-Ah-DRW"/>
                 <constraint firstItem="vQ6-fA-Jn0" firstAttribute="top" secondItem="ca5-gE-7Nd" secondAttribute="bottom" constant="6" id="sMk-IL-n7i"/>
                 <constraint firstItem="gxZ-cL-e48" firstAttribute="top" secondItem="vQ6-fA-Jn0" secondAttribute="bottom" constant="11" id="wtb-Iu-oEG"/>
                 <constraint firstAttribute="bottom" secondItem="ACs-o3-f5V" secondAttribute="bottom" constant="38" id="zLj-xF-p9N"/>
             </constraints>
-            <point key="canvasLocation" x="168" y="349"/>
+            <point key="canvasLocation" x="-38" y="348"/>
         </view>
     </objects>
+    <resources>
+        <image name="combo_box.png" width="2016" height="449"/>
+    </resources>
 </document>
