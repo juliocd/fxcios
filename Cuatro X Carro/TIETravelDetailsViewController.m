@@ -384,13 +384,18 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
-                if([jsonData valueForKey:@"result"] != nil){
+                NSMutableDictionary *dataUserLocation = [jsonData valueForKey:@"result"];
+                if(dataUserLocation != nil){
+                    
                     animmationPositionDiver.hidden = YES;
                     [animmationPositionDiver stopAnimating];
-                    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(6.2488523, -75);
-                    currenPositionMarker.position = position;
-                    currenPositionMarker.title = @"Conductor";
-                    currenPositionMarker.map = self.routeMap;
+                    double driverCurrentLatitude = [[dataUserLocation valueForKey:@"latitude"] doubleValue];
+                    double driverCurrentLongitude = [[dataUserLocation valueForKey:@"longitude"] doubleValue];
+                    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(driverCurrentLatitude, driverCurrentLongitude);
+                    GMSMarker *marker = [GMSMarker markerWithPosition:position];
+                    marker.position = position;
+                    marker.title = @"Conductor";
+                    marker.map = self.routeMap;
                 }else{
                     animmationPositionDiver.hidden = NO;
                     [animmationPositionDiver startAnimating];
