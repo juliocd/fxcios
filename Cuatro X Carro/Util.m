@@ -9,7 +9,9 @@
 #import "Util.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@implementation Util
+@implementation Util{
+    NSMutableDictionary *globalProperties;
+}
 
 @synthesize userEmail;
 
@@ -22,7 +24,11 @@ static Util *instance =nil;
     }
     return instance;
 }
-
+-(NSMutableDictionary *) getGlobalProperties{
+    globalProperties = [NSMutableDictionary new];
+    [globalProperties setValue:@"http://192.168.0.14:5000" forKey:@"host"];
+    return globalProperties;
+}
 
 - (NSMutableDictionary *) constructUserDefaults:(NSDictionary * ) jsonData{
     

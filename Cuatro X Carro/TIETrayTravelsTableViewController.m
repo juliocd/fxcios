@@ -51,8 +51,8 @@
     NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
     int userId = [[dataUser objectForKey:@"id"] intValue];
     
-    //Se recupera informacion de usuario
-    NSString *urlServer = @"http://127.0.0.1:5000/queryAllUserTrips";
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryAllUserTrips", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
                       @"userId=%i",

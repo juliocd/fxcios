@@ -25,7 +25,7 @@
 
 @synthesize countryTextInput, stateTextInput, cityTextInput, groupTextInput,
     fullUserNameTextInput, passwordTextInput, confirmPasswordTextInput, emailInput, groupHost,
-    countryItems, stateItems, cityItems, groupItems, countryItemsIds, stateItemsIds, cityItemsIds, groupItemsIds, groupItemsDomains, saveButton, changePasswordButton, urlServer, spinnerLocationLoad;
+    countryItems, stateItems, cityItems, groupItems, countryItemsIds, stateItemsIds, cityItemsIds, groupItemsIds, groupItemsDomains, saveButton, changePasswordButton, spinnerLocationLoad;
 
 - (id)initWithUserData:(NSMutableDictionary *) aUserData {
     self = [super initWithNibName:@"TIESingUpViewController" bundle:nil];
@@ -96,8 +96,12 @@
 
 //Se cargan grupos
 -(void) loadGroups{
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryAllTenants", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://127.0.0.1:5000/queryAllTenants"]];
+    [request setURL:[NSURL URLWithString:urlServer]];
     [request setHTTPMethod:@"GET"];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -143,9 +147,13 @@
 
 //Se recupera infromacion de datos geograficos
 - (void) loadGeograpichData{
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryAllAntioquiaInfo", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    
     [spinnerLocationLoad startAnimating];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://127.0.0.1:5000/queryAllAntioquiaInfo"]];
+    [request setURL:[NSURL URLWithString:urlServer]];
     [request setHTTPMethod:@"GET"];
     
     [[viewSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -292,9 +300,8 @@
 #pragma Botones
 - (IBAction)saveSingUpForm:(id)sender {
     
-    //Se ejecuta almacenamiento de usuario
-    NSLog(@"Se inicia almacenamiento de usuario");
-    urlServer = @"http://127.0.0.1:5000/saveUser";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/saveUser", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
     
     //Configurar password
@@ -380,7 +387,11 @@
 }
 
 - (IBAction)changePassword:(id)sender {
-    urlServer = @"http://127.0.0.1:5000/userLogin";
+    
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/userLogin", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cambiar contraseña" message:@"Ingrese su contraseña actual" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)

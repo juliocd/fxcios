@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *applicantEmail;
 @property (weak, nonatomic) IBOutlet UILabel *applicantPhone;
 @property (weak, nonatomic) IBOutlet UITextView *applicantAddress;
+@property (weak, nonatomic) IBOutlet UIImageView *passengerPrictureProfile;
+
+
 - (IBAction)AcceptingApplication:(id)sender;
 - (IBAction)CancelApplication:(id)sender;
 @end

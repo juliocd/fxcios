@@ -42,7 +42,11 @@
     [self loadUserRate:[userData valueForKey:@"rating"] == nil ? [[userData valueForKey:@"rating"] intValue] : 0];
     userName.text = [userData valueForKey:@"name"];
     userEmail.text = [userData valueForKey:@"email"];
-    userPhone.text = [userData valueForKey:@"phone"];
+    //userPhone.text = [userData valueForKey:@"phone"];
+    
+    //Estilo de imagen de perfil
+    profilePricture.layer.cornerRadius = profilePricture.frame.size.width / 2;
+    profilePricture.clipsToBounds = YES;
     
     //Se actualiza horario
     [self loadSchedule];

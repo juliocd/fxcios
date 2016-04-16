@@ -11,6 +11,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "Util.h"
 #import "Cuatro_X_Carro-Swift.h"
+#import "TIEPassengerDetailsViewController.h"
 
 @interface TIETravelDetailsViewController () <LGChatControllerDelegate> {
     NSMutableDictionary *tripData;
@@ -18,14 +19,21 @@
     GMSPolyline *polyline;
     GMSMarker *markerStart;
     GMSMarker *markerFinish;
+    GMSMarker *currenPositionMarker;
     NSMutableDictionary *trackTripData;
+    NSTimer *updateDriverPosition;
+    CLLocationManager *locationManager;
+    BOOL _isAvalibleLocation;
+    double currentLatitude;
+    double currentLongitude;
+    float testMore;
 }
 
 @end
 
 @implementation TIETravelDetailsViewController
 
-@synthesize routeMap, driverName, dateTrip, hourTrip, seatsState;
+@synthesize routeMap, driverName, dateTrip, hourTrip, seatsState, startTripUIButton, requestUIButton, finishTripUIButton, passengerOne, passengerTwo, passengerThree, passengerFour, passengerOneUIButton, passengerTwoUIButton, passengerThreeUIButton, passengerFourUIButton, animmationPositionDiver;
 
 - (id)initWithTripData:(NSMutableDictionary *) aTripData {
     self = [super initWithNibName:@"TIETravelDetailsViewController" bundle:nil];
@@ -37,6 +45,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _isAvalibleLocation = NO;
+    currentLatitude = 0;
+    currentLongitude = 0;
+    testMore = 0.000001;
     self.navigationController.navigationBar.topItem.title = @"Detalles";
     UIBarButtonItem *newBackButton =
     [[UIBarButtonItem alloc] initWithTitle:@"Atras"
@@ -59,14 +71,16 @@
     //Varibales de mapa
     markerStart = [GMSMarker new];
     markerFinish = [GMSMarker new];
+    currenPositionMarker = [GMSMarker new];
     
     [self loadInfoTrip];
 }
 
 -(void) loadInfoTrip{
     
-    //Se recupera informacion de usuario
-    NSString *urlServer = @"http://127.0.0.1:5000/queryTripInfoIOS";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryTripInfoIOS", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:tripData options:0 error:nil];
     NSString *dataTripString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
@@ -117,16 +131,40 @@
                 //Sillas disponibles
                 int availableSeats = [tripInfo valueForKey:@"available_seats"] == nil ? [[tripInfo valueForKey:@"available_seats"] intValue] : 0;
                 int maxSeats = [tripInfo valueForKey:@"max_seats"] == nil ? [[tripInfo valueForKey:@"max_seats"] intValue] : 0;
-                seatsState.text = [NSString stringWithFormat:@"(%i/%i)", availableSeats, maxSeats];
+                seatsState.text = [NSString stringWithFormat:@"Pasajeros (%i/%i)", availableSeats, maxSeats];
+                
+                //Si es pasajero se ocultan botones de conductor
+                if(![[tripData valueForKey:@"trip_type"] isEqualToString:@"Conductor"]){
+                    startTripUIButton.hidden = YES;
+                    requestUIButton.hidden = YES;
+                    updateDriverPosition = [NSTimer scheduledTimerWithTimeInterval:1
+                                                                            target:self
+                                                                          selector: @selector(getDriverPosition)
+                                                                          userInfo:nil
+                                                                           repeats:YES];
+                }
+                
+                //Se cargan pasajeros
+                NSMutableArray *passengers = [tripInfo valueForKey:@"passengers"];
+                if(passengers != nil){
+                    if(passengers.count > 0){
+                        passengerOne.text = [passengers[0] valueForKey:@"name"];
+                        passengerOneUIButton.hidden = NO;
+                        passengerOneUIButton.accessibilityValue = [NSString stringWithFormat:@"%@", [passengers[0] valueForKey:@"id"]];
+                    }if(passengers.count > 1){
+                        passengerTwo.text = [passengers[1] valueForKey:@"name"];
+                        passengerOneUIButton.hidden = NO;
+                    }if(passengers.count > 2){
+                        passengerThree.text = [passengers[2] valueForKey:@"name"];
+                        passengerOneUIButton.hidden = NO;
+                    }if(passengers.count > 3){
+                        passengerFour.text = [passengers[3] valueForKey:@"name"];
+                        passengerOneUIButton.hidden = NO;
+                    }
+                }
                 
                 //Se incia traking de pasajero
                 trackTripData = tripInfo;
-//                [NSTimer scheduledTimerWithTimeInterval:5
-//                                                 target:self
-//                                               selector: @selector(driverPositionTrack:)
-//                                               userInfo:nil
-//                                                repeats:YES];
-                
             }
             else{
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
@@ -140,18 +178,9 @@
     }] resume];
 }
 
-//se actualiza valor de traking
-- (void)driverPositionTrack:(NSTimer *)timer {
-    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                              message:[trackTripData valueForKey:@"date_hour"]
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles:nil];
-    [alertErrorLogin show];
-}
-
 //Personalizar boton atras
 -(void)backButton{
+    [updateDriverPosition invalidate];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -165,6 +194,29 @@
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:applicationsVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }
+
+- (IBAction)passengerOneInfoButton:(id)sender {
+    [self viewPassengerDetails:passengerOneUIButton.accessibilityValue];
+}
+
+- (IBAction)passengerTwoInfoButton:(id)sender {
+    [self viewPassengerDetails:passengerOneUIButton.accessibilityValue];
+}
+
+- (IBAction)passengerThreeInfoButton:(id)sender {
+    [self viewPassengerDetails:passengerOneUIButton.accessibilityValue];
+}
+
+- (IBAction)passengerFourInfoButton:(id)sender {
+    [self viewPassengerDetails:passengerOneUIButton.accessibilityValue];
+}
+
+-(void) viewPassengerDetails:(NSString *) passengerId{
+    TIEPassengerDetailsViewController *passangerDetailsVC =[[TIEPassengerDetailsViewController alloc] initWithTripId:passengerId];
+    UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:passangerDetailsVC];
+    [self presentViewController:trasformerNavC animated:YES completion:nil];
+}
+
 - (IBAction)goChatButton:(id)sender {
     
     LGChatController *chatController = [LGChatController new];
@@ -173,8 +225,112 @@
     [self.navigationController pushViewController:chatController animated:YES];
 }
 
-#pragma mark - LGChatControllerDelegate
+- (IBAction)startTripButton:(id)sender {
+    
+    //Se recupera posición incial del conductor y se carga en mapa
 
+    //se recupera posicion actual del usuario
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [self->locationManager requestWhenInUseAuthorization];
+    }
+    
+    [locationManager startUpdatingLocation];
+}
+
+- (IBAction)finishTripButton:(id)sender {
+    [updateDriverPosition invalidate];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    currentLatitude = newLocation.coordinate.latitude;
+    currentLongitude = newLocation.coordinate.longitude;
+    if(!_isAvalibleLocation){
+        _isAvalibleLocation = true;
+        startTripUIButton.hidden = YES;
+        requestUIButton.hidden = YES;
+        finishTripUIButton.hidden = NO;
+        updateDriverPosition = [NSTimer scheduledTimerWithTimeInterval:1
+                                                                target:self
+                                                              selector: @selector(saveDriverPosition)
+                                                              userInfo:nil
+                                                               repeats:YES];
+    }
+}
+
+-(void) saveDriverPosition{
+    //testMore += 0.001;
+    //Se valida que se tengan las coordenadas
+    if(currentLatitude !=0 && currentLongitude !=0){
+        //Se recupera informacion de usuario
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+        long userId = [[dataUser objectForKey:@"id"] intValue];
+        long tenantId = [[dataUser objectForKey:@"tenant_id"] intValue];
+        //Se recupera host para peticiones
+        NSString *urlServer = [NSString stringWithFormat:@"%@/saveDriverLocation", [util.getGlobalProperties valueForKey:@"host"]];
+        NSLog(@"url saveUser: %@", urlServer);
+        //Se configura data a enviar
+        NSString *post = [NSString stringWithFormat:
+                          @"user_id=%ld&latitude=%f&longitude=%f&tenant_id=%ld",
+                          userId,currentLatitude,currentLongitude,tenantId];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        //Se captura numero d eparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        
+        //Se configura request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString: urlServer]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:postData];
+        
+        //Se ejecuta request
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            dispatch_async(dispatch_get_main_queue(),^{
+                //Se convierte respuesta en JSON
+                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                id isValid = [jsonData valueForKey:@"valid"];
+                
+                if (isValid ? [isValid boolValue] : NO) {
+                    //Se dibuja posicion en mapa
+                    [self updateDriverLocation];
+                }
+                else{
+                    UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                            message:[jsonData valueForKey:@"description"]
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                    [alertSaveUser show];
+                }
+            });
+        }] resume];
+    }
+    else{
+        UIAlertView *alertMessage = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                message:@"No ha sido posble obtener su posición actual. Por favor verifique en Configuraciones si tiene los permisos de ubicación."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+        [alertMessage show];
+    }
+}
+
+-(void)updateDriverLocation{
+    
+}
+
+#pragma mark - LGChatControllerDelegate
 - (void)chatController:(LGChatController *)chatController didAddNewMessage:(LGChatMessage *)message
 {
     NSLog(@"Did Add Message: %@", message.content);
@@ -189,5 +345,66 @@
     message.date = @"3:45pm";
     message.sentByString = arc4random_uniform(2) == 0 ? [LGChatMessage SentByOpponentString] : [LGChatMessage SentByUserString];
     return YES;
+}
+
+-(void) getDriverPosition{
+    
+    //Se recupera informacion de usuario
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+    long userId = [[dataUser objectForKey:@"id"] intValue];
+    long tenantId = [[dataUser objectForKey:@"tenant_id"] intValue];
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryDriverLocation", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"user_id=%ld&tenant_id=%ld",
+                      userId,tenantId];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                if([jsonData valueForKey:@"result"] != nil){
+                    animmationPositionDiver.hidden = YES;
+                    [animmationPositionDiver stopAnimating];
+                    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(6.2488523, -75);
+                    currenPositionMarker.position = position;
+                    currenPositionMarker.title = @"Conductor";
+                    currenPositionMarker.map = self.routeMap;
+                }else{
+                    animmationPositionDiver.hidden = NO;
+                    [animmationPositionDiver startAnimating];
+                }
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
 }
 @end

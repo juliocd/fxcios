@@ -162,8 +162,9 @@
 
 #pragma Busqueda de viajes de pasajero
 -(void) searchPassengerTrip{
-    //Se envia peticion por POST
-    NSString *urlServer = @"http://127.0.0.1:5000/searchPassengerTripsIOS";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/searchPassengerTripsIOS", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSData * jsonData1 = [NSJSONSerialization  dataWithJSONObject:scheduleDayArray options:0 error:nil];
     NSString *scheduleDayArrayString = [[NSString alloc] initWithData:jsonData1   encoding:NSUTF8StringEncoding];
@@ -234,7 +235,7 @@
     //Se actualiza objeto de viaje seleccionado
     selectedTrip = tripInfo;
     //Se carga nombre de conductor
-    //driverName.text = [tripInfo valueForKey:@"user_id"];
+    driverName.text = [tripInfo valueForKey:@"user_id"];
     //Se carga ruta en mapa
     [self.searchRouteMap clear];
     markerStart = [GMSMarker new];
@@ -266,8 +267,9 @@
 #pragma Solicitud de viajes
 - (IBAction)RequestTrip:(id)sender {
     //Cargar ruta de viaje en mapa y nombre de conductor
-    //Se recupera informacion de usuario
-    NSString *urlServer = @"http://127.0.0.1:5000/requestPassengerTripIOS";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/requestPassengerTripIOS", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     //Se obtiene fecha del mismo dia de viaje
     NSString *dateHour = @"";

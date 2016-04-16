@@ -7,6 +7,7 @@
 //
 
 #import "RecoverPasswordViewController.h"
+#import "Util.h"
 
 @interface RecoverPasswordViewController ()
 
@@ -39,8 +40,9 @@
 - (IBAction)recoverPasswordButton:(id)sender {
     
     //Se ejecuta validacion de usuario
-    NSLog(@"Se inicia almacenamiento de usuario");
-    NSString *urlServer = @"http://127.0.0.1:5000/recoverPassword";
+    //Se recupera host para peticiones
+    Util *util=[Util getInstance];
+    NSString *urlServer = [NSString stringWithFormat:@"%@/recoverPassword", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
     
     NSString *email = userEmail.text;

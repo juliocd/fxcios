@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "NSString+MD5.h"
 #import "Util.h"
-#import "TestViewController.h"
 #import "RecoverPasswordViewController.h"
 
 @interface TIELoginViewController ()
@@ -54,10 +53,12 @@
 }
 
 - (IBAction)LoginButton:(id)sender {
+    Util *util=[Util getInstance];
     
     //Se ejecuta validacion de usuario
     NSLog(@"Se inicia almacenamiento de usuario");
-    NSString *urlServer = @"http://127.0.0.1:5000/userLogin";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/userLogin", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
     
     if (![userName isEqualToString:@""] || ![[self.passwordTextField text] isEqualToString:@""]) {
@@ -98,7 +99,6 @@
                 
                 if (isValid ? [isValid boolValue] : NO) {
                     //Se almacena datos de usuario
-                    Util *util=[Util getInstance];
                     [util constructUserDefaults:jsonData];
                     
                     //Se carga vista principal

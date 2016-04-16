@@ -261,8 +261,9 @@
             
             if (![stepsArrayString isEqualToString:@""] && ![driverTripString isEqualToString:@"[]"]) {
                 
-                //Se envia peticion por POST
-                NSString *urlServer = @"http://127.0.0.1:5000/saveDriverTripsIOS";
+                //Se recupera host para peticiones
+                NSString *urlServer = [NSString stringWithFormat:@"%@/saveDriverTripsIOS", [util.getGlobalProperties valueForKey:@"host"]];
+                NSLog(@"url saveUser: %@", urlServer);
                 //Se configura data a enviar
                 NSString *post = [NSString stringWithFormat:
                                   @"trips=%@&route=%@",

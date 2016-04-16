@@ -7,6 +7,7 @@
 //
 
 #import "TIEApplicationsViewController.h"
+#import "Util.h"
 
 @interface TIEApplicationsViewController (){
     NSString *tripId;
@@ -19,7 +20,7 @@
 
 @implementation TIEApplicationsViewController
 
-@synthesize applicantName, applicantEmail, applicantPhone, applicantAddress;
+@synthesize applicantName, applicantEmail, applicantPhone, applicantAddress, passengerPrictureProfile;
 
 - (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats{
     self = [super initWithNibName:@"TIEApplicationsViewController" bundle:nil];
@@ -48,8 +49,11 @@
 }
 
 - (void) getApplications{
-    //Se recupera informacion de usuario
-    NSString *urlServer = @"http://127.0.0.1:5000/queryRequestTrips";
+    
+    Util *util=[Util getInstance];
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryRequestTrips", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
                       @"id=%@",
@@ -139,8 +143,11 @@
 
 - (IBAction)AcceptingApplication:(id)sender {
     if ([selectedApplication count] > 0) {
-        //Se recupera informacion de usuario
-        NSString *urlServer = @"http://127.0.0.1:5000/saveRequestTripIOS";
+        
+        //Se recupera host para peticiones
+        Util *util=[Util getInstance];
+        NSString *urlServer = [NSString stringWithFormat:@"%@/saveRequestTripIOS", [util.getGlobalProperties valueForKey:@"host"]];
+        NSLog(@"url saveUser: %@", urlServer);
         //Se configura data a enviar
         NSMutableDictionary *driverTrip = [[NSMutableDictionary alloc] init];
         [driverTrip setValue:maxSeats forKey:@"max_seats"];

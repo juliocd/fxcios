@@ -276,7 +276,10 @@
     NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:schedule options:0 error:nil];
     NSString *scheduleString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
     
-    NSString *urlServer = @"http://127.0.0.1:5000/saveSchedule";
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/saveSchedule", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
                       @"schedule=%@&id=%@&tenant_id=%@",
@@ -286,7 +289,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero de parametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", [postData length]];
     
     //Se configura request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
