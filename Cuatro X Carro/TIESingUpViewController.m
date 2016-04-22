@@ -242,8 +242,11 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:countryItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.countryTextInput.text isEqualToString:@""] && [countryItems indexOfObject:self.countryTextInput.text] != -1){
+        initialIndex = [countryItems indexOfObject:self.countryTextInput.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Pais" rows:countryItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.countryTextInput setEnabled:NO];
 }
@@ -259,7 +262,11 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:stateItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.stateTextInput.text isEqualToString:@""] && [stateItems indexOfObject:self.stateTextInput.text] != -1){
+        initialIndex = [cityItems indexOfObject:self.stateTextInput.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Departamento" rows:stateItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.stateTextInput  setEnabled:NO];
 }
@@ -275,7 +282,11 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:cityItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.cityTextInput.text isEqualToString:@""] && [cityItems indexOfObject:self.cityTextInput.text] != -1){
+        initialIndex = [cityItems indexOfObject:self.cityTextInput.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Ciudad" rows:cityItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.cityTextInput  setEnabled:NO];
 }
@@ -292,7 +303,11 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:groupItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.groupTextInput.text isEqualToString:@""] && [groupItems indexOfObject:self.groupTextInput.text] != -1){
+        initialIndex = [groupItems indexOfObject:self.groupTextInput.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Grupo" rows:groupItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.groupTextInput  setEnabled:NO];
 }
@@ -468,7 +483,7 @@
     NSString *message = @"Usuario almacenado correctamente. Revise su correo para completar el registro.";
     if (!isValid ? [isValid boolValue] : NO) {
         message = [jsonData valueForKey:@"description"];
-        [util updateUserDefaults];
+        [util updateUserDefaults:^(bool result){}];
     }else{
         if(![userId isEqualToString:@"null"]){
             message = @"Usuario actualizado correctamente.";

@@ -19,7 +19,6 @@
     Util *util;
     NSNumber *isGoing;
     NSMutableArray *daysArray;
-    Boolean applyFilterByDay;
     NSMutableDictionary *userData;
     GMSPolyline *polyline;
     GMSMarker *markerStart;
@@ -80,9 +79,6 @@
     daySelect.text = [daysArray objectAtIndex:0];
     searchResultsFilterByDay = [[NSMutableDictionary alloc] init];
     
-    //Se activa bandera para filtrar elementos por dia una sola vez
-    applyFilterByDay = true;
-    
     [self searchPassengerTrip];
 }
 
@@ -116,7 +112,6 @@
     
     //Se organiza texto en celda
     NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];
-    NSString *dayOfWeek = @"";
     NSDateFormatter *yearFormat = [[NSDateFormatter alloc] init];
     [yearFormat setDateFormat:@"yyyy"];
     [yearFormat setLocale:usLocale];
@@ -144,18 +139,6 @@
     cell.tag = [[result valueForKey:@"id"] integerValue];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Hora: %@",[util militaryTimeToAMPMTime:[[[result valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]] ];
     
-    if (applyFilterByDay) {
-        NSDateFormatter *dayOfWeekFormat = [[NSDateFormatter alloc] init] ;
-        [dayOfWeekFormat setDateFormat:@"EEEE"];
-        [dayOfWeekFormat setLocale:usLocale];
-        dayOfWeek = [dayOfWeekFormat stringFromDate:dateNSDate];
-        dayOfWeek = [dayOfWeek capitalizedString];
-        NSString *indexStr = [@([daysArray indexOfObject:dayOfWeek]) stringValue];
-        //Se obtiene el arreglo almacenado ultimamente para este indice
-        NSMutableArray *filterArray = [searchResultsFilterByDay objectForKey:indexStr] != nil ? [searchResultsFilterByDay objectForKey:indexStr] : [[NSMutableArray alloc] init];
-        [searchResultsFilterByDay setValue:filterArray forKey:indexStr];
-    }
-        
     return cell;
 }
 
@@ -207,7 +190,7 @@
             }
             else{
                 NSData *data = [[jsonData objectForKey:@"result"] dataUsingEncoding:NSUTF8StringEncoding];
-                if (searchResults == nil) {
+                if (data == nil) {
                     UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                             message:@"No se encontraron viajes disponibles."
                                                                            delegate:nil
@@ -227,15 +210,14 @@
 }
 
 #pragma mark - Table view delegate
-
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Se recuperan datos de viaje
     NSMutableDictionary *tripInfo = [searchResults objectAtIndex:indexPath.row];
-    //Se actualiza objeto de viaje seleccionado
+//    //Se actualiza objeto de viaje seleccionado
     selectedTrip = tripInfo;
-    //Se carga nombre de conductor
-    driverName.text = [tripInfo valueForKey:@"user_id"];
+//    //Se carga nombre de conductor
+//    driverName.text = [tripInfo valueForKey:@"user_id"];
     //Se carga ruta en mapa
     [self.searchRouteMap clear];
     markerStart = [GMSMarker new];
@@ -243,13 +225,35 @@
     [util buildRoute:[tripInfo valueForKey:@"route"] withSecond:[[tripInfo valueForKey:@"tenant_id"] longValue] withThird:polyline withFourth:markerStart withFifth:markerFinish withSixth:self.searchRouteMap];
 }
 
+#pragma mark - Select day
 - (IBAction)DaySelect:(id)sender {
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         if ([sender respondsToSelector:@selector(setText:)]) {
             [sender performSelector:@selector(setText:) withObject:selectedValue];
-            NSString *indexStr = [@([daysArray indexOfObject:selectedValue]) stringValue];
-            searchResults = [searchResultsFilterByDay objectForKey:indexStr];
-            applyFilterByDay = false;
+            
+            if(![selectedValue isEqualToString:@"Todos"]){
+                //Se filtra por el dia de la semana
+                NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSMutableArray *resultArrayByDay = [searchResultsFilterByDay objectForKey:@"0"];
+                searchResults = [[NSMutableArray alloc] init];
+                for(id resultByDay in resultArrayByDay) {
+                    NSString *dateStr = [resultByDay valueForKey:@"date_hour"];
+                    NSDate *dateNSDate = [dateFormat dateFromString:dateStr];
+                    NSDateFormatter *dayOfWeekFormat = [[NSDateFormatter alloc] init] ;
+                    [dayOfWeekFormat setDateFormat:@"EEEE"];
+                    [dayOfWeekFormat setLocale:usLocale];
+                     NSString *dayOfWeek = [dayOfWeekFormat stringFromDate:dateNSDate];
+                    dayOfWeek = [dayOfWeek capitalizedString];
+                    if([dayOfWeek isEqualToString:selectedValue]){
+                        [searchResults addObject:resultByDay];
+                    }
+                }
+            }else{
+                //Se pasan todos los resultados
+                searchResults = [searchResultsFilterByDay objectForKey:@"0"];
+            }
             [self.resultTableView reloadData];
         }
         [self.daySelect  setEnabled:YES];
@@ -257,9 +261,12 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"No se selecciono dia");
     };
-    
     NSArray *dayItems = daysArray;
-    [ActionSheetStringPicker showPickerWithTitle:@"Dia de viaje" rows:dayItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.daySelect.text isEqualToString:@""] && [dayItems indexOfObject:self.daySelect.text] != -1){
+        initialIndex = [dayItems indexOfObject:self.daySelect.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Dia de viaje" rows:dayItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.daySelect setEnabled:NO];
 }

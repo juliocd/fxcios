@@ -21,6 +21,7 @@
                 <outlet property="returnTimeTextInput" destination="Iq2-HA-Oed" id="Dqs-Jq-CMf"/>
                 <outlet property="saturdayDepartTime" destination="avi-Q1-15b" id="DJq-Zw-fWG"/>
                 <outlet property="saturdayReturnTime" destination="sRX-rp-JBI" id="8AP-Qc-dft"/>
+                <outlet property="spinnerSaveEvent" destination="hM9-Am-reE" id="aOH-hF-ECQ"/>
                 <outlet property="thursdayDepartTime" destination="hPa-u9-71b" id="cEc-5E-7Zm"/>
                 <outlet property="thursdayReturnTime" destination="yKi-V8-rK2" id="Ri9-Tu-eIZ"/>
                 <outlet property="tuesdayDepartTime" destination="XJl-rG-zY6" id="VwH-2k-aVv"/>
@@ -41,7 +42,7 @@
                         <constraint firstAttribute="width" secondItem="NKU-0C-rZ8" secondAttribute="height" multiplier="304:183" id="lYq-zu-NdZ"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="mxN-G8-GS9">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="mxN-G8-GS9">
                     <rect key="frame" x="210" y="495" width="101" height="40"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Sv-kn-gDz">
@@ -65,7 +66,7 @@
                         <constraint firstAttribute="width" secondItem="TCi-tJ-XhQ" secondAttribute="height" multiplier="101:48" id="wGd-RU-ER8"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="kww-dZ-zG1">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="kww-dZ-zG1">
                     <rect key="frame" x="10" y="495" width="101" height="40"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="vdb-Vp-neV">
@@ -98,7 +99,7 @@
                         <constraint firstAttribute="width" secondItem="Fug-Je-ybg" secondAttribute="height" multiplier="101:48" id="cO1-gw-xgt"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="cZw-fu-OSU">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="cZw-fu-OSU">
                     <rect key="frame" x="110" y="495" width="101" height="40"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fondo_tab_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="7vd-5U-qpm">
@@ -149,7 +150,7 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="g04-OR-8bX"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hora regreso" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iq2-HA-Oed">
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hora regreso" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="Iq2-HA-Oed">
                     <rect key="frame" x="23" y="202" width="208" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -316,7 +317,7 @@
                     <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g09-Pr-aHi">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g09-Pr-aHi">
                     <rect key="frame" x="141" y="496" width="38" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="g09-Pr-aHi" secondAttribute="height" multiplier="1:1" id="EEC-kh-CGi"/>
@@ -461,6 +462,12 @@
                     <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Am-reE">
+                    <rect key="frame" x="142" y="497" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="hM9-Am-reE" secondAttribute="height" multiplier="1:1" id="0Yb-LI-PIB"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -525,6 +532,7 @@
                 <constraint firstItem="Gei-Pm-Rmo" firstAttribute="centerX" secondItem="cgv-zS-FT7" secondAttribute="centerX" id="MCl-Da-9U1"/>
                 <constraint firstAttribute="trailing" secondItem="QCx-Jn-v2J" secondAttribute="trailing" constant="9" id="MHu-5R-oIS"/>
                 <constraint firstItem="zyi-Up-imG" firstAttribute="width" secondItem="Obs-YP-7LM" secondAttribute="width" id="MIF-9Z-rs9"/>
+                <constraint firstItem="hM9-Am-reE" firstAttribute="centerX" secondItem="cZw-fu-OSU" secondAttribute="centerX" id="MSH-xY-hyr"/>
                 <constraint firstItem="seg-qE-dHK" firstAttribute="centerX" secondItem="Tiq-lb-xYo" secondAttribute="centerX" id="MYW-7M-WBD"/>
                 <constraint firstItem="5m0-QD-hFw" firstAttribute="leading" secondItem="5gh-vp-3oy" secondAttribute="trailing" constant="-1" id="Mbn-Yv-w27"/>
                 <constraint firstItem="4iK-Zi-TpO" firstAttribute="centerY" secondItem="7vd-5U-qpm" secondAttribute="centerY" id="MoY-wI-VTg"/>
@@ -593,6 +601,7 @@
                 <constraint firstItem="EJv-Rs-X4e" firstAttribute="width" secondItem="lOM-Yd-qYk" secondAttribute="width" id="jPC-6q-KMU"/>
                 <constraint firstItem="zyi-Up-imG" firstAttribute="top" secondItem="Obs-YP-7LM" secondAttribute="bottom" constant="-1" id="jb5-GU-Zce"/>
                 <constraint firstItem="Tiq-lb-xYo" firstAttribute="centerX" secondItem="aO9-KY-3nF" secondAttribute="centerX" id="kEr-P5-Uzn"/>
+                <constraint firstItem="hM9-Am-reE" firstAttribute="centerY" secondItem="cZw-fu-OSU" secondAttribute="centerY" id="kO0-ZM-vjT"/>
                 <constraint firstItem="cgv-zS-FT7" firstAttribute="width" secondItem="dOm-l8-Y3M" secondAttribute="width" id="kdF-fG-RIx"/>
                 <constraint firstItem="seg-qE-dHK" firstAttribute="height" secondItem="Tiq-lb-xYo" secondAttribute="height" id="krd-2j-DRW"/>
                 <constraint firstItem="cZw-fu-OSU" firstAttribute="top" secondItem="cgv-zS-FT7" secondAttribute="bottom" constant="-1" id="lZf-Fr-EYU"/>

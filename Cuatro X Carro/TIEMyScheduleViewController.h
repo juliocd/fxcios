@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet RadioButton *departRB;
 @property (weak, nonatomic) IBOutlet RadioButton *returnRB;
 @property (weak, nonatomic) IBOutlet RadioButton *departReturnRB;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerSaveEvent;
 
 - (IBAction)selectDay:(id)sender;
 - (IBAction)selectDepartTime:(id)sender;
@@ -51,7 +52,5 @@
 - (IBAction)clearTimeCombos:(id)sender;
 
 - (IBAction)saveSchedule:(id)sender;
-
-- (IBAction)closeSchedule:(id)sender;
 
 @end

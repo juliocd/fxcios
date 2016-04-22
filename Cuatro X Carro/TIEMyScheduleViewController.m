@@ -22,10 +22,11 @@
 
 @implementation TIEMyScheduleViewController
 
-@synthesize dayTextInput, departTimeTextInput, returnTimeTextInput, selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule, radioButton, departRB, returnRB, departReturnRB;
+@synthesize dayTextInput, departTimeTextInput, returnTimeTextInput, selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule, radioButton, departRB, returnRB, departReturnRB, spinnerSaveEvent;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    spinnerSaveEvent.hidden = YES;
     self.navigationController.navigationBar.topItem.title = @"Mi Horario";
     UIBarButtonItem *newBackButton =
     [[UIBarButtonItem alloc] initWithTitle:@"Atras"
@@ -51,9 +52,6 @@
         schedule = [NSJSONSerialization JSONObjectWithData:[strSchedule dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
         [self loadSchedule];
     }
-    
-    //Se inhabilita hora de regreso por el radiobuton
-    [returnTimeTextInput setEnabled:NO];
 }
 
 //Funcion que carga ultimo horario configurado en vista
@@ -79,7 +77,7 @@
 
 //Personalizar boton atras
 -(void)backButton{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self saveUserSchedule];
 }
 
 #pragma Combos
@@ -94,9 +92,12 @@
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    
     NSArray *dayItems = [NSArray arrayWithObjects:@"Lunes", @"Martes", @"Miercoles", @"Jueves", @"Viernes", nil];
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:dayItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.dayTextInput.text isEqualToString:@""] && [dayItems indexOfObject:self.dayTextInput.text] != -1){
+        initialIndex = [dayItems indexOfObject:self.dayTextInput.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Día" rows:dayItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.dayTextInput setEnabled:NO];
 }
@@ -170,16 +171,16 @@
 #pragma Radiobutton
 - (IBAction) onRadioBtn:(id)sender {
     if ([departRB isSelected]) {
-        [returnTimeTextInput setEnabled:NO];
-        [departTimeTextInput setEnabled:YES];
+        [returnTimeTextInput setHidden:YES];
+        [departTimeTextInput setHidden:NO];
     }
     else if([returnRB isSelected]){
-        [departTimeTextInput setEnabled:NO];
-        [returnTimeTextInput setEnabled:YES];
+        [departTimeTextInput setHidden:YES];
+        [returnTimeTextInput setHidden:NO];
     }
     else{
-        [returnTimeTextInput setEnabled:YES];
-        [departTimeTextInput setEnabled:YES];
+        [returnTimeTextInput setHidden:NO];
+        [departTimeTextInput setHidden:NO];
     }
     [self clearCombos];
 }
@@ -196,61 +197,61 @@
     NSString *militaryReturnTime = [util ampmTimeToMilitaryTime:AMPMReturnTime];
     
     if ([[self.dayTextInput text] isEqualToString:@"Lunes"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"monday_going"];
             mondayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"monday_return"];
             mondayReturnTime.text = AMPMReturnTime;
         }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Martes"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"tuesday_going"];
             tuesdayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"tuesday_return"];
             tuesdayReturnTime.text = AMPMReturnTime;
         }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Miercoles"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
         [schedule setValue:militaryDepartTime forKey:@"wednesday_going"];
         wednesdayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"wednesday_return"];
             wednesdayReturnTime.text = AMPMReturnTime;
         }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Jueves"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
         [schedule setValue:militaryDepartTime forKey:@"thursday_going"];
         thursdayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"thursday_return"];
             thursdayReturnTime.text = AMPMReturnTime;
         }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Viernes"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"friday_going"];
             fridayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"friday_return"];
             fridayReturnTime.text = AMPMReturnTime;
         }
     }
     else if ([[self.dayTextInput text] isEqualToString:@"Sabado"]) {
-        if ([departTimeTextInput isEnabled]) {
+        if (![departTimeTextInput isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"saturday_going"];
             saturdayDepartTime.text = AMPMDepartTime;
         }
-        if ([returnTimeTextInput isEnabled]) {
+        if (![returnTimeTextInput isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"saturday_return"];
             saturdayReturnTime.text = AMPMReturnTime;
         }
@@ -269,7 +270,13 @@
 }
 
 - (IBAction)saveSchedule:(id)sender {
+    //Se oculto por peticion de disenadores.
+}
+
+-(void) saveUserSchedule{
     
+    spinnerSaveEvent.hidden = NO;
+    [spinnerSaveEvent startAnimating];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
     
@@ -304,6 +311,7 @@
         NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         NSLog(@"requestReply: %@", requestReply);
         dispatch_async(dispatch_get_main_queue(),^{
+            [spinnerSaveEvent stopAnimating];
             
             //Se convierte respuesta en JSON
             NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
@@ -315,7 +323,9 @@
                 message = [jsonData objectForKey:@"error"];
             }
             else{
-                [util updateUserDefaults];
+                [util updateUserDefaults:^(bool result){
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
             }
             
             UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
@@ -326,10 +336,5 @@
             [alertSaveUser show];
         });
     }] resume];
-    
-}
-
-- (IBAction)closeSchedule:(id)sender {
-    
 }
 @end

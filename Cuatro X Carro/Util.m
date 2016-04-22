@@ -26,7 +26,7 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    [globalProperties setValue:@"http://192.168.0.14:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
     return globalProperties;
 }
 
@@ -59,7 +59,7 @@ static Util *instance =nil;
     return userDataDefault;
 }
 
-- (void) updateUserDefaults{
+- (void) updateUserDefaults:(void(^)(bool))handler{
     
     //Se recupera email de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -67,7 +67,7 @@ static Util *instance =nil;
     userEmail = [dataUser objectForKey:@"email"];
     
     //Se recupera informacion de usuario
-    NSString *urlServer = @"http://127.0.0.1:5000/getUserDataByEmail";
+    NSString *urlServer = @"http://localhost:5000/getUserDataByEmail";
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
                       @"email=%@",
@@ -75,7 +75,7 @@ static Util *instance =nil;
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
     //Se configura request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -83,6 +83,9 @@ static Util *instance =nil;
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
+    
+    //Gestionar callback
+    _completionHandler = [handler copy];
     
     //Se ejecuta request
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -94,14 +97,18 @@ static Util *instance =nil;
             NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
             id isValid = [jsonData valueForKey:@"valid"];
-
+            
             if (isValid ? [isValid boolValue] : NO) {
                 [self constructUserDefaults:jsonData];
                 NSLog(@"requestReply: %@", requestReply);
+                _completionHandler(true);
             }
             else{
+                _completionHandler(false);
                 NSLog(@"requestReply: %@", requestReply);
             }
+            
+            _completionHandler = nil;
         });
      }] resume];
 }

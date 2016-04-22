@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "-responseSaveUser:withSecond:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908063.163453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "-selectGroup:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "-setDayTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "471633199.574916"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "-loadSchedule"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-setDayTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,27 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "-saveSchedule:"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
             <Locations>
@@ -289,70 +273,6 @@
                   offsetFromSymbolStart = "18">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -458,28 +378,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "469851111.750637"
+            timestampString = "482910928.333304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "-saveSchedule:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -495,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
-            landmarkName = "-updateUserDefaults"
+            landmarkName = "-updateUserDefaults:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -506,12 +410,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/Util.m"
-            timestampString = "482517348.843864"
+            timestampString = "482912163.919006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-updateUserDefaults"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-updateUserDefaults:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -522,43 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "-saveSchedule:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-setDayTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -570,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "482214502.235434"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-setDayTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -591,7 +463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "-updateUserDefaults"
+            landmarkName = "-updateUserDefaults:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -650,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-CheckMonday:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-searchRoute:"
             landmarkType = "5">
          </BreakpointContent>
@@ -698,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "-CheckWednesday:"
             landmarkType = "5">
          </BreakpointContent>
@@ -714,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-SelectTravelType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -730,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-SwitchUserType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-ClearMap:"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "@implementation TIEScheduleTripViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -874,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "-SaveDriverTravel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -954,11 +826,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "-SaveDriverTravel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/Util.m"
-            timestampString = "482517348.843864"
+            timestampString = "482912163.919006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-militaryTimeToAMPMTime:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1386,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "471633199.574916"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-onRadioBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1402,11 +1274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEMyScheduleViewController.m"
-            timestampString = "471633199.574916"
+            timestampString = "482911203.957062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "-onRadioBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1418,11 +1290,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
             landmarkName = "-mapView:didTapAtCoordinate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1434,11 +1306,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "-mapView:didTapAtCoordinate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1450,11 +1322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "604"
+            endingLineNumber = "604"
             landmarkName = "-reloadMarkersByUserType"
             landmarkType = "5">
          </BreakpointContent>
@@ -1466,11 +1338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1498,11 +1370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "-getUserSchedule:withSecond:withThird:withFourth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1514,11 +1386,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1530,11 +1402,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1546,11 +1418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1562,11 +1434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1578,11 +1450,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1594,11 +1466,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1610,11 +1482,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1626,11 +1498,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "484"
+            endingLineNumber = "484"
             landmarkName = "-getUserSchedule:withSecond:withThird:withFourth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1642,11 +1514,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-SaveDriverTravel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1674,11 +1546,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "-mapView:didTapAtCoordinate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1690,11 +1562,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "-mapView:didTapAtCoordinate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1706,11 +1578,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "-mapView:didTapAtCoordinate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1722,11 +1594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1738,11 +1610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1754,11 +1626,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1770,11 +1642,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1786,11 +1658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
+            timestampString = "482997224.119797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1818,11 +1690,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -1834,11 +1706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1850,27 +1722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-DaySelect:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1882,43 +1738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997224.119797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
-            landmarkName = "-DaySelect:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471659446.326214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "-initWithSearchData:withSecond:withThird:withFourth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1978,11 +1802,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/Util.m"
-            timestampString = "482517348.843864"
+            timestampString = "482912163.919006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-buildRoute:withSecond:withThird:withFourth:withFifth:withSixth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1994,11 +1818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/Util.m"
-            timestampString = "482517348.843864"
+            timestampString = "482912163.919006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "-buildRoute:withSecond:withThird:withFourth:withFifth:withSixth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2010,11 +1834,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/Util.m"
-            timestampString = "482517348.843864"
+            timestampString = "482912163.919006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-buildRoute:withSecond:withThird:withFourth:withFifth:withSixth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2026,11 +1850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "471665866.900176"
+            timestampString = "482997224.119797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "-initWithSearchData:withSecond:withThird:withFourth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2042,43 +1866,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482999820.92993"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-RequestTrip:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999820.92993"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "-RequestTrip:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999820.92993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "284"
             endingLineNumber = "284"
-            landmarkName = "-RequestTrip:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "-RequestTrip:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
             landmarkName = "-RequestTrip:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2154,11 +1978,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482726625.664414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-getApplications"
             landmarkType = "5">
          </BreakpointContent>
@@ -2170,11 +1994,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482726625.664414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-getApplications"
             landmarkType = "5">
          </BreakpointContent>
@@ -2186,55 +2010,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482726625.664414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -2250,11 +2026,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482726625.664414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
+            timestampString = "482726625.664414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
+            timestampString = "482726625.664414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
+            timestampString = "482726625.664414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2266,11 +2090,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482726625.664414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2426,11 +2250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908063.163453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "-selectCity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2458,11 +2282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "-responseSaveUser:withSecond:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2474,11 +2298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2490,11 +2314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "-saveSingUpForm:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2506,11 +2330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESingUpViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482908985.473476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "-changePassword:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2634,11 +2458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482220833.118468"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-CheckMonday:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2650,11 +2474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997936.560126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "-getUserSchedule:withSecond:withThird:withFourth:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2682,11 +2506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -2698,11 +2522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482998854.529096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "-searchPassengerTrip"
             landmarkType = "5">
          </BreakpointContent>
@@ -2714,43 +2538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
+            timestampString = "482997224.119797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482221353.628791"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482221701.043561"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2784,22 +2576,6 @@
             startingLineNumber = "250"
             endingLineNumber = "250"
             landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
-            timestampString = "482519325.424922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3072,6 +2848,214 @@
             startingLineNumber = "395"
             endingLineNumber = "395"
             landmarkName = "-getDriverPosition"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIEApplicationsViewController.m"
+            timestampString = "482726625.664414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-AcceptingApplication:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999820.92993"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-RequestTrip:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482998854.529096"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "-DaySelect:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TIESearchTravelViewController DaySelect:]"
+                  moduleName = "Cuatro X Carro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/juliocesardiaz/Work/4xCarro/fxcios/Cuatro%20X%20Carro/TIESearchTravelViewController.m"
+                  timestampString = "482546672.441364"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[TIESearchTravelViewController DaySelect:]_block_invoke"
+                  moduleName = "Cuatro X Carro"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/juliocesardiaz/Work/4xCarro/fxcios/Cuatro%20X%20Carro/TIESearchTravelViewController.m"
+                  timestampString = "482546672.441465"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/Util.m"
+            timestampString = "482912163.919006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-buildRoute:withSecond:withThird:withFourth:withFifth:withSixth:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESingUpViewController.m"
+            timestampString = "482908063.163453"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-selectCity:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESingUpViewController.m"
+            timestampString = "482908063.163453"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "-selectCity:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESingUpViewController.m"
+            timestampString = "482908170.358744"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "-selectGroup:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIEScheduleTripViewController.m"
+            timestampString = "482997936.560126"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-SaveDriverTravel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999465.948636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "-DaySelect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999456.100772"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "-DaySelect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cuatro X Carro/TIESearchTravelViewController.m"
+            timestampString = "482999658.51016"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "-DaySelect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

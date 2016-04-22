@@ -41,6 +41,10 @@
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
     
+    //Estilo de imagen de perdil
+    passengerPrictureProfile.layer.cornerRadius = passengerPrictureProfile.frame.size.width / 2;
+    passengerPrictureProfile.clipsToBounds = YES;
+    
     //Se inicalizan variables locales
     applications = [[NSMutableArray alloc] init];
     selectedApplication = [[NSMutableDictionary alloc] init];

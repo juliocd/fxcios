@@ -93,22 +93,32 @@
         //Se recupera data de arreglo de puntos
         NSMutableArray *stepArray = [_routeController getStepArray];
         //Se valida que exista una ruta
-        if (stepArray.count > 0 && driverTripArray.count > 0) {
-            //Se cargan dias disponibles en filtro
-            if(buttonMonday.isSelected){[daysArray addObject:@"Lunes"];};
-            if(buttonTuesday.isSelected){[daysArray addObject:@"Martes"];};
-            if(buttonWednesday.isSelected){[daysArray addObject:@"Miércoles"];};
-            if(buttonThursday.isSelected){[daysArray addObject:@"Jueves"];};
-            if(buttonFriday.isSelected){[daysArray addObject:@"Viernes"];};
-            if(buttonSaturday.isSelected){[daysArray addObject:@"Sábado"];};
-            //Se envia parametros a siguinete controlador
-            TIESearchTravelViewController *searchTravelsVC = [[TIESearchTravelViewController alloc] initWithSearchData:driverTripArray withSecond:stepArray withThird:isGoing withFourth:daysArray];
-            UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:searchTravelsVC];
-            [self presentViewController:trasformerNavC animated:YES completion:nil];
+        if (stepArray.count > 0) {
+            if(driverTripArray.count > 0){
+                [daysArray addObject:@"Todos"];
+                //Se cargan dias disponibles en filtro
+                if(buttonMonday.isSelected){[daysArray addObject:@"Lunes"];};
+                if(buttonTuesday.isSelected){[daysArray addObject:@"Martes"];};
+                if(buttonWednesday.isSelected){[daysArray addObject:@"Miércoles"];};
+                if(buttonThursday.isSelected){[daysArray addObject:@"Jueves"];};
+                if(buttonFriday.isSelected){[daysArray addObject:@"Viernes"];};
+                if(buttonSaturday.isSelected){[daysArray addObject:@"Sábado"];};
+                //Se envia parametros a siguinete controlador
+                TIESearchTravelViewController *searchTravelsVC = [[TIESearchTravelViewController alloc] initWithSearchData:driverTripArray withSecond:stepArray withThird:isGoing withFourth:daysArray];
+                UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:searchTravelsVC];
+                [self presentViewController:trasformerNavC animated:YES completion:nil];
+            }else{
+                UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                          message:@"Usted no tiene horario establecido para este dia de la semana."
+                                                                         delegate:nil
+                                                                cancelButtonTitle:@"OK"
+                                                                otherButtonTitles:nil];
+                [alertErrorLogin show];
+            }
         }
         else{
             UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                      message:@"Debe indicar en el mapa su punto de salida o llegada, y seleccionar los dias correspondientes."
+                                                                      message:@"Debe indicar en el mapa su punto de salida o llegada."
                                                                      delegate:nil
                                                             cancelButtonTitle:@"OK"
                                                             otherButtonTitles:nil];
@@ -221,7 +231,11 @@
     };
     
     NSArray *dayItems = [NSArray arrayWithObjects:@"Ida", @"Regreso", nil];
-    [ActionSheetStringPicker showPickerWithTitle:@"Tipo de viaje" rows:dayItems initialSelection:0
+    NSUInteger initialIndex = 0;
+    if(![self.travelTypeSelect.text isEqualToString:@""] && [dayItems indexOfObject:self.travelTypeSelect.text] != -1){
+        initialIndex = [dayItems indexOfObject:self.travelTypeSelect.text];
+    }
+    [ActionSheetStringPicker showPickerWithTitle:@"Tipo de viaje" rows:dayItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
     [self.travelTypeSelect setEnabled:NO];
 }
@@ -259,7 +273,7 @@
             //Se recupera data de arreglo de puntos
             NSString *stepsArrayString = [_routeController getStepArrayString];
             
-            if (![stepsArrayString isEqualToString:@""] && ![driverTripString isEqualToString:@"[]"]) {
+            if (![stepsArrayString isEqualToString:@""] && stepsArrayString != nil && ![driverTripString isEqualToString:@"[]"]) {
                 
                 //Se recupera host para peticiones
                 NSString *urlServer = [NSString stringWithFormat:@"%@/saveDriverTripsIOS", [util.getGlobalProperties valueForKey:@"host"]];
@@ -298,7 +312,7 @@
                             message = [jsonData objectForKey:@"error"];
                         }
                         else{
-                            [util updateUserDefaults];
+                            [util updateUserDefaults:^(bool result){}];
                             [self clearMap];
                             [self reloadMarkersByUserType];
                         }
