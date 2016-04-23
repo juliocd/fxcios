@@ -350,15 +350,21 @@
                 password = [password MD5];
             }
             
+            //Se recupera token para mensajes
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSMutableDictionary *deviceTokenData = [defaults objectForKey:@"deviceTokenData"];
+            NSString *deviceToken = ([deviceTokenData valueForKey:@"deviceToken"] == (id)[NSNull null]) ? @"" : [deviceTokenData valueForKey:@"deviceToken"];
+            
             //Se configura data a enviar
             NSString *post = [NSString stringWithFormat:
-                        @"city_id=%ld&name=%@&email=%@&password=%@&tenant_id=%ld&id=%@",
+                        @"city_id=%ld&name=%@&email=%@&password=%@&tenant_id=%ld&id=%@&ios_token=%@",
                         [[cityItemsIds objectForKey:[self.cityTextInput text]] longValue],
                         [self.fullUserNameTextInput text],
                         email,
                         password,
                         [[groupItemsIds objectForKey:[self.groupTextInput text]] longValue],
-                        userIdStr];
+                        userIdStr,
+                        deviceToken];
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
             //Se captura numero d eparametros a enviar

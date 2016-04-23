@@ -94,7 +94,19 @@
 
 //Se determina numero de filas de la tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [searchResults count];
+    if(searchResults.count > 0){
+        self.resultTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.resultTableView.backgroundView   = nil;
+        return [searchResults count];
+    }else{
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.resultTableView.bounds.size.width, self.resultTableView.bounds.size.height)];
+        noDataLabel.text             = @"No se encontraron registros";
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        self.resultTableView.backgroundView = noDataLabel;
+        self.resultTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        return 0;
+    }
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,10 +226,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Se recuperan datos de viaje
     NSMutableDictionary *tripInfo = [searchResults objectAtIndex:indexPath.row];
-//    //Se actualiza objeto de viaje seleccionado
+    //Se actualiza objeto de viaje seleccionado
     selectedTrip = tripInfo;
-//    //Se carga nombre de conductor
-//    driverName.text = [tripInfo valueForKey:@"user_id"];
+    //Se carga nombre de conductor
+    driverName.text = [tripInfo valueForKey:@"user_name"];
     //Se carga ruta en mapa
     [self.searchRouteMap clear];
     markerStart = [GMSMarker new];
@@ -287,7 +299,6 @@
         }
     }
     NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
-    //[passengerTrip setValue:[selectedTrip valueForKey:@"id"] forKey:@"driver_trip_id"];
     [passengerTrip setValue:[userData valueForKey:@"id"] forKey:@"user_id"];
     [passengerTrip setValue:dateHour forKey:@"date_hour"];
     [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"latitude"] forKey:@"latitude"];

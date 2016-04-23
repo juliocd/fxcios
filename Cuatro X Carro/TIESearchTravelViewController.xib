@@ -39,9 +39,10 @@
                         <action selector="RequestTrip:" destination="-1" eventType="touchUpInside" id="MJe-GJ-2ZT"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ACs-o3-f5V">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ACs-o3-f5V">
                     <rect key="frame" x="8" y="339" width="304" height="191"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0oB-XF-qB8"/>
                         <outlet property="delegate" destination="-1" id="AXG-Uw-eI8"/>
@@ -51,7 +52,7 @@
                     <rect key="frame" x="8" y="70" width="304" height="197"/>
                     <color key="backgroundColor" red="0.76293420670000001" green="1" blue="0.72672292439999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pablo perez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp9-h1-DVN">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp9-h1-DVN">
                     <rect key="frame" x="100" y="275" width="212" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
@@ -66,7 +67,7 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="5Tf-Cr-6oH"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conductor: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-fA-Jn0">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Conductor: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ6-fA-Jn0">
                     <rect key="frame" x="8" y="273" width="96" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="vQ6-fA-Jn0" secondAttribute="height" multiplier="32:7" id="dqh-P3-lcM"/>

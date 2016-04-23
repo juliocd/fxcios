@@ -114,9 +114,9 @@
 }
 - (IBAction)LogOut:(id)sender {
     //Se borran datos de usuario deslogueado
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *userDataDefault = [[NSMutableDictionary alloc] init];
-    [userDefault setObject:userDataDefault forKey:@"userData"];
+    NSUserDefaults *defaultProperties = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *emptyData = [[NSMutableDictionary alloc] init];
+    [defaultProperties setObject:emptyData forKey:@"userData"];
     
     //Se envia a primera vista
     [self.tabBarController setSelectedIndex:0];

@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TIELoginViewController">
             <connections>
+                <outlet property="myView" destination="i5M-Pr-FkT" id="R5O-nG-gHN"/>
                 <outlet property="passwordTextField" destination="o3c-GT-Z6q" id="gBc-C9-gsb"/>
                 <outlet property="usernameTextField" destination="Q8B-3t-wgN" id="Nur-q0-zeC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

@@ -23,5 +23,6 @@
 - (NSString *) nextDateByDay:(int) day;
 - (void) buildRoute:(NSMutableArray *) steps withSecond:(long) tenantId withThird:(GMSPolyline *) polyline withFourth:(GMSMarker *) markerStart withFifth:(GMSMarker *) markerFinish withSixth:(GMSMapView *) routeMap;
 -(NSMutableDictionary *) getGlobalProperties;
+-(void) userNotifications;
 
 @end

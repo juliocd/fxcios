@@ -13,19 +13,26 @@
 #import "Util.h"
 #import "RecoverPasswordViewController.h"
 
-@interface TIELoginViewController ()
+@interface TIELoginViewController (){
+    int fieldNumber;
+    int contField;
+}
 
 @end
 
 @implementation TIELoginViewController
 
-@synthesize usernameTextField, passwordTextField, userName, password;
+@synthesize usernameTextField, passwordTextField, userName, password, myView;
 
 - (void)viewDidLoad {
     
-    [self userHaveOpenSession];
+    //Se definen variables que contralan aumento de campos en pantalla
+    contField = 1;
     
+    [self userHaveOpenSession];
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void) userHaveOpenSession{
@@ -100,7 +107,8 @@
                 if (isValid ? [isValid boolValue] : NO) {
                     //Se almacena datos de usuario
                     [util constructUserDefaults:jsonData];
-                    
+                    //Se insctibe token de usuario en caso de tenerlo
+                    [util userNotifications];
                     //Se carga vista principal
                     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
                     [appDelegate.window setRootViewController:appDelegate.tabBarController];
@@ -127,7 +135,37 @@
     }
 }
 
+- (void)keyboardWillShow:(NSNotification*)aNotification {
+    contField++;
+    [UIView animateWithDuration:0.15 animations:^
+     {
+         CGRect newFrame = [myView frame];
+         newFrame.origin.y = -140;
+         [myView setFrame:newFrame];
+         
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
 
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.15 animations:^
+     {
+         CGRect newFrame = [myView frame];
+         newFrame.origin.y = 0;
+         [myView setFrame:newFrame];
+         
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 
 - (IBAction)SingupButton:(id)sender {
     TIESingUpViewController *viewController = [[TIESingUpViewController alloc] init];

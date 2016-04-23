@@ -26,7 +26,7 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://192.168.0.13:5000" forKey:@"host"];
     return globalProperties;
 }
 
@@ -67,7 +67,8 @@ static Util *instance =nil;
     userEmail = [dataUser objectForKey:@"email"];
     
     //Se recupera informacion de usuario
-    NSString *urlServer = @"http://localhost:5000/getUserDataByEmail";
+    NSMutableDictionary *globalProp = [self getGlobalProperties];
+    NSString *urlServer = [NSString stringWithFormat:@"%@/getUserDataByEmail", [globalProp valueForKey:@"host"]];
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
                       @"email=%@",
@@ -218,6 +219,59 @@ static Util *instance =nil;
         markerStart.title = @"Salida";
         markerStart.snippet = @"Medellin";
         markerStart.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+    }
+}
+
+-(void) userNotifications{
+    //1.Se valida que el usuario este logueado
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *userData = [defaults objectForKey:@"userData"];
+    NSMutableDictionary *deviceTokenData = [defaults objectForKey:@"deviceTokenData"];
+    if(userData != nil && deviceTokenData != nil){
+        //2.Validar que el token no se encuentre asignado al usuario logueado
+        if([[deviceTokenData valueForKey:@"associateToUser"] isEqualToString:@"false"]){
+            
+            //Se ejecuta validacion de usuario
+            NSLog(@"Se inicia actualizacion de token de usuario");
+            //Se recupera host para peticiones
+            NSMutableDictionary *globalProp = [self getGlobalProperties];
+            NSString *urlServer = [NSString stringWithFormat:@"%@/userIOSToken", [globalProp valueForKey:@"host"]];
+            NSLog(@"url saveUser: %@", urlServer);
+            
+            //Se configura data a enviar
+            NSString *post = [NSString stringWithFormat:
+                              @"user_id=%@&ios_token=%@",[userData objectForKey:@"id"], [deviceTokenData valueForKey:@"deviceToken"]];
+            NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+            
+            //Se captura numero de deparametros a enviar
+            NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+            
+            //Se configura request
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            [request setURL:[NSURL URLWithString: urlServer]];
+            [request setHTTPMethod:@"POST"];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            [request setHTTPBody:postData];
+            
+            //Se ejecuta request
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                NSLog(@"requestReply: %@", requestReply);
+                dispatch_async(dispatch_get_main_queue(),^{
+                    //Se convierte respuesta en JSON
+                    NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                    id isValid = [jsonData valueForKey:@"valid"];
+                    
+                    if (isValid ? [isValid boolValue] : NO) {
+                        [self updateUserDefaults:^(bool result){}];
+                        [deviceTokenData setValue:@"true" forKey:@"associateToUser"];
+                        [defaults setObject:deviceTokenData forKey:@"deviceTokenData"];
+                    }
+                });
+            }] resume];
+        }
     }
 }
 

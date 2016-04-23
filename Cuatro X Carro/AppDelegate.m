@@ -12,6 +12,7 @@
 #import "TIETrayTravelsTableViewController.h"
 #import "TIEProfileViewController.h"
 #import "TIEScheduleTripViewController.h"
+#import "Util.h"
 
 @interface AppDelegate ()
 
@@ -90,7 +91,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //Inscribir notificaciones en servidor
+    Util *util=[Util getInstance];
+    [util userNotifications];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -99,7 +102,12 @@
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-    NSLog(@"My token is: %@", deviceToken);
+    //Se almacena token de dispositivo
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *deviceTokenData = [NSMutableDictionary new];
+    [deviceTokenData setValue:deviceToken forKey:@"deviceToken"];
+    [deviceTokenData setValue:@"false" forKey:@"associateToUser"];
+    [defaults setObject:deviceTokenData forKey:@"deviceTokenData"];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -109,7 +117,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Detect if APN is received on Background or Foreground state
-    NSString *opa = @"asdasd";
 }
 
 @end
