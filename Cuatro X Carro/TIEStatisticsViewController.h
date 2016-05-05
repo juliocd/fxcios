@@ -8,13 +8,10 @@
 
 #import "ViewController.h"
 
-@interface TIEPassengerDetailsViewController : ViewController
+@interface TIEStatisticsViewController : ViewController
 
 - (id)initWithTripId:(NSString *) passengerId;
 
-@property (weak, nonatomic) IBOutlet UIImageView *pictureProfileImage;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userEmailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startedTripsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *finishedTripsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cancelTripLabel;

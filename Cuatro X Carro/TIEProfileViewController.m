@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "TIELoginViewController.h"
 #import "ActionSheetPicker.h"
+#import "TIEStatisticsViewController.h"
 
 @interface TIEProfileViewController (){
     //Se declara variable de utilidades
@@ -112,11 +113,19 @@
     UINavigationController *trasformerNavC = [[UINavigationController alloc] initWithRootViewController:myScheduleVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }
+
+- (IBAction)passengerStatistics:(id)sender {
+    TIEStatisticsViewController *myStatisticsVC = [[TIEStatisticsViewController alloc] init];
+    UINavigationController *trasformerNavC = [[UINavigationController alloc] initWithRootViewController:myStatisticsVC];
+    [self presentViewController:trasformerNavC animated:YES completion:nil];
+}
+
 - (IBAction)LogOut:(id)sender {
+    //Se elimina token de base de datos
+    [util userNotifications: @"true"];
     //Se borran datos de usuario deslogueado
     NSUserDefaults *defaultProperties = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *emptyData = [[NSMutableDictionary alloc] init];
-    [defaultProperties setObject:emptyData forKey:@"userData"];
+    [defaultProperties setObject:nil forKey:@"userData"];
     
     //Se envia a primera vista
     [self.tabBarController setSelectedIndex:0];

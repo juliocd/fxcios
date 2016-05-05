@@ -1,19 +1,19 @@
 //
-//  RecoverPasswordViewController.m
+//  TIERecoverPassViewController.m
 //  Cuatro X Carro
 //
-//  Created by Julio Cesar Diaz M on 4/10/16.
+//  Created by Julio Cesar Diaz M on 5/4/16.
 //  Copyright © 2016 IT Economics SAS. All rights reserved.
 //
 
-#import "RecoverPasswordViewController.h"
+#import "TIERecoverPassViewController.h"
 #import "Util.h"
 
-@interface RecoverPasswordViewController ()
+@interface TIERecoverPassViewController ()
 
 @end
 
-@implementation RecoverPasswordViewController
+@implementation TIERecoverPassViewController
 
 @synthesize userEmail;
 

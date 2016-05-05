@@ -43,6 +43,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
+    
 }
 
 - (void) loadTrips{
@@ -125,9 +126,6 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(TIETravelCustomCellTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([items count] > 0) {
-        
-        
-        
         NSMutableDictionary *item = [items objectAtIndex:indexPath.row];
         //Datos comunes
         cell.tripId.text = [[item valueForKey:@"id"] stringValue];
@@ -258,6 +256,15 @@
                 break;
         }
     }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self loadTrips];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
 }
 
 @end

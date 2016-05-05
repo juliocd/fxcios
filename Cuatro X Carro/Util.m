@@ -26,7 +26,9 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    [globalProperties setValue:@"http://192.168.0.13:5000" forKey:@"host"];
+    //[globalProperties setValue:@"http://192.168.0.15:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
+    //[globalProperties setValue:@"http://52.10.216.232:5000" forKey:@"host"];
     return globalProperties;
 }
 
@@ -222,7 +224,7 @@ static Util *instance =nil;
     }
 }
 
--(void) userNotifications{
+-(void) userNotifications:(NSString *)deleteToken {
     //1.Se valida que el usuario este logueado
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *userData = [defaults objectForKey:@"userData"];
@@ -235,12 +237,12 @@ static Util *instance =nil;
             NSLog(@"Se inicia actualizacion de token de usuario");
             //Se recupera host para peticiones
             NSMutableDictionary *globalProp = [self getGlobalProperties];
-            NSString *urlServer = [NSString stringWithFormat:@"%@/userIOSToken", [globalProp valueForKey:@"host"]];
+            NSString *urlServer = [NSString stringWithFormat:@"%@/queryUserDeviceToken", [globalProp valueForKey:@"host"]];
             NSLog(@"url saveUser: %@", urlServer);
             
             //Se configura data a enviar
             NSString *post = [NSString stringWithFormat:
-                              @"user_id=%@&ios_token=%@",[userData objectForKey:@"id"], [deviceTokenData valueForKey:@"deviceToken"]];
+                              @"user_id=%@&token=%@&device_type=%@&is_deleted=%@",[userData objectForKey:@"id"], [deviceTokenData valueForKey:@"deviceToken"], @"ios", deleteToken];
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
             //Se captura numero de deparametros a enviar

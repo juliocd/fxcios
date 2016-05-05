@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="daySelect" destination="62L-4X-Kgy" id="bED-hB-IRC"/>
                 <outlet property="driverName" destination="jp9-h1-DVN" id="nAJ-XJ-715"/>
+                <outlet property="resultSearchTable" destination="ACs-o3-f5V" id="XHg-xJ-NsD"/>
                 <outlet property="resultTableView" destination="ACs-o3-f5V" id="bHf-OV-VrS"/>
                 <outlet property="searchRouteMap" destination="ca5-gE-7Nd" id="11g-xd-j6v"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -39,10 +40,10 @@
                         <action selector="RequestTrip:" destination="-1" eventType="touchUpInside" id="MJe-GJ-2ZT"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ACs-o3-f5V">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="1" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ACs-o3-f5V">
                     <rect key="frame" x="8" y="339" width="304" height="191"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="separatorColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0oB-XF-qB8"/>
                         <outlet property="delegate" destination="-1" id="AXG-Uw-eI8"/>

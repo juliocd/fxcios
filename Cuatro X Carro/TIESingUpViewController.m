@@ -350,21 +350,15 @@
                 password = [password MD5];
             }
             
-            //Se recupera token para mensajes
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableDictionary *deviceTokenData = [defaults objectForKey:@"deviceTokenData"];
-            NSString *deviceToken = ([deviceTokenData valueForKey:@"deviceToken"] == (id)[NSNull null]) ? @"" : [deviceTokenData valueForKey:@"deviceToken"];
-            
             //Se configura data a enviar
             NSString *post = [NSString stringWithFormat:
-                        @"city_id=%ld&name=%@&email=%@&password=%@&tenant_id=%ld&id=%@&ios_token=%@",
+                        @"city_id=%ld&name=%@&email=%@&password=%@&tenant_id=%ld&id=%@",
                         [[cityItemsIds objectForKey:[self.cityTextInput text]] longValue],
                         [self.fullUserNameTextInput text],
                         email,
                         password,
                         [[groupItemsIds objectForKey:[self.groupTextInput text]] longValue],
-                        userIdStr,
-                        deviceToken];
+                        userIdStr];
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
             //Se captura numero d eparametros a enviar
@@ -489,7 +483,6 @@
     NSString *message = @"Usuario almacenado correctamente. Revise su correo para completar el registro.";
     if (!isValid ? [isValid boolValue] : NO) {
         message = [jsonData valueForKey:@"description"];
-        [util updateUserDefaults:^(bool result){}];
     }else{
         if(![userId isEqualToString:@"null"]){
             message = @"Usuario actualizado correctamente.";

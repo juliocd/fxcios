@@ -33,7 +33,7 @@
                         <action selector="SingupButton:" destination="-1" eventType="touchUpInside" id="YNe-y5-G75"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="adrian" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="o3c-GT-Z6q">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="pedro" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="o3c-GT-Z6q">
                     <rect key="frame" x="54" y="379" width="252" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -63,7 +63,7 @@
                         <action selector="ForgetPassword:" destination="-1" eventType="touchUpInside" id="hg2-nn-r2X"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="adrian@gmail.com" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8B-3t-wgN">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="pedro@gmail.com" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q8B-3t-wgN">
                     <rect key="frame" x="54" y="328" width="252" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>

@@ -93,12 +93,6 @@
                     <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3004688729" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwa-mt-2EG">
-                    <rect key="frame" x="126" y="91" width="172" height="22"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcP-Ws-GPO">
                     <rect key="frame" x="168" y="145" width="36" height="34"/>
                     <state key="normal" backgroundImage="edit_boton.png"/>
@@ -124,6 +118,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdc-eE-aOj">
                     <rect key="frame" x="228" y="145" width="36" height="34"/>
                     <state key="normal" backgroundImage="statistics_boton.png"/>
+                    <connections>
+                        <action selector="passengerStatistics:" destination="-1" eventType="touchUpInside" id="vIX-rD-iZ7"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="AD6-gz-cJg">
                     <rect key="frame" x="8" y="197" width="101" height="48"/>
@@ -389,6 +386,12 @@
                         <action selector="updateSchedue:" destination="-1" eventType="touchUpInside" id="UfJ-Sh-2UK"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3004688729" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwa-mt-2EG">
+                    <rect key="frame" x="126" y="91" width="172" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>

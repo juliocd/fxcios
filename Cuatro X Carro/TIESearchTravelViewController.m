@@ -10,6 +10,8 @@
 #import "ActionSheetPicker.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import "Util.h"
+#import <QuartzCore/QuartzCore.h>
+#import "TIETravelCustomCellTableViewCell.h"
 
 @interface TIESearchTravelViewController (){
     NSMutableArray *scheduleDayArray;
@@ -29,7 +31,7 @@
 
 @implementation TIESearchTravelViewController
 
-@synthesize searchRouteMap, daySelect, driverName;
+@synthesize searchRouteMap, daySelect, driverName, resultSearchTable;
 
 - (id)initWithSearchData:(NSMutableArray *) aScheduleDayArray withSecond:(NSMutableArray *) aStepArray withThird:(NSNumber *) aIsGoing withFourth:(NSMutableArray *) aDaysArray{
     self = [super initWithNibName:@"TIESearchTravelViewController" bundle:nil];
@@ -71,6 +73,9 @@
     //Se inicializan variables locales
     selectedTrip = [[NSMutableDictionary alloc] init];
     
+    //Bordear esquinas de tabla
+    resultSearchTable.layer.cornerRadius=5;
+    
     //Se recuperan datos de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     userData = [defaults objectForKey:@"userData"];
@@ -110,50 +115,188 @@
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    CGRect tableFrame = tableView.frame;
+//    tableFrame.origin.y = 20;
+//    tableFrame.size.height = UIScreen.mainScreen.bounds.size.height - 25 -45;
+//    tableFrame.size.width = tableView.contentSize.width; // if you would allow horiz scrolling
+//    tableView.frame = tableFrame;
+    
     //Se crea instancia de celda
-    static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    TIETravelCustomCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
     //Se valida que la celda esta vacia para llenarla
     if (!cell)
     {
+        //Se registra celda creda a archivo xib
+        [tableView registerNib:[UINib nibWithNibName:@"TIETravelCustomCellTableViewCell" bundle:nil] forCellReuseIdentifier:@"tableCell"];
         //Se agrega vista cargada con celda a tabla
-        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
     }
-    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    result = [searchResults objectAtIndex:indexPath.row];
-    
-    //Se organiza texto en celda
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];
-    NSDateFormatter *yearFormat = [[NSDateFormatter alloc] init];
-    [yearFormat setDateFormat:@"yyyy"];
-    [yearFormat setLocale:usLocale];
-    NSDateFormatter *monthFormat = [[NSDateFormatter alloc] init];
-    [monthFormat setDateFormat:@"MMM"];
-    [monthFormat setLocale:usLocale];
-    NSDateFormatter *dayFormat = [[NSDateFormatter alloc] init] ;
-    [dayFormat setDateFormat:@"EEEE dd"];
-    [dayFormat setLocale:usLocale];
-    NSString *dateStr = [[result valueForKey:@"date_hour"] substringToIndex:10];
-    // Convert string to date object
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    NSDate *dateNSDate = [dateFormat dateFromString:dateStr];
-    NSString *cellText = [NSString stringWithFormat:@"%@ de %@ de %@.", [[dayFormat stringFromDate:dateNSDate] capitalizedString], [[monthFormat stringFromDate:dateNSDate] capitalizedString], [yearFormat stringFromDate:dateNSDate]];
-    
-    if ([result valueForKey:@"is_going"] ? [[result valueForKey:@"is_going"] boolValue] : NO) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
-        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
-    }
-    else{
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
-        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
-    }
-    cell.tag = [[result valueForKey:@"id"] integerValue];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Hora: %@",[util militaryTimeToAMPMTime:[[[result valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]] ];
     
     return cell;
+    
+//    //Se crea instancia de celda
+//    static NSString *cellIdentifier = @"Cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    //Se valida que la celda esta vacia para llenarla
+//    if (!cell)
+//    {
+//        //Se agrega vista cargada con celda a tabla
+//        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+//    }
+//    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+//    result = [searchResults objectAtIndex:indexPath.row];
+//    
+//    //Se organiza texto en celda
+//    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];
+//    NSDateFormatter *yearFormat = [[NSDateFormatter alloc] init];
+//    [yearFormat setDateFormat:@"yyyy"];
+//    [yearFormat setLocale:usLocale];
+//    NSDateFormatter *monthFormat = [[NSDateFormatter alloc] init];
+//    [monthFormat setDateFormat:@"MMM"];
+//    [monthFormat setLocale:usLocale];
+//    NSDateFormatter *dayFormat = [[NSDateFormatter alloc] init] ;
+//    [dayFormat setDateFormat:@"EEEE dd"];
+//    [dayFormat setLocale:usLocale];
+//    NSString *dateStr = [[result valueForKey:@"date_hour"] substringToIndex:10];
+//    // Convert string to date object
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+//    NSDate *dateNSDate = [dateFormat dateFromString:dateStr];
+//    NSString *cellText = [NSString stringWithFormat:@"%@ de %@ de %@.", [[dayFormat stringFromDate:dateNSDate] capitalizedString], [[monthFormat stringFromDate:dateNSDate] capitalizedString], [yearFormat stringFromDate:dateNSDate]];
+//    
+//    if ([result valueForKey:@"is_going"] ? [[result valueForKey:@"is_going"] boolValue] : NO) {
+//        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
+//        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+//    }
+//    else{
+//        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
+//        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+//    }
+//    cell.tag = [[result valueForKey:@"id"] integerValue];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"Hora: %@",[util militaryTimeToAMPMTime:[[[result valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]] ];
+//    
+//    return cell;
 }
 
+//Se configuran datos de la celda
+- (void)tableView:(UITableView *)tableView willDisplayCell:(TIETravelCustomCellTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([searchResults count] > 0) {
+        NSMutableDictionary *item = [searchResults objectAtIndex:indexPath.row];
+        //Datos comunes
+        cell.tripId.text = [[item valueForKey:@"id"] stringValue];
+        cell.userNameLabel.text = [item valueForKey:@"driver_name"];
+        if ([item valueForKey:@"is_going"] ? [[item valueForKey:@"is_going"] boolValue] : NO) {
+            cell.tripType.text = @"Ida";
+        }
+        else{
+            cell.tripType.text = @"Regreso";
+        }
+        NSString *dateTrip = [[item valueForKey:@"date_hour"] substringToIndex:10];
+        NSArray *dateTripArray = [dateTrip componentsSeparatedByString:@"-"];
+        cell.dateDayLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[2]];
+        cell.dateMonthLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[1]];
+        cell.dateYearLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[0]];
+        cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
+        //Datos de conductor
+        if ([[item valueForKey:@"trip_type"] isEqualToString:@"Conductor"]) {
+            cell.userType.text = @"CONDUCTOR";
+            //////////////////Sillas disponibles
+            int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
+            int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;
+            cell.seatsAvailableLabel.text = [NSString stringWithFormat:@"%i/%i",availableSeats,maxSeats];
+            //[self updateSeats:availableSeats withSecond:maxSeats withThirds:cell];
+            //////////////////Calificacion de conductor
+            int rating = [item valueForKey:@"driver_rating"] != nil ? [[item valueForKey:@"driver_rating"] intValue] : 0;
+            [self updateDriverRating:rating withSecond:cell];
+            //////////////////Solicitudes
+            int request = [[item valueForKey:@"request"] intValue];
+            if (request > 0) {
+                cell.requestButton.tintColor = [UIColor orangeColor];
+            }
+            else{
+                cell.requestButton.tintColor = [UIColor whiteColor];
+            }
+            //////////////////Notificaciones
+            int notifications = [[item valueForKey:@"notifications"] intValue];
+            if (notifications > 0) {
+                cell.notificationButton.tintColor = [UIColor yellowColor];
+            }
+            else{
+                cell.notificationButton.tintColor = [UIColor whiteColor];
+            }
+            cell.backgroundColor = [UIColor blueColor];
+        }
+        else{
+            //Se oculta notificacion de solicitud
+            cell.userType.text = @"PASAJERO";
+            cell.requestButton.hidden = YES;
+            cell.backgroundColor = [UIColor greenColor];
+        }
+        //Notificaciones
+        //int notification = [[item valueForKey:@"notification"] intValue];
+        int notification = 1;
+        if (notification > 0) {
+            cell.notificationButton.tintColor = [UIColor redColor];
+        }
+        UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 277, 58)];
+        av.backgroundColor = [UIColor whiteColor];
+        av.opaque = NO;
+        av.image = [UIImage imageNamed:@"viajes_box.png"];
+        cell.backgroundView = av;
+    }
+}
+
+-(void) updateDriverRating:(int) rating withSecond:(TIETravelCustomCellTableViewCell *) cell{
+    for (int i=1; i<=5; i++) {
+        switch (i) {
+            case 1:
+                if(rating >= i){
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"star_on.png"]];
+                }
+                else{
+                    [cell.rateOneImage setImage:[UIImage imageNamed:@"star_off.png"]];
+                }
+                break;
+            case 2:
+                if(rating >= i){
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"star_on.png"]];
+                }
+                else{
+                    [cell.rateTwoImage setImage:[UIImage imageNamed:@"star_off.png"]];
+                }
+                break;
+            case 3:
+                if(rating >= i){
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"star_on.png"]];
+                }
+                else{
+                    [cell.rateThreeImage setImage:[UIImage imageNamed:@"star_off.png"]];
+                }
+                break;
+            case 4:
+                if(rating >= i){
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"star_on.png"]];
+                }
+                else{
+                    [cell.rateFourImage setImage:[UIImage imageNamed:@"star_off.png"]];
+                }
+                break;
+            case 5:
+                if(rating >= i){
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"star_on.png"]];
+                }
+                else{
+                    [cell.rateFiveImage setImage:[UIImage imageNamed:@"star_off.png"]];
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 #pragma Busqueda de viajes de pasajero
 -(void) searchPassengerTrip{
@@ -301,8 +444,13 @@
     NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
     [passengerTrip setValue:[userData valueForKey:@"id"] forKey:@"user_id"];
     [passengerTrip setValue:dateHour forKey:@"date_hour"];
-    [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"latitude"] forKey:@"latitude"];
-    [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"longitude"] forKey:@"longitude"];
+    if(isGoing == 0){
+        [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"latitude"] forKey:@"latitude"];
+        [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"longitude"] forKey:@"longitude"];
+    }else{
+        [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"latitude"] forKey:@"latitude"];
+        [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"longitude"] forKey:@"longitude"];
+    }
     [passengerTrip setValue:isGoing forKey:@"is_going"];
     [passengerTrip setValue:[userData valueForKey:@"tenant_id"] forKey:@"tenant_id"];
     NSData * jsonData1 = [NSJSONSerialization  dataWithJSONObject:passengerTrip options:0 error:nil];

@@ -6,9 +6,9 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecoverPasswordViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TIERecoverPassViewController">
             <connections>
-                <outlet property="userEmail" destination="Fz6-rJ-9g8" id="QXa-Ps-gmH"/>
+                <outlet property="userEmail" destination="Fz6-rJ-9g8" id="JKS-4P-xEI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

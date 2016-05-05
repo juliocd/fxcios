@@ -8,25 +8,28 @@
 
 #import "TIEApplicationsViewController.h"
 #import "Util.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface TIEApplicationsViewController (){
     NSString *tripId;
     NSString *maxSeats;
-    NSMutableArray *applications;
+    NSMutableArray *dataArray;
     NSMutableDictionary *selectedApplication;
+    NSMutableArray *passengers;
 }
 
 @end
 
 @implementation TIEApplicationsViewController
 
-@synthesize applicantName, applicantEmail, applicantPhone, applicantAddress, passengerPrictureProfile;
+@synthesize applicantName, applicantEmail, applicantPhone, applicantAddress, passengerPrictureProfile, applicationsTable, informationTitleLabel, aceptRequestButton, rejectRequestButton;
 
-- (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats{
+- (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats withThird:(NSMutableArray *) aPassengers{
     self = [super initWithNibName:@"TIEApplicationsViewController" bundle:nil];
     if (self) {
         tripId = aTripId;
         maxSeats = aMaxSeats;
+        passengers = aPassengers;
     }
     return self;
 }
@@ -45,11 +48,21 @@
     passengerPrictureProfile.layer.cornerRadius = passengerPrictureProfile.frame.size.width / 2;
     passengerPrictureProfile.clipsToBounds = YES;
     
+    //Bordear esquinas de tabla
+    applicationsTable.layer.cornerRadius=5;
+    
     //Se inicalizan variables locales
-    applications = [[NSMutableArray alloc] init];
+    dataArray = [[NSMutableArray alloc] init];
     selectedApplication = [[NSMutableDictionary alloc] init];
     
-    [self getApplications];
+    if(passengers == nil){
+        [self getApplications];
+    }else{
+        aceptRequestButton.hidden = YES;
+        rejectRequestButton.hidden = YES;
+        informationTitleLabel.text = @"Pasajero";
+        dataArray = passengers;
+    }
 }
 
 - (void) getApplications{
@@ -85,7 +98,7 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
-                applications = [jsonData valueForKey:@"result"];
+                dataArray = [jsonData valueForKey:@"result"];
                 [self.applicationsTableView reloadData];
             }
             else{
@@ -112,7 +125,7 @@
 
 //Se determina numero de filas de la tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  [applications count];
+    return  [dataArray count];
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,8 +138,8 @@
         //Se agrega vista cargada con celda a tabla
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    if ([applications count] > 0) {
-        NSMutableDictionary *application = [applications objectAtIndex:indexPath.row];
+    if ([dataArray count] > 0) {
+        NSMutableDictionary *application = [dataArray objectAtIndex:indexPath.row];
         cell.textLabel.text = [application valueForKey:@"name"];
     }
     
@@ -137,7 +150,7 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary *application = [applications objectAtIndex:indexPath.row];
+    NSMutableDictionary *application = [dataArray objectAtIndex:indexPath.row];
     selectedApplication = application;
     applicantName.text = [application valueForKey:@"name"];
     applicantEmail.text = [application valueForKey:@"email"];
@@ -167,7 +180,7 @@
                           driverTripString, passengerTripString];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
-        //Se captura numero d eparametros a enviar
+        //Se captura numero de parametros a enviar
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         
         //Se configura request
@@ -193,7 +206,7 @@
                 }
                 else{
                     [self getApplications];
-                    applications = [[NSMutableArray alloc] init];
+                    dataArray = [[NSMutableArray alloc] init];
                     selectedApplication = [[NSMutableDictionary alloc] init];
                 }
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"

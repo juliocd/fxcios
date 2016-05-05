@@ -17,15 +17,21 @@
     NSNumber *staticLatitude;
     NSNumber *staticLongitude;
     NSMutableArray *daysArray;
+    NSString *lastTripTypeSelected;
 }
 
 @synthesize  selectRouteMap, travelTypeSelect, searchPassengerTravels, switchUserType, saveDriverTravel, availableSeats, availableSeatsLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    lastTripTypeSelected = @"Ida";
     
     //Se inicializa selector de filtro de dias
     daysArray = [[NSMutableArray alloc] init];
+    
+    //Se obtiene informacion de usuario
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    dataUser = [defaults objectForKey:@"userData"];
     
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
@@ -41,6 +47,7 @@
                                                                  zoom:16];
     selectRouteMap.camera = camera;
     selectRouteMap.myLocationEnabled = YES;
+    selectRouteMap.settings.myLocationButton = YES;
     selectRouteMap.delegate = self;
     _coordinates = [NSMutableArray new];
     _routeController = [LRouteController new];
@@ -60,13 +67,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
-    //Se inicializa nuevamente arreglo de filtro de dias
-    daysArray = [[NSMutableArray alloc] init];
-    //Se obtiene informacion de usuario
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    dataUser = [defaults objectForKey:@"userData"];
-    [self clearMap];
-    [self reloadMarkersByUserType];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -221,8 +222,13 @@
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         if ([sender respondsToSelector:@selector(setText:)]) {
             [sender performSelector:@selector(setText:) withObject:selectedValue];
-            [self clearMap];
-            [self reloadMarkersByUserType];
+            //Recargar mapa si se cambia de opcion
+            NSLog(@"%@", self.travelTypeSelect.text);
+            if(![self.travelTypeSelect.text isEqualToString:lastTripTypeSelected]){
+                [self clearMap];
+                [self reloadMarkersByUserType];
+                lastTripTypeSelected = selectedValue;
+            }
         }
         [self.travelTypeSelect  setEnabled:YES];
     };
@@ -273,64 +279,71 @@
             //Se recupera data de arreglo de puntos
             NSString *stepsArrayString = [_routeController getStepArrayString];
             
-            if (![stepsArrayString isEqualToString:@""] && stepsArrayString != nil && ![driverTripString isEqualToString:@"[]"]) {
+            if (![stepsArrayString isEqualToString:@""] && stepsArrayString != nil){
                 
-                //Se recupera host para peticiones
-                NSString *urlServer = [NSString stringWithFormat:@"%@/saveDriverTripsIOS", [util.getGlobalProperties valueForKey:@"host"]];
-                NSLog(@"url saveUser: %@", urlServer);
-                //Se configura data a enviar
-                NSString *post = [NSString stringWithFormat:
-                                  @"trips=%@&route=%@",
-                                  driverTripString,
-                                  stepsArrayString];
-                NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-                
-                //Se captura numero d eparametros a enviar
-                NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-                
-                //Se configura request
-                NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-                [request setURL:[NSURL URLWithString: urlServer]];
-                [request setHTTPMethod:@"POST"];
-                [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-                [request setHTTPBody:postData];
-                
-                //Se ejecuta request
-                NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-                [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                    NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                    NSLog(@"requestReply: %@", requestReply);
-                    dispatch_async(dispatch_get_main_queue(),^{
-                        
-                        //Se convierte respuesta en JSON
-                        NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-                        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
-                        id isValid = [jsonData valueForKey:@"valid"];
-                        
-                        NSString *message = @"Viaje almacenado correctamente.";
-                        if (!isValid ? [isValid boolValue] : NO) {
-                            message = [jsonData objectForKey:@"error"];
-                        }
-                        else{
-                            [util updateUserDefaults:^(bool result){}];
-                            [self clearMap];
-                            [self reloadMarkersByUserType];
-                        }
-                        
-                        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                                message:message
-                                                                               delegate:nil
-                                                                      cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil];
-                        [alertSaveUser show];
-                    });
-                }] resume];
-            
-            }else{
-                NSString *messagePassengerOrDriver = @"Debe crear una ruta en el mapa y seleccionar los dias correspondientes.";
-                if([switchUserType isOn]){
-                    messagePassengerOrDriver = @"Debe indicar su posicion de origen/destino y seleccionar los dias correspondientes.";
+                if(![driverTripString isEqualToString:@"[]"]) {
+                    
+                    //Se recupera host para peticiones
+                    NSString *urlServer = [NSString stringWithFormat:@"%@/saveDriverTripsIOS", [util.getGlobalProperties valueForKey:@"host"]];
+                    NSLog(@"url saveUser: %@", urlServer);
+                    //Se configura data a enviar
+                    NSString *post = [NSString stringWithFormat:
+                                      @"trips=%@&route=%@",
+                                      driverTripString,
+                                      stepsArrayString];
+                    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                    
+                    //Se captura numero d eparametros a enviar
+                    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+                    
+                    //Se configura request
+                    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+                    [request setURL:[NSURL URLWithString: urlServer]];
+                    [request setHTTPMethod:@"POST"];
+                    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+                    [request setHTTPBody:postData];
+                    
+                    //Se ejecuta request
+                    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                        NSLog(@"requestReply: %@", requestReply);
+                        dispatch_async(dispatch_get_main_queue(),^{
+                            
+                            //Se convierte respuesta en JSON
+                            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                            id isValid = [jsonData valueForKey:@"valid"];
+                            
+                            NSString *message = @"Viaje almacenado correctamente.";
+                            if (!isValid ? [isValid boolValue] : NO) {
+                                message = [jsonData objectForKey:@"error"];
+                            }
+                            else{
+                                [util updateUserDefaults:^(bool result){}];
+                                [self clearMap];
+                                [self reloadMarkersByUserType];
+                            }
+                            
+                            UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                                    message:message
+                                                                                   delegate:nil
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil];
+                            [alertSaveUser show];
+                        });
+                    }] resume];
+                }else{
+                    NSString *messagePassengerOrDriver = @"Por favor seleccione un día de la semana y recuerde que debe tener un hoario configurado.";
+                    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                              message:messagePassengerOrDriver
+                                                                             delegate:nil
+                                                                    cancelButtonTitle:@"OK"
+                                                                    otherButtonTitles:nil];
+                    [alertErrorLogin show];
                 }
+            }else{
+                NSString *messagePassengerOrDriver = @"Debe indicar un punto en el mapa.";
                 UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                           message:messagePassengerOrDriver
                                                                          delegate:nil

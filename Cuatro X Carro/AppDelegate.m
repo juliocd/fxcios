@@ -93,7 +93,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     //Inscribir notificaciones en servidor
     Util *util=[Util getInstance];
-    [util userNotifications];
+    [util userNotifications:@"false"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

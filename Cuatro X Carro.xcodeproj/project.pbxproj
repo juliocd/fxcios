@@ -14,8 +14,6 @@
 		0ECD1FEC1B5C510700D6CFA5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD1FEB1B5C510700D6CFA5 /* Images.xcassets */; };
 		0ECD1FEF1B5C510700D6CFA5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD1FED1B5C510700D6CFA5 /* LaunchScreen.xib */; };
 		0ECD1FFB1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD1FFA1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m */; };
-		0ECD200A1B5C520D00D6CFA5 /* TIELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */; };
-		0ECD200B1B5C520D00D6CFA5 /* TIELoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */; };
 		0ECD200F1B5C534100D6CFA5 /* TIESingUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */; };
 		0ECD20101B5C534100D6CFA5 /* TIESingUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */; };
 		0ECD20141B5C77AC00D6CFA5 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ECD20131B5C77AC00D6CFA5 /* back.png */; };
@@ -29,8 +27,6 @@
 		0ECD204D1B5CC44200D6CFA5 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECD20451B5CC44200D6CFA5 /* SWActionSheet.m */; };
 		4E0399F053B6980A4D4C73FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDCA82F83C00E90A923900 /* libPods.a */; };
 		CE0427301BE71BAE0098BA62 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */; };
-		CE04A2F61CBB3239000FD03E /* RecoverPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */; };
-		CE04A2F71CBB3239000FD03E /* RecoverPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */; };
 		CE093F5A1C7A3DED00E839D1 /* login_boton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F591C7A3DED00E839D1 /* login_boton.png */; };
 		CE093F5C1C7A3E2800E839D1 /* pasajero_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */; };
 		CE093F5E1C7A3E8F00E839D1 /* email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F5D1C7A3E8F00E839D1 /* email_icon.png */; };
@@ -51,9 +47,15 @@
 		CE11ACAD1CA796AC005FC4CB /* logo_menu@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */; };
 		CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AAB9D1BEED90F00C321DF /* Util.m */; };
 		CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */; };
+		CE5DAAF91CD5975B001D7985 /* TIEMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5DAAF71CD5975B001D7985 /* TIEMessageViewController.m */; };
+		CE5DAAFA1CD5975B001D7985 /* TIEMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5DAAF81CD5975B001D7985 /* TIEMessageViewController.xib */; };
+		CE5DAB011CD597AF001D7985 /* TIEPassengerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5DAAFF1CD597AF001D7985 /* TIEPassengerViewController.m */; };
+		CE5DAB021CD597AF001D7985 /* TIEPassengerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5DAB001CD597AF001D7985 /* TIEPassengerViewController.xib */; };
 		CE6825DD1BE87D3100513135 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6825DC1BE87D3100513135 /* RadioButton.m */; };
-		CE6D6E4D1CC2911C000CCA0D /* TIEPassengerDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D6E4B1CC2911C000CCA0D /* TIEPassengerDetailsViewController.m */; };
-		CE6D6E4E1CC2911C000CCA0D /* TIEPassengerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6D6E4C1CC2911C000CCA0D /* TIEPassengerDetailsViewController.xib */; };
+		CE6D6E4D1CC2911C000CCA0D /* TIEStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D6E4B1CC2911C000CCA0D /* TIEStatisticsViewController.m */; };
+		CE6D6E4E1CC2911C000CCA0D /* TIEStatisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6D6E4C1CC2911C000CCA0D /* TIEStatisticsViewController.xib */; };
+		CE74FD091CD698C6006B4B22 /* chat_box_other.png in Resources */ = {isa = PBXBuildFile; fileRef = CE74FD071CD698C6006B4B22 /* chat_box_other.png */; };
+		CE74FD0A1CD698C6006B4B22 /* chat_box_user.png in Resources */ = {isa = PBXBuildFile; fileRef = CE74FD081CD698C6006B4B22 /* chat_box_user.png */; };
 		CE79AE141C83A33000440475 /* image_perfil_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE131C83A33000440475 /* image_perfil_1.png */; };
 		CE79AE171C83A80D00440475 /* chat_off.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE151C83A80D00440475 /* chat_off.png */; };
 		CE79AE181C83A80D00440475 /* chat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE161C83A80D00440475 /* chat_on.png */; };
@@ -85,6 +87,10 @@
 		CE79AE4F1C83FC5500440475 /* check_on.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE4D1C83FC5500440475 /* check_on.png */; };
 		CE79AE511C83FCF600440475 /* conductor_data_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE501C83FCF600440475 /* conductor_data_box.png */; };
 		CE79AE531C83FE5A00440475 /* search_boton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79AE521C83FE5A00440475 /* search_boton.png */; };
+		CE81944A1CDAFA9E00B95882 /* TIELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8194481CDAFA9E00B95882 /* TIELoginViewController.m */; };
+		CE81944B1CDAFA9E00B95882 /* TIELoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8194491CDAFA9E00B95882 /* TIELoginViewController.xib */; };
+		CE8194531CDAFBC300B95882 /* TIERecoverPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8194511CDAFBC300B95882 /* TIERecoverPassViewController.m */; };
+		CE8194541CDAFBC300B95882 /* TIERecoverPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8194521CDAFBC300B95882 /* TIERecoverPassViewController.xib */; };
 		CE8F3FF51BB8A190003D8CDD /* TIEMyScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */; };
 		CE8F3FF61BB8A190003D8CDD /* TIEMyScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */; };
 		CE8F3FFA1BB8A4FF003D8CDD /* TIETravelDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F3FF81BB8A4FF003D8CDD /* TIETravelDetailsViewController.m */; };
@@ -134,9 +140,6 @@
 		0ECD1FF41B5C510700D6CFA5 /* Cuatro X CarroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cuatro X CarroTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ECD1FF91B5C510700D6CFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ECD1FFA1B5C510700D6CFA5 /* Cuatro_X_CarroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cuatro_X_CarroTests.m; sourceTree = "<group>"; };
-		0ECD20071B5C520D00D6CFA5 /* TIELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIELoginViewController.h; sourceTree = "<group>"; };
-		0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIELoginViewController.m; sourceTree = "<group>"; };
-		0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIELoginViewController.xib; sourceTree = "<group>"; };
 		0ECD200C1B5C534100D6CFA5 /* TIESingUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIESingUpViewController.h; sourceTree = "<group>"; };
 		0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIESingUpViewController.m; sourceTree = "<group>"; };
 		0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIESingUpViewController.xib; sourceTree = "<group>"; };
@@ -164,9 +167,6 @@
 		6AB3D93DCDFE9C93631D1657 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04272E1BE71BAE0098BA62 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		CE04272F1BE71BAE0098BA62 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		CE04A2F31CBB3239000FD03E /* RecoverPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoverPasswordViewController.h; sourceTree = "<group>"; };
-		CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoverPasswordViewController.m; sourceTree = "<group>"; };
-		CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecoverPasswordViewController.xib; sourceTree = "<group>"; };
 		CE093F591C7A3DED00E839D1 /* login_boton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_boton.png; sourceTree = "<group>"; };
 		CE093F5B1C7A3E2800E839D1 /* pasajero_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pasajero_box.png; sourceTree = "<group>"; };
 		CE093F5D1C7A3E8F00E839D1 /* email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_icon.png; sourceTree = "<group>"; };
@@ -190,11 +190,19 @@
 		CE4AAB9D1BEED90F00C321DF /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		CE4AABA21BEEDCA300C321DF /* DefaultRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRequest.h; sourceTree = "<group>"; };
 		CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultRequest.m; sourceTree = "<group>"; };
+		CE5DAAF61CD5975B001D7985 /* TIEMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEMessageViewController.h; sourceTree = "<group>"; };
+		CE5DAAF71CD5975B001D7985 /* TIEMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEMessageViewController.m; sourceTree = "<group>"; };
+		CE5DAAF81CD5975B001D7985 /* TIEMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEMessageViewController.xib; sourceTree = "<group>"; };
+		CE5DAAFE1CD597AF001D7985 /* TIEPassengerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEPassengerViewController.h; sourceTree = "<group>"; };
+		CE5DAAFF1CD597AF001D7985 /* TIEPassengerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEPassengerViewController.m; sourceTree = "<group>"; };
+		CE5DAB001CD597AF001D7985 /* TIEPassengerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEPassengerViewController.xib; sourceTree = "<group>"; };
 		CE6825DB1BE87D3100513135 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
 		CE6825DC1BE87D3100513135 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
-		CE6D6E4A1CC2911C000CCA0D /* TIEPassengerDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEPassengerDetailsViewController.h; sourceTree = "<group>"; };
-		CE6D6E4B1CC2911C000CCA0D /* TIEPassengerDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEPassengerDetailsViewController.m; sourceTree = "<group>"; };
-		CE6D6E4C1CC2911C000CCA0D /* TIEPassengerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEPassengerDetailsViewController.xib; sourceTree = "<group>"; };
+		CE6D6E4A1CC2911C000CCA0D /* TIEStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEStatisticsViewController.h; sourceTree = "<group>"; };
+		CE6D6E4B1CC2911C000CCA0D /* TIEStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEStatisticsViewController.m; sourceTree = "<group>"; };
+		CE6D6E4C1CC2911C000CCA0D /* TIEStatisticsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEStatisticsViewController.xib; sourceTree = "<group>"; };
+		CE74FD071CD698C6006B4B22 /* chat_box_other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_box_other.png; sourceTree = "<group>"; };
+		CE74FD081CD698C6006B4B22 /* chat_box_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_box_user.png; sourceTree = "<group>"; };
 		CE79AE131C83A33000440475 /* image_perfil_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_perfil_1.png; sourceTree = "<group>"; };
 		CE79AE151C83A80D00440475 /* chat_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_off.png; sourceTree = "<group>"; };
 		CE79AE161C83A80D00440475 /* chat_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_on.png; sourceTree = "<group>"; };
@@ -226,6 +234,12 @@
 		CE79AE4D1C83FC5500440475 /* check_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_on.png; sourceTree = "<group>"; };
 		CE79AE501C83FCF600440475 /* conductor_data_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conductor_data_box.png; sourceTree = "<group>"; };
 		CE79AE521C83FE5A00440475 /* search_boton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_boton.png; sourceTree = "<group>"; };
+		CE8194471CDAFA9E00B95882 /* TIELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIELoginViewController.h; sourceTree = "<group>"; };
+		CE8194481CDAFA9E00B95882 /* TIELoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIELoginViewController.m; sourceTree = "<group>"; };
+		CE8194491CDAFA9E00B95882 /* TIELoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIELoginViewController.xib; sourceTree = "<group>"; };
+		CE8194501CDAFBC300B95882 /* TIERecoverPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIERecoverPassViewController.h; sourceTree = "<group>"; };
+		CE8194511CDAFBC300B95882 /* TIERecoverPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIERecoverPassViewController.m; sourceTree = "<group>"; };
+		CE8194521CDAFBC300B95882 /* TIERecoverPassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIERecoverPassViewController.xib; sourceTree = "<group>"; };
 		CE8F3FF21BB8A190003D8CDD /* TIEMyScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIEMyScheduleViewController.h; sourceTree = "<group>"; };
 		CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIEMyScheduleViewController.m; sourceTree = "<group>"; };
 		CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIEMyScheduleViewController.xib; sourceTree = "<group>"; };
@@ -381,9 +395,6 @@
 				CE8F40061BB8CEEE003D8CDD /* ScheduleTrip */,
 				CE8F3FF11BB8A12B003D8CDD /* Profile */,
 				CEFD846A1BAF4D7100410730 /* TrayTravels */,
-				0ECD20071B5C520D00D6CFA5 /* TIELoginViewController.h */,
-				0ECD20081B5C520D00D6CFA5 /* TIELoginViewController.m */,
-				0ECD20091B5C520D00D6CFA5 /* TIELoginViewController.xib */,
 				0ECD200C1B5C534100D6CFA5 /* TIESingUpViewController.h */,
 				0ECD200D1B5C534100D6CFA5 /* TIESingUpViewController.m */,
 				0ECD200E1B5C534100D6CFA5 /* TIESingUpViewController.xib */,
@@ -396,9 +407,12 @@
 				CEFD845F1BAF3BFE00410730 /* TIEScheduleTripViewController.h */,
 				CEFD84601BAF3BFE00410730 /* TIEScheduleTripViewController.m */,
 				CEFD84611BAF3BFE00410730 /* TIEScheduleTripViewController.xib */,
-				CE04A2F31CBB3239000FD03E /* RecoverPasswordViewController.h */,
-				CE04A2F41CBB3239000FD03E /* RecoverPasswordViewController.m */,
-				CE04A2F51CBB3239000FD03E /* RecoverPasswordViewController.xib */,
+				CE8194471CDAFA9E00B95882 /* TIELoginViewController.h */,
+				CE8194481CDAFA9E00B95882 /* TIELoginViewController.m */,
+				CE8194491CDAFA9E00B95882 /* TIELoginViewController.xib */,
+				CE8194501CDAFBC300B95882 /* TIERecoverPassViewController.h */,
+				CE8194511CDAFBC300B95882 /* TIERecoverPassViewController.m */,
+				CE8194521CDAFBC300B95882 /* TIERecoverPassViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -495,6 +509,7 @@
 		CE093F9B1C7AC45C00E839D1 /* TrayTravels */ = {
 			isa = PBXGroup;
 			children = (
+				CE74FD021CD68D74006B4B22 /* DetailView */,
 				CE093F9C1C7AC46600E839D1 /* CustomCell */,
 			);
 			name = TrayTravels;
@@ -511,6 +526,28 @@
 				CE093F9D1C7AC4AD00E839D1 /* viajes_box.png */,
 			);
 			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		CE5DAAF51CD5972C001D7985 /* SwipeView */ = {
+			isa = PBXGroup;
+			children = (
+				CE5DAAF61CD5975B001D7985 /* TIEMessageViewController.h */,
+				CE5DAAF71CD5975B001D7985 /* TIEMessageViewController.m */,
+				CE5DAAF81CD5975B001D7985 /* TIEMessageViewController.xib */,
+				CE5DAAFE1CD597AF001D7985 /* TIEPassengerViewController.h */,
+				CE5DAAFF1CD597AF001D7985 /* TIEPassengerViewController.m */,
+				CE5DAB001CD597AF001D7985 /* TIEPassengerViewController.xib */,
+			);
+			name = SwipeView;
+			sourceTree = "<group>";
+		};
+		CE74FD021CD68D74006B4B22 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				CE74FD071CD698C6006B4B22 /* chat_box_other.png */,
+				CE74FD081CD698C6006B4B22 /* chat_box_user.png */,
+			);
+			name = DetailView;
 			sourceTree = "<group>";
 		};
 		CE79AE1D1C83E78F00440475 /* Profile */ = {
@@ -562,6 +599,9 @@
 		CE8F3FF11BB8A12B003D8CDD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CE6D6E4A1CC2911C000CCA0D /* TIEStatisticsViewController.h */,
+				CE6D6E4B1CC2911C000CCA0D /* TIEStatisticsViewController.m */,
+				CE6D6E4C1CC2911C000CCA0D /* TIEStatisticsViewController.xib */,
 				CE8F3FF21BB8A190003D8CDD /* TIEMyScheduleViewController.h */,
 				CE8F3FF31BB8A190003D8CDD /* TIEMyScheduleViewController.m */,
 				CE8F3FF41BB8A190003D8CDD /* TIEMyScheduleViewController.xib */,
@@ -582,6 +622,7 @@
 		CEFD846A1BAF4D7100410730 /* TrayTravels */ = {
 			isa = PBXGroup;
 			children = (
+				CE5DAAF51CD5972C001D7985 /* SwipeView */,
 				CEFD84671BAF468400410730 /* TIETravelCustomCellTableViewCell.xib */,
 				CEFD84661BAF468400410730 /* TIETravelCustomCellTableViewCell.m */,
 				CEFD84651BAF468400410730 /* TIETravelCustomCellTableViewCell.h */,
@@ -591,9 +632,6 @@
 				CE8F40011BB8C081003D8CDD /* TIEApplicationsViewController.h */,
 				CE8F40021BB8C081003D8CDD /* TIEApplicationsViewController.m */,
 				CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */,
-				CE6D6E4A1CC2911C000CCA0D /* TIEPassengerDetailsViewController.h */,
-				CE6D6E4B1CC2911C000CCA0D /* TIEPassengerDetailsViewController.m */,
-				CE6D6E4C1CC2911C000CCA0D /* TIEPassengerDetailsViewController.xib */,
 			);
 			name = TrayTravels;
 			sourceTree = "<group>";
@@ -694,11 +732,10 @@
 				CE093F661C7A44EB00E839D1 /* key_icon.png in Resources */,
 				CEFD84731BAF4DA200410730 /* seat_empty.png in Resources */,
 				CE79AE441C83F98500440475 /* slider_boton.png in Resources */,
-				CE04A2F71CBB3239000FD03E /* RecoverPasswordViewController.xib in Resources */,
 				CE8F3FFB1BB8A4FF003D8CDD /* TIETravelDetailsViewController.xib in Resources */,
 				CE79AE181C83A80D00440475 /* chat_on.png in Resources */,
-				0ECD200B1B5C520D00D6CFA5 /* TIELoginViewController.xib in Resources */,
 				0ECD20141B5C77AC00D6CFA5 /* back.png in Resources */,
+				CE74FD091CD698C6006B4B22 /* chat_box_other.png in Resources */,
 				CE79AE361C83F34F00440475 /* ambos_icon.png in Resources */,
 				CE79AE271C83E9FE00440475 /* fondo_tab_1.png in Resources */,
 				CE79AE3A1C83F36C00440475 /* save_boton.png in Resources */,
@@ -714,14 +751,17 @@
 				CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */,
 				CE79AE4E1C83FC5500440475 /* check_off.png in Resources */,
 				CE093F9E1C7AC4AD00E839D1 /* viajes_box.png in Resources */,
+				CE5DAB021CD597AF001D7985 /* TIEPassengerViewController.xib in Resources */,
 				CEFD84741BAF4DA200410730 /* seat_full.png in Resources */,
 				0ECD20101B5C534100D6CFA5 /* TIESingUpViewController.xib in Resources */,
 				CE79AE311C83EEBE00440475 /* ida_png.png in Resources */,
 				CE8F40051BB8C081003D8CDD /* TIEApplicationsViewController.xib in Resources */,
 				CE093F931C7ABC2500E839D1 /* perfil_off@2x~iphone.png in Resources */,
 				0ECD1FEF1B5C510700D6CFA5 /* LaunchScreen.xib in Resources */,
+				CE81944B1CDAFA9E00B95882 /* TIELoginViewController.xib in Resources */,
 				CE79AE3E1C83F4BD00440475 /* unchecked.png in Resources */,
 				CE79AE171C83A80D00440475 /* chat_off.png in Resources */,
+				CE74FD0A1CD698C6006B4B22 /* chat_box_user.png in Resources */,
 				CE79AE481C83F9CE00440475 /* aceptar_boton.png in Resources */,
 				CEFD84691BAF468400410730 /* TIETravelCustomCellTableViewCell.xib in Resources */,
 				CE79AE1F1C83E7A900440475 /* perfil_box.png in Resources */,
@@ -731,11 +771,12 @@
 				CE79AE2B1C83EA0900440475 /* fondo_tab_3.png in Resources */,
 				CE79AE231C83E8EB00440475 /* edit_boton.png in Resources */,
 				CEFD84721BAF4DA200410730 /* rate_full.png in Resources */,
-				CE6D6E4E1CC2911C000CCA0D /* TIEPassengerDetailsViewController.xib in Resources */,
+				CE6D6E4E1CC2911C000CCA0D /* TIEStatisticsViewController.xib in Resources */,
 				CE79AE511C83FCF600440475 /* conductor_data_box.png in Resources */,
 				0ECD1FEC1B5C510700D6CFA5 /* Images.xcassets in Resources */,
 				CEFE54A01BB855F60048A556 /* logo.png in Resources */,
 				CE79AE531C83FE5A00440475 /* search_boton.png in Resources */,
+				CE8194541CDAFBC300B95882 /* TIERecoverPassViewController.xib in Resources */,
 				CE79AE451C83F98500440475 /* slider_circle.png in Resources */,
 				CE093F9A1C7ABC6400E839D1 /* program_on@2x~iphone.png in Resources */,
 				CEFD84701BAF4DA200410730 /* default.icon.png in Resources */,
@@ -750,6 +791,7 @@
 				CE093F961C7ABC2500E839D1 /* viajes_on@2x~iphone.png in Resources */,
 				CE093F6B1C7AA3C700E839D1 /* registro.png in Resources */,
 				CE093F951C7ABC2500E839D1 /* viajes_off@2x~iphone.png in Resources */,
+				CE5DAAFA1CD5975B001D7985 /* TIEMessageViewController.xib in Resources */,
 				CEFD84711BAF4DA200410730 /* rate_empty.png in Resources */,
 				CE093F711C7AAB7100E839D1 /* register_boton.png in Resources */,
 			);
@@ -806,7 +848,7 @@
 				CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */,
 				CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */,
 				0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */,
-				CE6D6E4D1CC2911C000CCA0D /* TIEPassengerDetailsViewController.m in Sources */,
+				CE6D6E4D1CC2911C000CCA0D /* TIEStatisticsViewController.m in Sources */,
 				0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */,
 				CE0427301BE71BAE0098BA62 /* NSString+MD5.m in Sources */,
 				0ECD204A1B5CC44200D6CFA5 /* ActionSheetLocalePicker.m in Sources */,
@@ -815,14 +857,15 @@
 				CE6825DD1BE87D3100513135 /* RadioButton.m in Sources */,
 				CEFB75971C420389003EA201 /* LGSimpleChat.swift in Sources */,
 				CE8F40041BB8C081003D8CDD /* TIEApplicationsViewController.m in Sources */,
+				CE5DAB011CD597AF001D7985 /* TIEPassengerViewController.m in Sources */,
 				0ECD204C1B5CC44200D6CFA5 /* DistancePickerView.m in Sources */,
 				0ECD1FE71B5C510700D6CFA5 /* ViewController.m in Sources */,
 				CEFD84621BAF3BFE00410730 /* TIEScheduleTripViewController.m in Sources */,
 				CE0ADCA11C02DD3F004B22DD /* LRouteController.m in Sources */,
-				0ECD200A1B5C520D00D6CFA5 /* TIELoginViewController.m in Sources */,
+				CE5DAAF91CD5975B001D7985 /* TIEMessageViewController.m in Sources */,
+				CE8194531CDAFBC300B95882 /* TIERecoverPassViewController.m in Sources */,
 				0ECD200F1B5C534100D6CFA5 /* TIESingUpViewController.m in Sources */,
 				CE8F3FF51BB8A190003D8CDD /* TIEMyScheduleViewController.m in Sources */,
-				CE04A2F61CBB3239000FD03E /* RecoverPasswordViewController.m in Sources */,
 				CEFD84681BAF468400410730 /* TIETravelCustomCellTableViewCell.m in Sources */,
 				0ECD20461B5CC44200D6CFA5 /* AbstractActionSheetPicker.m in Sources */,
 				0ECD1FE41B5C510700D6CFA5 /* AppDelegate.m in Sources */,
@@ -831,6 +874,7 @@
 				0ECD1FE11B5C510700D6CFA5 /* main.m in Sources */,
 				0ECD20471B5CC44200D6CFA5 /* ActionSheetCustomPicker.m in Sources */,
 				CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */,
+				CE81944A1CDAFA9E00B95882 /* TIELoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

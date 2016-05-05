@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "NSString+MD5.h"
 #import "Util.h"
-#import "RecoverPasswordViewController.h"
+#import "TIERecoverPassViewController.h"
 
 @interface TIELoginViewController (){
     int fieldNumber;
@@ -36,12 +36,12 @@
 }
 
 -(void) userHaveOpenSession{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
-//    if (dataUser != nil) {
-//        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-//        [appDelegate.window setRootViewController:appDelegate.tabBarController];
-//    }
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+    //    if (dataUser != nil) {
+    //        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    //        [appDelegate.window setRootViewController:appDelegate.tabBarController];
+    //    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +108,7 @@
                     //Se almacena datos de usuario
                     [util constructUserDefaults:jsonData];
                     //Se insctibe token de usuario en caso de tenerlo
-                    [util userNotifications];
+                    [util userNotifications:@"false"];
                     //Se carga vista principal
                     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
                     [appDelegate.window setRootViewController:appDelegate.tabBarController];
@@ -127,10 +127,10 @@
     }
     else{
         UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                message:@"Existen campos obligatorios vacíos."
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
+                                                                  message:@"Existen campos obligatorios vacíos."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
         [alertErrorLogin show];
     }
 }
@@ -174,7 +174,7 @@
 }
 
 - (IBAction)ForgetPassword:(id)sender {
-    RecoverPasswordViewController *viewController = [[RecoverPasswordViewController alloc] init];
+    TIERecoverPassViewController *viewController = [[TIERecoverPassViewController alloc] init];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:viewController];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }
