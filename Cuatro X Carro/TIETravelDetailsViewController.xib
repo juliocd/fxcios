@@ -17,7 +17,6 @@
                 <outlet property="messengerTable" destination="U4j-Q6-vf7" id="pBt-nN-E06"/>
                 <outlet property="requestUIButton" destination="LeP-Vz-4qD" id="IlY-tc-6on"/>
                 <outlet property="routeMap" destination="7UK-hW-g6m" id="L1L-xy-BwU"/>
-                <outlet property="spinnerComments" destination="FYQ-W7-0TE" id="Hlx-ym-RSw"/>
                 <outlet property="startTripUIButton" destination="xpk-mt-A0d" id="blh-bO-lg8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -45,30 +44,10 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBJ-sA-wBD">
-                    <rect key="frame" x="77" y="528" width="124" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="gBJ-sA-wBD" secondAttribute="height" multiplier="31:8" id="ApE-cc-Slw"/>
-                    </constraints>
-                    <state key="normal" title="En Auto" backgroundImage="pasajero_box.png"/>
-                    <connections>
-                        <action selector="finishTripPassenger:" destination="-1" eventType="touchUpInside" id="ySW-Zh-cxG"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCm-SH-ei7">
-                    <rect key="frame" x="149" y="528" width="52" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="yCm-SH-ei7" secondAttribute="height" multiplier="13:8" id="d3y-Ow-nns"/>
-                    </constraints>
-                    <state key="normal" title="Fin" backgroundImage="pasajero_box.png"/>
-                    <connections>
-                        <action selector="finishTripButton:" destination="-1" eventType="touchUpInside" id="UnA-JD-rBH"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeP-Vz-4qD">
                     <rect key="frame" x="77" y="528" width="52" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="LeP-Vz-4qD" secondAttribute="height" multiplier="13:8" id="N2L-HR-qkg"/>
+                        <constraint firstAttribute="width" secondItem="LeP-Vz-4qD" secondAttribute="height" multiplier="13:8" id="nMQ-j7-Jhu"/>
                     </constraints>
                     <state key="normal" title="Sol" backgroundImage="pasajero_box.png"/>
                     <connections>
@@ -112,7 +91,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4NP-Uh-DWP">
                     <rect key="frame" x="7" y="528" width="52" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="4NP-Uh-DWP" secondAttribute="height" multiplier="13:8" id="uyd-6B-sBR"/>
+                        <constraint firstAttribute="width" secondItem="4NP-Uh-DWP" secondAttribute="height" multiplier="13:8" id="a6n-Ad-Bko"/>
                     </constraints>
                     <state key="normal" title="Pas" backgroundImage="pasajero_box.png"/>
                     <connections>
@@ -131,7 +110,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xpk-mt-A0d">
                     <rect key="frame" x="149" y="528" width="52" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="xpk-mt-A0d" secondAttribute="height" multiplier="13:8" id="EJj-El-IcG"/>
+                        <constraint firstAttribute="width" secondItem="xpk-mt-A0d" secondAttribute="height" multiplier="13:8" id="2MG-vw-njS"/>
                     </constraints>
                     <state key="normal" title="Iniciar" backgroundImage="pasajero_box.png"/>
                     <connections>
@@ -159,64 +138,77 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzv-Y1-wBV">
                     <rect key="frame" x="275" y="528" width="36" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="uzv-Y1-wBV" secondAttribute="height" multiplier="9:8" id="zxu-7Q-X4H"/>
+                        <constraint firstAttribute="width" secondItem="uzv-Y1-wBV" secondAttribute="height" multiplier="9:8" id="jC2-j4-a4V"/>
                     </constraints>
                     <state key="normal" backgroundImage="chat_off.png"/>
                     <connections>
                         <action selector="sendMessage:" destination="-1" eventType="touchUpInside" id="VWU-33-FP6"/>
                     </connections>
                 </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FYQ-W7-0TE">
-                    <rect key="frame" x="247" y="534" width="20" height="20"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBJ-sA-wBD">
+                    <rect key="frame" x="77" y="528" width="124" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="FYQ-W7-0TE" secondAttribute="height" multiplier="1:1" id="GNP-Du-pXh"/>
+                        <constraint firstAttribute="width" secondItem="gBJ-sA-wBD" secondAttribute="height" multiplier="31:8" id="bKM-bR-1lY"/>
                     </constraints>
-                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </activityIndicatorView>
+                    <state key="normal" title="En Auto" backgroundImage="pasajero_box.png"/>
+                    <connections>
+                        <action selector="finishTripPassenger:" destination="-1" eventType="touchUpInside" id="ySW-Zh-cxG"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCm-SH-ei7">
+                    <rect key="frame" x="149" y="528" width="52" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="yCm-SH-ei7" secondAttribute="height" multiplier="13:8" id="Aih-nd-TbL"/>
+                    </constraints>
+                    <state key="normal" title="Fin" backgroundImage="pasajero_box.png"/>
+                    <connections>
+                        <action selector="finishTripButton:" destination="-1" eventType="touchUpInside" id="UnA-JD-rBH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="vlU-TA-iTu" firstAttribute="centerY" secondItem="UcK-YQ-Cej" secondAttribute="centerY" id="15S-Af-b6r"/>
+                <constraint firstItem="xpk-mt-A0d" firstAttribute="leading" secondItem="LeP-Vz-4qD" secondAttribute="trailing" constant="20" id="1lD-i9-X21"/>
                 <constraint firstItem="7UK-hW-g6m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="2EN-gp-yd5"/>
+                <constraint firstItem="yCm-SH-ei7" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="90" id="2iV-iY-1Sx"/>
                 <constraint firstItem="U4j-Q6-vf7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="2yu-fI-iug"/>
                 <constraint firstItem="Fy1-0Q-thL" firstAttribute="leading" secondItem="jsw-jN-CUT" secondAttribute="trailing" constant="6" id="3kw-Nb-yFp"/>
-                <constraint firstAttribute="trailing" secondItem="uzv-Y1-wBV" secondAttribute="trailing" constant="9" id="3sf-i0-IeC"/>
-                <constraint firstItem="uzv-Y1-wBV" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="3vg-Vr-ipv"/>
                 <constraint firstAttribute="trailing" secondItem="7UK-hW-g6m" secondAttribute="trailing" constant="8" id="4mN-di-mH9"/>
+                <constraint firstItem="4NP-Uh-DWP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="4sJ-uM-R3t"/>
                 <constraint firstItem="U4j-Q6-vf7" firstAttribute="top" secondItem="UcK-YQ-Cej" secondAttribute="bottom" constant="1" id="8PR-su-b2O"/>
-                <constraint firstItem="gBJ-sA-wBD" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="8WA-6b-bgp"/>
+                <constraint firstItem="gBJ-sA-wBD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="18" id="8XJ-vM-6m7"/>
                 <constraint firstItem="Gss-zZ-N8q" firstAttribute="top" secondItem="7UK-hW-g6m" secondAttribute="bottom" constant="3" id="8ht-ui-mOF"/>
+                <constraint firstItem="4NP-Uh-DWP" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="C6e-Jk-14p"/>
                 <constraint firstItem="Zjf-gn-TUr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="Cbn-fE-IGM"/>
                 <constraint firstAttribute="trailing" secondItem="Gss-zZ-N8q" secondAttribute="trailing" constant="8" id="Ccv-9T-Dh3"/>
                 <constraint firstItem="UcK-YQ-Cej" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Dk7-VF-sAF"/>
-                <constraint firstItem="xpk-mt-A0d" firstAttribute="leading" secondItem="LeP-Vz-4qD" secondAttribute="trailing" constant="20" id="F07-74-Fnr"/>
+                <constraint firstItem="uzv-Y1-wBV" firstAttribute="centerY" secondItem="xpk-mt-A0d" secondAttribute="centerY" id="EJK-jz-1yU"/>
                 <constraint firstItem="jsw-jN-CUT" firstAttribute="leading" secondItem="Zjf-gn-TUr" secondAttribute="trailing" constant="8" id="F17-9L-FZx"/>
                 <constraint firstItem="jsw-jN-CUT" firstAttribute="centerY" secondItem="Zjf-gn-TUr" secondAttribute="centerY" id="FFj-pd-NQg"/>
                 <constraint firstItem="Zjf-gn-TUr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="GcJ-fh-eFs"/>
-                <constraint firstItem="FYQ-W7-0TE" firstAttribute="centerY" secondItem="uzv-Y1-wBV" secondAttribute="centerY" id="J2H-Ai-T1E"/>
-                <constraint firstItem="xpk-mt-A0d" firstAttribute="centerY" secondItem="LeP-Vz-4qD" secondAttribute="centerY" id="J9k-in-wdf"/>
-                <constraint firstItem="gBJ-sA-wBD" firstAttribute="centerY" secondItem="4NP-Uh-DWP" secondAttribute="centerY" id="MSI-Mv-7KN"/>
-                <constraint firstItem="4NP-Uh-DWP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="7" id="Qbp-hA-3gR"/>
-                <constraint firstItem="4NP-Uh-DWP" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="SGO-zy-Z5w"/>
+                <constraint firstItem="LeP-Vz-4qD" firstAttribute="centerY" secondItem="xpk-mt-A0d" secondAttribute="centerY" id="LT1-hO-IjQ"/>
+                <constraint firstItem="LeP-Vz-4qD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="18" id="RJP-N4-hQj"/>
+                <constraint firstItem="uzv-Y1-wBV" firstAttribute="leading" secondItem="yCm-SH-ei7" secondAttribute="trailing" constant="74" id="SsK-w7-8fd"/>
                 <constraint firstItem="jsw-jN-CUT" firstAttribute="centerY" secondItem="Fy1-0Q-thL" secondAttribute="centerY" id="T73-c9-teP"/>
                 <constraint firstItem="UcK-YQ-Cej" firstAttribute="top" secondItem="7UK-hW-g6m" secondAttribute="bottom" constant="3" id="T7p-jI-GEM"/>
-                <constraint firstItem="gBJ-sA-wBD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="18" id="TxV-v9-ghl"/>
-                <constraint firstItem="xpk-mt-A0d" firstAttribute="centerY" secondItem="FYQ-W7-0TE" secondAttribute="centerY" id="VOE-kJ-v2F"/>
-                <constraint firstItem="yCm-SH-ei7" firstAttribute="centerY" secondItem="xpk-mt-A0d" secondAttribute="centerY" id="Yfe-YE-nkJ"/>
-                <constraint firstItem="yCm-SH-ei7" firstAttribute="centerX" secondItem="xpk-mt-A0d" secondAttribute="centerX" id="cnz-tW-6p0"/>
+                <constraint firstAttribute="trailing" secondItem="uzv-Y1-wBV" secondAttribute="trailing" constant="9" id="afB-mF-7tY"/>
+                <constraint firstItem="gBJ-sA-wBD" firstAttribute="centerY" secondItem="4NP-Uh-DWP" secondAttribute="centerY" id="cFl-SI-fjO"/>
                 <constraint firstItem="7UK-hW-g6m" firstAttribute="top" secondItem="Zjf-gn-TUr" secondAttribute="bottom" constant="6" id="cpm-nC-afh"/>
-                <constraint firstItem="LeP-Vz-4qD" firstAttribute="centerY" secondItem="4NP-Uh-DWP" secondAttribute="centerY" id="eEv-f4-jOC"/>
-                <constraint firstItem="xpk-mt-A0d" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="i0E-Qc-Hsf"/>
-                <constraint firstItem="LeP-Vz-4qD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="18" id="iEs-3N-0Du"/>
-                <constraint firstItem="LeP-Vz-4qD" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="joU-Lr-O0D"/>
-                <constraint firstItem="FYQ-W7-0TE" firstAttribute="leading" secondItem="xpk-mt-A0d" secondAttribute="trailing" constant="46" id="kMy-gx-n7Y"/>
-                <constraint firstItem="FYQ-W7-0TE" firstAttribute="leading" secondItem="gBJ-sA-wBD" secondAttribute="trailing" constant="46" id="kSd-fv-eai"/>
+                <constraint firstItem="yCm-SH-ei7" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="dNG-uu-QSi"/>
+                <constraint firstItem="4NP-Uh-DWP" firstAttribute="centerY" secondItem="LeP-Vz-4qD" secondAttribute="centerY" id="fz5-FB-9rS"/>
+                <constraint firstItem="gBJ-sA-wBD" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="kx8-Gv-HsE"/>
                 <constraint firstAttribute="trailing" secondItem="U4j-Q6-vf7" secondAttribute="trailing" constant="8" id="oqb-t7-ikB"/>
                 <constraint firstItem="Gss-zZ-N8q" firstAttribute="leading" secondItem="x93-0f-qqu" secondAttribute="trailing" constant="6" id="p0l-p5-g50"/>
+                <constraint firstItem="yCm-SH-ei7" firstAttribute="centerY" secondItem="4NP-Uh-DWP" secondAttribute="centerY" id="pij-Lc-mpw"/>
                 <constraint firstItem="vlU-TA-iTu" firstAttribute="leading" secondItem="UcK-YQ-Cej" secondAttribute="trailing" id="sjv-sM-0a9"/>
                 <constraint firstItem="Gss-zZ-N8q" firstAttribute="centerY" secondItem="x93-0f-qqu" secondAttribute="centerY" id="toZ-04-0Ez"/>
+                <constraint firstItem="uzv-Y1-wBV" firstAttribute="leading" secondItem="gBJ-sA-wBD" secondAttribute="trailing" constant="74" id="v7a-tv-vg4"/>
+                <constraint firstItem="LeP-Vz-4qD" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="wIG-Qx-3VB"/>
+                <constraint firstItem="xpk-mt-A0d" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="wmm-Q7-7VN"/>
+                <constraint firstItem="uzv-Y1-wBV" firstAttribute="leading" secondItem="xpk-mt-A0d" secondAttribute="trailing" constant="74" id="xcb-IB-kkJ"/>
                 <constraint firstAttribute="trailing" secondItem="Fy1-0Q-thL" secondAttribute="trailing" constant="9" id="yJx-k2-lYP"/>
-                <constraint firstItem="uzv-Y1-wBV" firstAttribute="leading" secondItem="FYQ-W7-0TE" secondAttribute="trailing" constant="8" id="zdn-ns-wpN"/>
+                <constraint firstItem="uzv-Y1-wBV" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="yy3-IO-Oxu"/>
             </constraints>
             <point key="canvasLocation" x="306" y="229"/>
         </view>

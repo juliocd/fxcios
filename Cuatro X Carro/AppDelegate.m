@@ -108,6 +108,7 @@
     [deviceTokenData setValue:deviceToken forKey:@"deviceToken"];
     [deviceTokenData setValue:@"false" forKey:@"associateToUser"];
     [defaults setObject:deviceTokenData forKey:@"deviceTokenData"];
+    NSLog(@"Token: %@", deviceToken);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -116,7 +117,24 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    // Detect if APN is received on Background or Foreground state
+    UIApplicationState state = [application applicationState];
+    
+    if (state == UIApplicationStateActive)
+    {
+        
+        NSLog(@"User Info : %@", [userInfo description]);
+        
+        NSLog(@"User Info Alert Message : %@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+        
+        NSString *messageString = [NSString stringWithFormat:@"%@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]];
+        
+        NSString *playSoundOnAlert = [NSString stringWithFormat:@"%@", [[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
+        
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
+        
+        NSError *error;
+        
+    }
 }
 
 @end

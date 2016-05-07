@@ -26,8 +26,8 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    //[globalProperties setValue:@"http://192.168.0.15:5000" forKey:@"host"];
-    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://192.168.0.12:5000" forKey:@"host"];
+    //[globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
     //[globalProperties setValue:@"http://52.10.216.232:5000" forKey:@"host"];
     return globalProperties;
 }

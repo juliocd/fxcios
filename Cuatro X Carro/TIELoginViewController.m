@@ -137,7 +137,7 @@
 
 - (void)keyboardWillShow:(NSNotification*)aNotification {
     contField++;
-    [UIView animateWithDuration:0.15 animations:^
+    [UIView animateWithDuration:0.5 animations:^
      {
          CGRect newFrame = [myView frame];
          newFrame.origin.y = -140;
@@ -150,7 +150,7 @@
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-    [UIView animateWithDuration:0.15 animations:^
+    [UIView animateWithDuration:0.5 animations:^
      {
          CGRect newFrame = [myView frame];
          newFrame.origin.y = 0;

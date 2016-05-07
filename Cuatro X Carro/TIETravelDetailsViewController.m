@@ -26,6 +26,7 @@
     NSTimer *updateCommentaries;
     CLLocationManager *locationManager;
     BOOL _isAvalibleLocation;
+    BOOL _isFinishedTrip;
     double currentLatitude;
     double currentLongitude;
     float testMore;
@@ -38,7 +39,7 @@
 
 @implementation TIETravelDetailsViewController
 
-@synthesize routeMap, driverName, dateTrip, hourTrip, startTripUIButton, requestUIButton, finishTripUIButton, animmationPositionDiver, messengerTable, spinnerComments,finishTripPassengerButton;
+@synthesize routeMap, driverName, dateTrip, hourTrip, startTripUIButton, requestUIButton, finishTripUIButton, animmationPositionDiver, messengerTable,finishTripPassengerButton;
 
 - (id)initWithTripData:(NSMutableDictionary *) aTripData {
     self = [super initWithNibName:@"TIETravelDetailsViewController" bundle:nil];
@@ -51,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isAvalibleLocation = NO;
+    _isFinishedTrip = NO;
     currentLatitude = 0;
     currentLongitude = 0;
     testMore = 0.000001;
@@ -69,6 +71,7 @@
                                                                  zoom:16];
     self.routeMap.camera = camera;
     self.routeMap.myLocationEnabled = YES;
+    self.routeMap.settings.myLocationButton = YES;
     
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
@@ -258,9 +261,20 @@
 
 //Personalizar boton atras
 -(void)backButton{
-    [updateDriverPosition invalidate];
-    [updateCommentaries invalidate];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(_isFinishedTrip == NO && _isAvalibleLocation == YES){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alerta" message:@"Ya se ha iniciado un viaje. Al salir de este debe volver a ingresar para reiniciarlo. ¿Desea salir?" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [updateDriverPosition invalidate];
+            [updateCommentaries invalidate];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [updateDriverPosition invalidate];
+        [updateCommentaries invalidate];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -360,8 +374,6 @@
 }
 
 -(void) getTripCommentaries{
-    spinnerComments.hidden = NO;
-    [spinnerComments startAnimating];
     //Se recupera host para peticiones
     NSString *urlServer = [NSString stringWithFormat:@"%@/queryCommentsByTrip", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
@@ -396,8 +408,6 @@
             
             if (isValid ? [isValid boolValue] : NO) {
                 messages = [jsonData valueForKey:@"result"];
-                [spinnerComments stopAnimating];
-                spinnerComments.hidden = YES;
                 [messengerTable reloadData];
             }
             else{
@@ -421,7 +431,7 @@
 - (IBAction)startTripButton:(id)sender {
     
     //Se recupera posición incial del conductor y se carga en mapa
-
+    
     //se recupera posicion actual del usuario
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -443,7 +453,7 @@
     NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
-                      @"trip_id=%@",
+                      @"id=%@",
                       [tripData valueForKey:@"id"]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -468,6 +478,7 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
+                _isFinishedTrip = YES;
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                         message:@"Viaje fianlizado correctamente"
                                                                        delegate:nil
@@ -490,8 +501,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     currentLatitude = newLocation.coordinate.latitude;
     currentLongitude = newLocation.coordinate.longitude;
+    [routeMap animateToLocation:CLLocationCoordinate2DMake(currentLatitude, currentLongitude)];
     if(!_isAvalibleLocation){
-        _isAvalibleLocation = true;
+        _isAvalibleLocation = YES;
         startTripUIButton.hidden = YES;
         requestUIButton.hidden = YES;
         finishTripUIButton.hidden = NO;
@@ -610,6 +622,7 @@
                     marker.position = position;
                     marker.title = @"Conductor";
                     marker.map = self.routeMap;
+                    [routeMap animateToLocation:CLLocationCoordinate2DMake(driverCurrentLatitude, driverCurrentLongitude)];
                 }else{
                     animmationPositionDiver.hidden = NO;
                     [animmationPositionDiver startAnimating];

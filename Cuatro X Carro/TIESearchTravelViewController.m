@@ -66,6 +66,7 @@
                                                                  zoom:12];
     self.searchRouteMap.camera = camera;
     self.searchRouteMap.myLocationEnabled = YES;
+    self.searchRouteMap.settings.myLocationButton = YES;
     
     //Se inicializa funcion de utilidades
     util = [Util getInstance];

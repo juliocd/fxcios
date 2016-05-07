@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *finishTripUIButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *animmationPositionDiver;
 @property (weak, nonatomic) IBOutlet UITableView *messengerTable;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerComments;
 @property (weak, nonatomic) IBOutlet UIButton *finishTripPassengerButton;
 
 - (IBAction)startTripButton:(id)sender;
