@@ -404,73 +404,55 @@
 - (IBAction)changePassword:(id)sender {
     
     //Se recupera host para peticiones
-    NSString *urlServer = [NSString stringWithFormat:@"%@/userLogin", [util.getGlobalProperties valueForKey:@"host"]];
+    NSString *urlServer = [NSString stringWithFormat:@"%@/recoverPassword", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cambiar contraseña" message:@"Ingrese su contraseña actual" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cambiar contraseña" message:@"Se enviara un correo electrónico para realizar el cambio de contraseña. ¿Desea continuar?" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-          {
-              //Se configura data a enviar
-              NSString *passwordTextFieldMD5 = [alert.textFields.firstObject.text MD5];
-              NSString *password = [NSString stringWithFormat:@"%@%@",passwordTextFieldMD5, [userData valueForKey:@"email"]];
-              password = [password MD5];
-              NSString *post = [NSString stringWithFormat:
-                                @"email=%@&password=%@",
-                                [userData valueForKey:@"email"],
-                                password];
-              NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-              
-              //Se captura numero de deparametros a enviar
-              NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-              
-              //Se configura request
-              NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-              [request setURL:[NSURL URLWithString: urlServer]];
-              [request setHTTPMethod:@"POST"];
-              [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-              [request setHTTPBody:postData];
-              
-              //Se ejecuta request
-              NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-              [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                  NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                  NSLog(@"requestReply: %@", requestReply);
-                  dispatch_async(dispatch_get_main_queue(),^{
-                      //Se convierte respuesta en JSON
-                      NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-                      NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
-                      id isValid = [jsonData valueForKey:@"valid"];
-                      
-                      if (isValid ? [isValid boolValue] : NO) {
-                          activePasswordStr = alert.textFields.firstObject.text;
-                          emailInput.enabled = YES;
-                          emailInput.textColor = [UIColor blackColor];
-                          passwordTextInput.text = activePasswordStr;
-                          confirmPasswordTextInput.text = activePasswordStr;
-                          passwordTextInput.hidden = NO;
-                          passwordTextInput.placeholder = @"Nueva contraseña";
-                          passwordTextInput.enabled = YES;
-                          passwordTextInput.textColor = [UIColor blackColor];
-                          confirmPasswordTextInput.hidden = NO;
-                          confirmPasswordTextInput.placeholder = @"Repetir nueva contraseña";
-                          changePasswordButton.hidden = YES;
-                      }
-                      else{
-                          UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                                    message:@"Contraseña invalida"
-                                                                                   delegate:nil
-                                                                          cancelButtonTitle:@"OK"
-                                                                          otherButtonTitles:nil];
-                          [alertErrorLogin show];
-                      }
-                  });
-              }] resume];
-          }]];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *passwField) {
-        passwField.placeholder = @"Contraseña";
-        passwField.secureTextEntry = YES;
-    }];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Enviar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+          //Se configura data a enviar
+          NSString *passwordTextFieldMD5 = [alert.textFields.firstObject.text MD5];
+          NSString *password = [NSString stringWithFormat:@"%@%@",passwordTextFieldMD5, [userData valueForKey:@"email"]];
+          password = [password MD5];
+          NSString *post = [NSString stringWithFormat:
+                            @"email=%@",
+                            [userData valueForKey:@"email"]];
+          NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+          
+          //Se captura numero de deparametros a enviar
+          NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+          
+          //Se configura request
+          NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+          [request setURL:[NSURL URLWithString: urlServer]];
+          [request setHTTPMethod:@"POST"];
+          [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+          [request setHTTPBody:postData];
+          
+          //Se ejecuta request
+          NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+          [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+              NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+              NSLog(@"requestReply: %@", requestReply);
+              dispatch_async(dispatch_get_main_queue(),^{
+                  //Se convierte respuesta en JSON
+                  NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                  NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                  id isValid = [jsonData valueForKey:@"valid"];
+                  
+                  NSString *message = @"Se ha enviado un correo electrónico a su cuenta registrada. Por favor reviselo para continuar con el proceso.";
+                  if (!(isValid ? [isValid boolValue] : NO)) {
+                      message = @"Error enviando correo electrónico. Por favor intente mas tarde.";
+                  }
+                  UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                            message:message
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                  [alertErrorLogin show];
+              });
+          }] resume];
+      }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

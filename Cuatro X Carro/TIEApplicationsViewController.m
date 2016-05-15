@@ -44,6 +44,10 @@
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
     
+    //Seterar tag de boton
+    aceptRequestButton.tag = 1;
+    rejectRequestButton.tag = 0;
+    
     //Estilo de imagen de perdil
     passengerPrictureProfile.layer.cornerRadius = passengerPrictureProfile.frame.size.width / 2;
     passengerPrictureProfile.clipsToBounds = YES;
@@ -158,7 +162,7 @@
     applicantAddress.text = ([application valueForKey:@"address"] != (id)[NSNull null]) ? [application valueForKey:@"address"] : @"Clle XXX Nro XX-XXXX";
 }
 
-- (IBAction)AcceptingApplication:(id)sender {
+- (IBAction)AnswerApplication:(id)sender {
     if ([selectedApplication count] > 0) {
         
         //Se recupera host para peticiones
@@ -173,11 +177,13 @@
         NSString *driverTripString = [[NSString alloc] initWithData:jsonData1   encoding:NSUTF8StringEncoding];
         NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
         [passengerTrip setValue:[selectedApplication valueForKey:@"passenger_trip_id"] forKey:@"passenger_trip_id"];
+        [passengerTrip setValue:[selectedApplication valueForKey:@"id"] forKey:@"id"];
         NSData * jsonData2 = [NSJSONSerialization  dataWithJSONObject:passengerTrip options:0 error:nil];
         NSString *passengerTripString = [[NSString alloc] initWithData:jsonData2   encoding:NSUTF8StringEncoding];
+        int isConfirmed = (int)[(UIButton *)sender tag];
         NSString *post = [NSString stringWithFormat:
-                          @"trip=%@&passenger=%@",
-                          driverTripString, passengerTripString];
+                          @"trip=%@&passenger=%@&is_confirmed=%@",
+                          driverTripString, passengerTripString,(isConfirmed == 0) ? @"false" : @"true"];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
         //Se captura numero de parametros a enviar
@@ -200,7 +206,7 @@
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
                 id isValid = [jsonData valueForKey:@"valid"];
                 
-                NSString *message = @"Solicitud alamcenada correctamnte";
+                NSString *message = @"Solicitud procesada correctamente.";
                 if (!(isValid ? [isValid boolValue] : NO)) {
                     message = [jsonData valueForKey:@"description"];
                 }
@@ -228,6 +234,20 @@
     }
 }
 
-- (IBAction)CancelApplication:(id)sender {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    dataArray = [[NSMutableArray alloc] init];
+    selectedApplication = [[NSMutableDictionary alloc] init];
+    applicantName.text = @"";
+    applicantEmail.text = @"";
+    if(passengers == nil){
+        [self getApplications];
+    }else{
+        aceptRequestButton.hidden = YES;
+        rejectRequestButton.hidden = YES;
+        informationTitleLabel.text = @"Pasajero";
+        dataArray = passengers;
+    }
 }
+
 @end

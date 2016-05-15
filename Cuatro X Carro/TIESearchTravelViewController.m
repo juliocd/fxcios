@@ -117,12 +117,6 @@
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    CGRect tableFrame = tableView.frame;
-//    tableFrame.origin.y = 20;
-//    tableFrame.size.height = UIScreen.mainScreen.bounds.size.height - 25 -45;
-//    tableFrame.size.width = tableView.contentSize.width; // if you would allow horiz scrolling
-//    tableView.frame = tableFrame;
-    
     //Se crea instancia de celda
     TIETravelCustomCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
     //Se valida que la celda esta vacia para llenarla
@@ -135,49 +129,6 @@
     }
     
     return cell;
-    
-//    //Se crea instancia de celda
-//    static NSString *cellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    //Se valida que la celda esta vacia para llenarla
-//    if (!cell)
-//    {
-//        //Se agrega vista cargada con celda a tabla
-//        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-//    }
-//    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-//    result = [searchResults objectAtIndex:indexPath.row];
-//    
-//    //Se organiza texto en celda
-//    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];
-//    NSDateFormatter *yearFormat = [[NSDateFormatter alloc] init];
-//    [yearFormat setDateFormat:@"yyyy"];
-//    [yearFormat setLocale:usLocale];
-//    NSDateFormatter *monthFormat = [[NSDateFormatter alloc] init];
-//    [monthFormat setDateFormat:@"MMM"];
-//    [monthFormat setLocale:usLocale];
-//    NSDateFormatter *dayFormat = [[NSDateFormatter alloc] init] ;
-//    [dayFormat setDateFormat:@"EEEE dd"];
-//    [dayFormat setLocale:usLocale];
-//    NSString *dateStr = [[result valueForKey:@"date_hour"] substringToIndex:10];
-//    // Convert string to date object
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat:@"yyyy-MM-dd"];
-//    NSDate *dateNSDate = [dateFormat dateFromString:dateStr];
-//    NSString *cellText = [NSString stringWithFormat:@"%@ de %@ de %@.", [[dayFormat stringFromDate:dateNSDate] capitalizedString], [[monthFormat stringFromDate:dateNSDate] capitalizedString], [yearFormat stringFromDate:dateNSDate]];
-//    
-//    if ([result valueForKey:@"is_going"] ? [[result valueForKey:@"is_going"] boolValue] : NO) {
-//        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
-//        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
-//    }
-//    else{
-//        cell.textLabel.text = [NSString stringWithFormat:@"%@", cellText];
-//        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
-//    }
-//    cell.tag = [[result valueForKey:@"id"] integerValue];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"Hora: %@",[util militaryTimeToAMPMTime:[[[result valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]] ];
-//    
-//    return cell;
 }
 
 //Se configuran datos de la celda
@@ -187,7 +138,7 @@
         NSMutableDictionary *item = [searchResults objectAtIndex:indexPath.row];
         //Datos comunes
         cell.tripId.text = [[item valueForKey:@"id"] stringValue];
-        cell.userNameLabel.text = [item valueForKey:@"driver_name"];
+        cell.userNameLabel.text = [item valueForKey:@"user_name"];
         if ([item valueForKey:@"is_going"] ? [[item valueForKey:@"is_going"] boolValue] : NO) {
             cell.tripType.text = @"Ida";
         }
@@ -200,47 +151,18 @@
         cell.dateMonthLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[1]];
         cell.dateYearLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[0]];
         cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
-        //Datos de conductor
-        if ([[item valueForKey:@"trip_type"] isEqualToString:@"Conductor"]) {
-            cell.userType.text = @"CONDUCTOR";
-            //////////////////Sillas disponibles
-            int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
-            int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;
-            cell.seatsAvailableLabel.text = [NSString stringWithFormat:@"%i/%i",availableSeats,maxSeats];
-            //[self updateSeats:availableSeats withSecond:maxSeats withThirds:cell];
-            //////////////////Calificacion de conductor
-            int rating = [item valueForKey:@"driver_rating"] != nil ? [[item valueForKey:@"driver_rating"] intValue] : 0;
-            [self updateDriverRating:rating withSecond:cell];
-            //////////////////Solicitudes
-            int request = [[item valueForKey:@"request"] intValue];
-            if (request > 0) {
-                cell.requestButton.tintColor = [UIColor orangeColor];
-            }
-            else{
-                cell.requestButton.tintColor = [UIColor whiteColor];
-            }
-            //////////////////Notificaciones
-            int notifications = [[item valueForKey:@"notifications"] intValue];
-            if (notifications > 0) {
-                cell.notificationButton.tintColor = [UIColor yellowColor];
-            }
-            else{
-                cell.notificationButton.tintColor = [UIColor whiteColor];
-            }
-            cell.backgroundColor = [UIColor blueColor];
-        }
-        else{
-            //Se oculta notificacion de solicitud
-            cell.userType.text = @"PASAJERO";
-            cell.requestButton.hidden = YES;
-            cell.backgroundColor = [UIColor greenColor];
-        }
-        //Notificaciones
-        //int notification = [[item valueForKey:@"notification"] intValue];
-        int notification = 1;
-        if (notification > 0) {
-            cell.notificationButton.tintColor = [UIColor redColor];
-        }
+        //Sillas disponibles
+        int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
+        int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;
+        cell.seatsAvailableLabel.text = [NSString stringWithFormat:@"%i/%i",availableSeats,maxSeats];
+        //Calificacion de conductor
+        int rating = [item valueForKey:@"driver_rating"] != nil ? [[item valueForKey:@"driver_rating"] intValue] : 0;
+        [self updateDriverRating:rating withSecond:cell];
+        //Ocultar mensajes
+        cell.notificationButton.hidden = YES;
+        cell.requestButton.hidden = YES;
+        cell.userType.hidden = YES;
+        
         UIImageView *av = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 277, 58)];
         av.backgroundColor = [UIColor whiteColor];
         av.opaque = NO;
@@ -429,71 +351,80 @@
 
 #pragma Solicitud de viajes
 - (IBAction)RequestTrip:(id)sender {
-    //Cargar ruta de viaje en mapa y nombre de conductor
-    //Se recupera host para peticiones
-    NSString *urlServer = [NSString stringWithFormat:@"%@/requestPassengerTripIOS", [util.getGlobalProperties valueForKey:@"host"]];
-    NSLog(@"url saveUser: %@", urlServer);
-    //Se configura data a enviar
-    //Se obtiene fecha del mismo dia de viaje
-    NSString *dateHour = @"";
-    for (int j=0; j<scheduleDayArray.count; j++) {
-        NSMutableDictionary *dateOpt = [scheduleDayArray objectAtIndex:j];
-        if ([[[selectedTrip objectForKey:@"date_hour"] substringToIndex:10] isEqualToString:[[dateOpt valueForKey:@"date_hour"] substringToIndex:10]]) {
-            dateHour = [dateOpt valueForKey:@"date_hour"];
-        }
-    }
-    NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
-    [passengerTrip setValue:[userData valueForKey:@"id"] forKey:@"user_id"];
-    [passengerTrip setValue:dateHour forKey:@"date_hour"];
-    if(isGoing == 0){
-        [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"latitude"] forKey:@"latitude"];
-        [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"longitude"] forKey:@"longitude"];
-    }else{
-        [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"latitude"] forKey:@"latitude"];
-        [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"longitude"] forKey:@"longitude"];
-    }
-    [passengerTrip setValue:isGoing forKey:@"is_going"];
-    [passengerTrip setValue:[userData valueForKey:@"tenant_id"] forKey:@"tenant_id"];
-    NSData * jsonData1 = [NSJSONSerialization  dataWithJSONObject:passengerTrip options:0 error:nil];
-    NSString *passengerTripString = [[NSString alloc] initWithData:jsonData1   encoding:NSUTF8StringEncoding];
-    NSData * jsonData2 = [NSJSONSerialization  dataWithJSONObject:selectedTrip options:0 error:nil];
-    NSString *selectedTripString = [[NSString alloc] initWithData:jsonData2   encoding:NSUTF8StringEncoding];
-    NSString *post = [NSString stringWithFormat:
-                      @"passenger=%@&driver=%@",
-                      passengerTripString, selectedTripString];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    //Se captura numero d eparametros a enviar
-    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-    
-    //Se configura request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString: urlServer]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:postData];
-    
-    //Se ejecuta request
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-        dispatch_async(dispatch_get_main_queue(),^{
-            //Se convierte respuesta en JSON
-            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
-            id isValid = [jsonData valueForKey:@"valid"];
-            
-            NSString *message = @"Solicitud enviada correctamente. Sera notificado si el conductor acepta su solicitud.";
-            if (!(isValid ? [isValid boolValue] : NO)) {
-                message = [jsonData valueForKey:@"description"];
+    if([selectedTrip count] > 0){
+        //Cargar ruta de viaje en mapa y nombre de conductor
+        //Se recupera host para peticiones
+        NSString *urlServer = [NSString stringWithFormat:@"%@/requestPassengerTripIOS", [util.getGlobalProperties valueForKey:@"host"]];
+        NSLog(@"url saveUser: %@", urlServer);
+        //Se configura data a enviar
+        //Se obtiene fecha del mismo dia de viaje
+        NSString *dateHour = @"";
+        for (int j=0; j<scheduleDayArray.count; j++) {
+            NSMutableDictionary *dateOpt = [scheduleDayArray objectAtIndex:j];
+            if ([[[selectedTrip objectForKey:@"date_hour"] substringToIndex:10] isEqualToString:[[dateOpt valueForKey:@"date_hour"] substringToIndex:10]]) {
+                dateHour = [dateOpt valueForKey:@"date_hour"];
             }
-            UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                    message:message
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-            [alertSaveUser show];
-        });
-    }] resume];
+        }
+        NSMutableDictionary *passengerTrip = [[NSMutableDictionary alloc] init];
+        [passengerTrip setValue:[userData valueForKey:@"id"] forKey:@"user_id"];
+        [passengerTrip setValue:dateHour forKey:@"date_hour"];
+        if(isGoing == 0){
+            [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"latitude"] forKey:@"latitude"];
+            [passengerTrip setValue:[[stepArray lastObject] valueForKey:@"longitude"] forKey:@"longitude"];
+        }else{
+            [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"latitude"] forKey:@"latitude"];
+            [passengerTrip setValue:[[stepArray firstObject] valueForKey:@"longitude"] forKey:@"longitude"];
+        }
+        [passengerTrip setValue:isGoing forKey:@"is_going"];
+        [passengerTrip setValue:[userData valueForKey:@"tenant_id"] forKey:@"tenant_id"];
+        NSData * jsonData1 = [NSJSONSerialization  dataWithJSONObject:passengerTrip options:0 error:nil];
+        NSString *passengerTripString = [[NSString alloc] initWithData:jsonData1   encoding:NSUTF8StringEncoding];
+        NSData * jsonData2 = [NSJSONSerialization  dataWithJSONObject:selectedTrip options:0 error:nil];
+        NSString *selectedTripString = [[NSString alloc] initWithData:jsonData2   encoding:NSUTF8StringEncoding];
+        NSString *post = [NSString stringWithFormat:
+                          @"passenger=%@&driver=%@",
+                          passengerTripString, selectedTripString];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        //Se captura numero d eparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        
+        //Se configura request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString: urlServer]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:postData];
+        
+        //Se ejecuta request
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            dispatch_async(dispatch_get_main_queue(),^{
+                //Se convierte respuesta en JSON
+                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                id isValid = [jsonData valueForKey:@"valid"];
+                
+                NSString *message = @"Solicitud enviada correctamente. Sera notificado si el conductor acepta su solicitud.";
+                if (!(isValid ? [isValid boolValue] : NO)) {
+                    message = [jsonData valueForKey:@"description"];
+                }
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:message
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            });
+        }] resume];
+    }else{
+        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                message:@"Debe seleccionar un viaje."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+        [alertSaveUser show];
+    }
 }
 @end

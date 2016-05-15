@@ -25,6 +25,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *rejectRequestButton;
 
 
-- (IBAction)AcceptingApplication:(id)sender;
-- (IBAction)CancelApplication:(id)sender;
+- (IBAction)AnswerApplication:(id)sender;
 @end

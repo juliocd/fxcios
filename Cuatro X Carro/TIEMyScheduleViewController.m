@@ -324,16 +324,25 @@
             }
             else{
                 [util updateUserDefaults:^(bool result){
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    if(result){
+                        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                                message:message
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                        [alertSaveUser show];
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }
+                    else{
+                        UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                                message:@"Error actualizando informacion de usuario."
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                        [alertSaveUser show];
+                    }
                 }];
             }
-            
-            UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                    message:message
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-            [alertSaveUser show];
         });
     }] resume];
 }

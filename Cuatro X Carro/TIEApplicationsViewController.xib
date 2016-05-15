@@ -42,7 +42,7 @@
                     </constraints>
                     <state key="normal" title="Aceptar" backgroundImage="pasajero_box.png"/>
                     <connections>
-                        <action selector="AcceptingApplication:" destination="-1" eventType="touchUpInside" id="WfM-0b-YMx"/>
+                        <action selector="AnswerApplication:" destination="-1" eventType="touchUpInside" id="E8u-aI-DnO"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHr-ce-9fc">
@@ -103,7 +103,7 @@
                     </constraints>
                     <state key="normal" title="Rechazar" backgroundImage="pasajero_box.png"/>
                     <connections>
-                        <action selector="CancelApplication:" destination="-1" eventType="touchUpInside" id="mAv-ao-ycD"/>
+                        <action selector="AnswerApplication:" destination="-1" eventType="touchUpInside" id="7DW-wh-8df"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_perfil_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="RRe-lZ-Q7B">

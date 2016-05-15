@@ -39,7 +39,7 @@
 
 @implementation TIETravelDetailsViewController
 
-@synthesize routeMap, driverName, dateTrip, hourTrip, startTripUIButton, requestUIButton, finishTripUIButton, animmationPositionDiver, messengerTable,finishTripPassengerButton;
+@synthesize routeMap, driverName, dateTrip, hourTrip, startTripUIButton, requestUIButton, finishTripUIButton, animmationPositionDiver, messengerTable,finishTripPassengerButton, cancelTripButton;
 
 - (id)initWithTripData:(NSMutableDictionary *) aTripData {
     self = [super initWithNibName:@"TIETravelDetailsViewController" bundle:nil];
@@ -51,6 +51,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
     _isAvalibleLocation = NO;
     _isFinishedTrip = NO;
     currentLatitude = 0;
@@ -93,11 +96,11 @@
     
     //Timer para recuperar comentarios de usaurio
     messages = [[NSMutableArray alloc] init];
-    updateCommentaries = [NSTimer scheduledTimerWithTimeInterval:1
-                                                            target:self
-                                                          selector: @selector(getTripCommentaries)
-                                                          userInfo:nil
-                                                           repeats:YES];
+    updateCommentaries = [NSTimer scheduledTimerWithTimeInterval:2
+                                                          target:self
+                                                        selector: @selector(getTripCommentaries)
+                                                        userInfo:nil
+                                                         repeats:YES];
 }
 
 #pragma mark - Messenger table
@@ -218,8 +221,8 @@
                 //Si es pasajero se ocultan botones de conductor
                 if(![[tripData valueForKey:@"trip_type"] isEqualToString:@"Conductor"]){
                     startTripUIButton.hidden = YES;
+                    cancelTripButton.hidden = YES;
                     requestUIButton.hidden = YES;
-                    finishTripPassengerButton.hidden = NO;
                     isPassengerOnTrip = false;
                     updateDriverPosition = [NSTimer scheduledTimerWithTimeInterval:1
                                                                             target:self
@@ -265,16 +268,15 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alerta" message:@"Ya se ha iniciado un viaje. Al salir de este debe volver a ingresar para reiniciarlo. ¿Desea salir?" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [updateDriverPosition invalidate];
-            [updateCommentaries invalidate];
             [self dismissViewControllerAnimated:YES completion:nil];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [updateDriverPosition invalidate];
-        [updateCommentaries invalidate];
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    [updateDriverPosition invalidate];
+    [updateCommentaries invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -283,6 +285,8 @@
 }
 
 - (IBAction)viewApplications:(id)sender {
+    [updateDriverPosition invalidate];
+    [updateCommentaries invalidate];
     TIEApplicationsViewController *applicationsVC =[[TIEApplicationsViewController alloc] initWithTripId:[tripData valueForKey:@"id"] withSecond:[tripData valueForKey:@"max_seats"] withThird:nil];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:applicationsVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
@@ -355,6 +359,8 @@
 }
 
 - (IBAction)showPassengers:(id)sender {
+    [updateDriverPosition invalidate];
+    [updateCommentaries invalidate];
     NSMutableArray *passengers = [trackTripData valueForKey:@"passengers"];
     TIEApplicationsViewController *applicationsVC =[[TIEApplicationsViewController alloc] initWithTripId:[tripData valueForKey:@"id"] withSecond:[tripData valueForKey:@"max_seats"] withThird:passengers];
     UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:applicationsVC];
@@ -371,6 +377,63 @@
                                                   otherButtonTitles:nil];
     [alertSaveUser show];
     isPassengerOnTrip = true;
+}
+
+- (IBAction)cancelTrip:(id)sender {
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/cancelDriverTrip", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cancelar viaje" message:@"¿Desea cancelar este viaje?" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        //Se configura data a enviar
+        NSString *post = [NSString stringWithFormat:
+                          @"id=%@&tenant_id=%@&user_id=%@",
+                          [tripData valueForKey:@"id"],
+                          [dataUser valueForKey:@"tenant_id"],
+                          [dataUser valueForKey:@"id"]];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        //Se captura numero de deparametros a enviar
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        
+        //Se configura request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString: urlServer]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:postData];
+        
+        //Se ejecuta request
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSLog(@"requestReply: %@", requestReply);
+            dispatch_async(dispatch_get_main_queue(),^{
+                //Se convierte respuesta en JSON
+                NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+                id isValid = [jsonData valueForKey:@"valid"];
+                
+                if (isValid ? [isValid boolValue] : NO) {
+                    [updateDriverPosition invalidate];
+                    [updateCommentaries invalidate];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                else{
+                    UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                              message:@"Error al cancelar viaje. Intente mas tarde."
+                                                                             delegate:nil
+                                                                    cancelButtonTitle:@"OK"
+                                                                    otherButtonTitles:nil];
+                    [alertErrorLogin show];
+                }
+            });
+        }] resume];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void) getTripCommentaries{
@@ -506,6 +569,7 @@
         _isAvalibleLocation = YES;
         startTripUIButton.hidden = YES;
         requestUIButton.hidden = YES;
+        cancelTripButton.hidden = YES;
         finishTripUIButton.hidden = NO;
         updateDriverPosition = [NSTimer scheduledTimerWithTimeInterval:1
                                                                 target:self
@@ -612,7 +676,7 @@
             if (isValid ? [isValid boolValue] : NO) {
                 NSMutableDictionary *dataUserLocation = [jsonData valueForKey:@"result"];
                 if(dataUserLocation != nil){
-                    
+                    finishTripPassengerButton.hidden = NO;
                     animmationPositionDiver.hidden = YES;
                     [animmationPositionDiver stopAnimating];
                     double driverCurrentLatitude = [[dataUserLocation valueForKey:@"latitude"] doubleValue];

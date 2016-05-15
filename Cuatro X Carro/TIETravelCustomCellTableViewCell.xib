@@ -49,10 +49,10 @@
                         <rect key="frame" x="91" y="102" width="24" height="24"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="03:20 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0z-M6-Rz1">
-                        <rect key="frame" x="220" y="71" width="78" height="18"/>
+                        <rect key="frame" x="216" y="71" width="82" height="18"/>
                         <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="78" id="N50-O6-OSy"/>
+                            <constraint firstAttribute="width" constant="82" id="N50-O6-OSy"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -128,7 +128,7 @@
                         <color key="textColor" red="0.52549019610000003" green="0.52549019610000003" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pasajeros" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-tP-XQt">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cupos" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-tP-XQt">
                         <rect key="frame" x="180" y="91" width="79" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="rwh-tP-XQt" secondAttribute="height" multiplier="79:21" id="QIE-Kx-5jH"/>
@@ -185,7 +185,7 @@
                     <constraint firstItem="5S1-qu-2qb" firstAttribute="width" secondItem="ptF-OH-wpJ" secondAttribute="width" id="D4a-pM-IwZ"/>
                     <constraint firstAttribute="topMargin" secondItem="IjB-HH-vJk" secondAttribute="top" id="DFo-2e-8Qo"/>
                     <constraint firstItem="ptF-OH-wpJ" firstAttribute="height" secondItem="x3r-TN-Wo6" secondAttribute="height" id="DHi-V4-ruQ"/>
-                    <constraint firstItem="b0z-M6-Rz1" firstAttribute="leading" secondItem="YNo-34-O7D" secondAttribute="trailing" constant="2" id="EDO-IP-4yc"/>
+                    <constraint firstItem="b0z-M6-Rz1" firstAttribute="leading" secondItem="YNo-34-O7D" secondAttribute="trailing" constant="-2" id="EDO-IP-4yc"/>
                     <constraint firstItem="rwh-tP-XQt" firstAttribute="leading" secondItem="6Cu-iO-C2X" secondAttribute="trailing" constant="10" id="FfW-Sb-U6S"/>
                     <constraint firstAttribute="trailingMargin" secondItem="VAm-J3-Y6a" secondAttribute="trailing" constant="181" id="GbQ-wD-Oas"/>
                     <constraint firstItem="RJI-7x-3GR" firstAttribute="centerY" secondItem="DEX-za-AjU" secondAttribute="centerY" id="JRE-OO-te8"/>

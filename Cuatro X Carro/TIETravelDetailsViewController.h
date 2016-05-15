@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *animmationPositionDiver;
 @property (weak, nonatomic) IBOutlet UITableView *messengerTable;
 @property (weak, nonatomic) IBOutlet UIButton *finishTripPassengerButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelTripButton;
 
 - (IBAction)startTripButton:(id)sender;
 - (IBAction)finishTripButton:(id)sender;
@@ -31,5 +32,6 @@
 - (IBAction)sendMessage:(id)sender;
 - (IBAction)showPassengers:(id)sender;
 - (IBAction)finishTripPassenger:(id)sender;
+- (IBAction)cancelTrip:(id)sender;
 
 @end

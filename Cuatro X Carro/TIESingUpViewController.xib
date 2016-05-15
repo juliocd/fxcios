@@ -28,8 +28,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@grupo.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3c-IP-fLT">
-                    <rect key="frame" x="176" y="209" width="136" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@grupo.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3c-IP-fLT">
+                    <rect key="frame" x="172" y="209" width="136" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="g3c-IP-fLT" secondAttribute="height" multiplier="136:37" id="JIH-aA-lHh"/>
                         <constraint firstAttribute="width" constant="136" id="aa6-t4-Ifr"/>
@@ -38,8 +38,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="hjw-ij-yUa">
-                    <rect key="frame" x="8" y="209" width="167" height="38"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="hjw-ij-yUa">
+                    <rect key="frame" x="8" y="209" width="163" height="37"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="hjw-ij-yUa" secondAttribute="height" multiplier="167:38" id="tZw-nh-fWX"/>
                     </constraints>
@@ -55,7 +55,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="País" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="jU9-Ge-hIn">
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="País" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="jU9-Ge-hIn">
                     <rect key="frame" x="8" y="386" width="304" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jU9-Ge-hIn" secondAttribute="height" multiplier="8:1" id="DUI-Su-voT"/>
@@ -67,22 +67,8 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="7pU-34-qcC"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ciudad" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="vhz-HU-5h5">
-                    <rect key="frame" x="8" y="478" width="304" height="38"/>
-                    <color key="tintColor" red="0.15343925110000001" green="0.52207420329999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="vhz-HU-5h5" secondAttribute="height" multiplier="8:1" id="cBa-Vx-eZi"/>
-                    </constraints>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <action selector="selectCity:" destination="-1" eventType="touchDown" id="JEg-4i-caR"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="YCZ-vQ-JN7"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Seleccione" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="baL-SF-JnK">
-                    <rect key="frame" x="8" y="89" width="304" height="38"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Seleccione" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="baL-SF-JnK">
+                    <rect key="frame" x="8" y="91" width="304" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="baL-SF-JnK" secondAttribute="height" multiplier="8:1" id="Cgq-ul-FEW"/>
                     </constraints>
@@ -93,8 +79,8 @@
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="x0E-Qa-ppi"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Grupo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTb-ON-r9X">
-                    <rect key="frame" x="8" y="65" width="304" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grupo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTb-ON-r9X">
+                    <rect key="frame" x="8" y="65" width="304" height="23"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -110,8 +96,8 @@
                         <outlet property="delegate" destination="-1" id="kcd-ti-Yh1"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repetir Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="YmE-jE-OFZ">
-                    <rect key="frame" x="8" y="298" width="304" height="38"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Repetir Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="YmE-jE-OFZ">
+                    <rect key="frame" x="8" y="297" width="304" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="YmE-jE-OFZ" secondAttribute="height" multiplier="8:1" id="lti-Mx-Lmr"/>
                     </constraints>
@@ -121,8 +107,8 @@
                         <outlet property="delegate" destination="-1" id="i7D-69-UVL"/>
                     </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Departamento" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="xVs-Sf-xO1">
-                    <rect key="frame" x="8" y="432" width="304" height="38"/>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Departamento" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="xVs-Sf-xO1">
+                    <rect key="frame" x="8" y="431" width="304" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="xVs-Sf-xO1" secondAttribute="height" multiplier="8:1" id="qz2-hP-dBu"/>
                     </constraints>
@@ -134,7 +120,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tcw-fD-asX">
-                    <rect key="frame" x="67" y="523" width="187" height="35"/>
+                    <rect key="frame" x="67" y="522" width="187" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Tcw-fD-asX" secondAttribute="height" multiplier="187:35" id="k6b-Lb-ijb"/>
                     </constraints>
@@ -153,8 +139,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="OX1-lC-pcQ">
-                    <rect key="frame" x="8" y="254" width="304" height="38"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contraseña" textAlignment="center" minimumFontSize="17" background="login_input.png" translatesAutoresizingMaskIntoConstraints="NO" id="OX1-lC-pcQ">
+                    <rect key="frame" x="8" y="253" width="304" height="38"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="OX1-lC-pcQ" secondAttribute="height" multiplier="8:1" id="W50-Jz-gYU"/>
                     </constraints>
@@ -170,13 +156,13 @@
                         <constraint firstAttribute="width" secondItem="MPa-3n-XNu" secondAttribute="height" multiplier="1:1" id="Ote-Y8-TiY"/>
                     </constraints>
                 </activityIndicatorView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQo-qJ-dBt">
-                    <rect key="frame" x="11" y="298" width="299" height="34"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQo-qJ-dBt">
+                    <rect key="frame" x="11" y="297" width="299" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="yQo-qJ-dBt" secondAttribute="height" multiplier="299:34" id="5h4-F3-QaW"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="Cambiar datos de acceso">
+                    <state key="normal" title="Cambiar contraseña">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -184,6 +170,20 @@
                         <action selector="changePassword:" destination="-1" eventType="touchUpInside" id="b34-4p-iCj"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ciudad" textAlignment="center" minimumFontSize="17" background="combo_box.png" translatesAutoresizingMaskIntoConstraints="NO" id="vhz-HU-5h5">
+                    <rect key="frame" x="8" y="385" width="304" height="38"/>
+                    <color key="tintColor" red="0.15343925110000001" green="0.52207420329999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="vhz-HU-5h5" secondAttribute="height" multiplier="8:1" id="cBa-Vx-eZi"/>
+                    </constraints>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="selectCity:" destination="-1" eventType="touchDown" id="JEg-4i-caR"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="YCZ-vQ-JN7"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="0.11945019630000001" green="0.74352777930000002" blue="0.85865486410000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -205,7 +205,7 @@
                 <constraint firstAttribute="trailing" secondItem="qYE-rv-7BP" secondAttribute="trailing" constant="8" id="GH9-Sc-m32"/>
                 <constraint firstItem="qYE-rv-7BP" firstAttribute="top" secondItem="baL-SF-JnK" secondAttribute="bottom" constant="8" id="H2A-W3-c4f"/>
                 <constraint firstItem="US6-tg-uyB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="KXq-VX-3d9"/>
-                <constraint firstItem="vhz-HU-5h5" firstAttribute="top" secondItem="xVs-Sf-xO1" secondAttribute="bottom" constant="8" id="MfN-uk-swC"/>
+                <constraint firstItem="vhz-HU-5h5" firstAttribute="top" secondItem="xVs-Sf-xO1" secondAttribute="bottom" constant="-84" id="MfN-uk-swC"/>
                 <constraint firstAttribute="trailing" secondItem="Tcw-fD-asX" secondAttribute="trailing" constant="66" id="N5f-ie-sGf"/>
                 <constraint firstItem="yQo-qJ-dBt" firstAttribute="top" secondItem="hjw-ij-yUa" secondAttribute="bottom" constant="51" id="OPV-hp-tLA"/>
                 <constraint firstItem="YmE-jE-OFZ" firstAttribute="top" secondItem="OX1-lC-pcQ" secondAttribute="bottom" constant="6" id="PTg-AY-bkp"/>
@@ -213,7 +213,7 @@
                 <constraint firstAttribute="trailing" secondItem="US6-tg-uyB" secondAttribute="trailing" constant="8" id="QzD-FZ-leY"/>
                 <constraint firstItem="qYE-rv-7BP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Sar-k1-iRT"/>
                 <constraint firstItem="jU9-Ge-hIn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="UW2-Ay-kNm"/>
-                <constraint firstItem="Tcw-fD-asX" firstAttribute="top" secondItem="vhz-HU-5h5" secondAttribute="bottom" constant="8" id="VB3-Bb-cfn"/>
+                <constraint firstItem="Tcw-fD-asX" firstAttribute="top" secondItem="vhz-HU-5h5" secondAttribute="bottom" constant="99" id="VB3-Bb-cfn"/>
                 <constraint firstItem="g3c-IP-fLT" firstAttribute="leading" secondItem="hjw-ij-yUa" secondAttribute="trailing" constant="1" id="Zbr-ED-iIN"/>
                 <constraint firstItem="US6-tg-uyB" firstAttribute="top" secondItem="qYE-rv-7BP" secondAttribute="bottom" constant="4" id="bjg-BF-Kc9"/>
                 <constraint firstItem="MPa-3n-XNu" firstAttribute="top" secondItem="YmE-jE-OFZ" secondAttribute="bottom" constant="16" id="bxs-Xf-cC6"/>
@@ -231,7 +231,7 @@
                 <constraint firstAttribute="trailing" secondItem="baL-SF-JnK" secondAttribute="trailing" constant="8" id="q5K-oW-Axy"/>
                 <constraint firstAttribute="trailing" secondItem="y7o-nn-13b" secondAttribute="trailing" constant="8" id="tfY-Ac-gvB"/>
             </constraints>
-            <point key="canvasLocation" x="623" y="429"/>
+            <point key="canvasLocation" x="-172" y="322"/>
         </view>
         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos Personales" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="68F-kR-0CO">
             <rect key="frame" x="0.0" y="0.0" width="304" height="21"/>
