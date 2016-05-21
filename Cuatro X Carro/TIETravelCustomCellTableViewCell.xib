@@ -231,6 +231,7 @@
                 <outlet property="dateMonthLabel" destination="RJI-7x-3GR" id="7sb-6i-HH1"/>
                 <outlet property="dateYearLabel" destination="DEX-za-AjU" id="9HH-qZ-KkC"/>
                 <outlet property="notificationButton" destination="6Cu-iO-C2X" id="kMJ-W6-DhZ"/>
+                <outlet property="quotasLabel" destination="rwh-tP-XQt" id="YvX-wr-Sd5"/>
                 <outlet property="rateFiveImage" destination="VAm-J3-Y6a" id="CCM-NT-KlU"/>
                 <outlet property="rateFourImage" destination="5S1-qu-2qb" id="5TA-96-HFB"/>
                 <outlet property="rateOneImage" destination="1jU-Gw-TN7" id="Lkj-FO-uz6"/>

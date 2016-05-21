@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIButton *notificationButton;
 @property (weak, nonatomic) IBOutlet UIButton *requestButton;
+@property (weak, nonatomic) IBOutlet UILabel *quotasLabel;
 
 //Nuevos campos por estilos
 @property (weak, nonatomic) IBOutlet UILabel *dateDayLabel;

@@ -33,13 +33,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = inset;
+    
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
     [self loadTrips];
-    //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,12 +104,6 @@
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGRect tableFrame = tableView.frame;
-    tableFrame.origin.y = 20;
-    tableFrame.size.height = UIScreen.mainScreen.bounds.size.height - 25 -45;
-    tableFrame.size.width = tableView.contentSize.width; // if you would allow horiz scrolling
-    tableView.frame = tableFrame;
     
     //Se crea instancia de celda
     TIETravelCustomCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"tableCell"];
@@ -172,6 +168,9 @@
             cell.backgroundColor = [UIColor blueColor];
         }
         else{
+            //Se actualizan cupos
+            cell.quotasLabel.hidden = YES;
+            cell.seatsAvailableLabel.hidden = YES;
             //Se oculta notificacion de solicitud
             cell.userType.text = @"PASAJERO";
             cell.requestButton.hidden = YES;

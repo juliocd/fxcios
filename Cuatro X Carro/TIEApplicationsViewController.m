@@ -15,7 +15,8 @@
     NSString *maxSeats;
     NSMutableArray *dataArray;
     NSMutableDictionary *selectedApplication;
-    NSMutableArray *passengers;
+    BOOL showPassengers;
+    NSString *tenantId;
 }
 
 @end
@@ -24,12 +25,13 @@
 
 @synthesize applicantName, applicantEmail, applicantPhone, applicantAddress, passengerPrictureProfile, applicationsTable, informationTitleLabel, aceptRequestButton, rejectRequestButton;
 
-- (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats withThird:(NSMutableArray *) aPassengers{
+- (id) initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats withThird:(BOOL) aShowPassengers withFourth:(NSString *) aTenantId{
     self = [super initWithNibName:@"TIEApplicationsViewController" bundle:nil];
     if (self) {
         tripId = aTripId;
         maxSeats = aMaxSeats;
-        passengers = aPassengers;
+        showPassengers = aShowPassengers;
+        tenantId = aTenantId;
     }
     return self;
 }
@@ -59,13 +61,13 @@
     dataArray = [[NSMutableArray alloc] init];
     selectedApplication = [[NSMutableDictionary alloc] init];
     
-    if(passengers == nil){
+    if(!showPassengers){
         [self getApplications];
     }else{
         aceptRequestButton.hidden = YES;
         rejectRequestButton.hidden = YES;
-        informationTitleLabel.text = @"Pasajero";
-        dataArray = passengers;
+        informationTitleLabel.text = @"Pasajeros";
+        [self getPassengers];
     }
 }
 
@@ -79,6 +81,55 @@
     NSString *post = [NSString stringWithFormat:
                       @"id=%@",
                       tripId];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                dataArray = [jsonData valueForKey:@"result"];
+                [self.applicationsTableView reloadData];
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
+}
+
+- (void) getPassengers{
+    
+    Util *util=[Util getInstance];
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/queryTripPassengers", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"id=%@&tenant_id=%@",
+                      tripId,
+                      tenantId];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
@@ -240,13 +291,10 @@
     selectedApplication = [[NSMutableDictionary alloc] init];
     applicantName.text = @"";
     applicantEmail.text = @"";
-    if(passengers == nil){
+    if(!showPassengers){
         [self getApplications];
     }else{
-        aceptRequestButton.hidden = YES;
-        rejectRequestButton.hidden = YES;
-        informationTitleLabel.text = @"Pasajero";
-        dataArray = passengers;
+        [self getPassengers];
     }
 }
 

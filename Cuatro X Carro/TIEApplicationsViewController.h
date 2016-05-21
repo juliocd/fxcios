@@ -10,7 +10,7 @@
 
 @interface TIEApplicationsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-- (id)initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats withThird:(NSMutableArray *) aPassengers;
+- (id)initWithTripId:(NSString *) aTripId withSecond:(NSString *) aMaxSeats withThird:(BOOL) aShowPassengers withFourth:(NSString *) aTenantId;
 
 @property (weak, nonatomic) IBOutlet UITableView *applicationsTableView;
 

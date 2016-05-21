@@ -99,6 +99,12 @@
 		CE8F40051BB8C081003D8CDD /* TIEApplicationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */; };
 		CE8F400F1BB8D2C1003D8CDD /* TIESearchTravelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F400D1BB8D2C1003D8CDD /* TIESearchTravelViewController.m */; };
 		CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F400E1BB8D2C1003D8CDD /* TIESearchTravelViewController.xib */; };
+		CECB0F541CEEC9AD002940F6 /* perfil_off-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F4E1CEEC9AD002940F6 /* perfil_off-568h@2x~iphone.png */; };
+		CECB0F551CEEC9AD002940F6 /* perfil_on-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F4F1CEEC9AD002940F6 /* perfil_on-568h@2x~iphone.png */; };
+		CECB0F561CEEC9AD002940F6 /* program_off-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F501CEEC9AD002940F6 /* program_off-568h@2x~iphone.png */; };
+		CECB0F571CEEC9AD002940F6 /* program_on-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F511CEEC9AD002940F6 /* program_on-568h@2x~iphone.png */; };
+		CECB0F581CEEC9AD002940F6 /* viajes_off-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F521CEEC9AD002940F6 /* viajes_off-568h@2x~iphone.png */; };
+		CECB0F591CEEC9AD002940F6 /* viajes_on-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CECB0F531CEEC9AD002940F6 /* viajes_on-568h@2x~iphone.png */; };
 		CEFB75971C420389003EA201 /* LGSimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB75961C420389003EA201 /* LGSimpleChat.swift */; };
 		CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD84561BAF3A6300410730 /* TIETrayTravelsTableViewController.m */; };
 		CEFD84591BAF3A6300410730 /* TIETrayTravelsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD84571BAF3A6300410730 /* TIETrayTravelsTableViewController.xib */; };
@@ -252,6 +258,12 @@
 		CE8F400C1BB8D2C1003D8CDD /* TIESearchTravelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIESearchTravelViewController.h; sourceTree = "<group>"; };
 		CE8F400D1BB8D2C1003D8CDD /* TIESearchTravelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIESearchTravelViewController.m; sourceTree = "<group>"; };
 		CE8F400E1BB8D2C1003D8CDD /* TIESearchTravelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIESearchTravelViewController.xib; sourceTree = "<group>"; };
+		CECB0F4E1CEEC9AD002940F6 /* perfil_off-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "perfil_off-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		CECB0F4F1CEEC9AD002940F6 /* perfil_on-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "perfil_on-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		CECB0F501CEEC9AD002940F6 /* program_off-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program_off-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		CECB0F511CEEC9AD002940F6 /* program_on-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program_on-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		CECB0F521CEEC9AD002940F6 /* viajes_off-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "viajes_off-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		CECB0F531CEEC9AD002940F6 /* viajes_on-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "viajes_on-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		CEFB75951C420388003EA201 /* Cuatro X Carro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cuatro X Carro-Bridging-Header.h"; sourceTree = "<group>"; };
 		CEFB75961C420389003EA201 /* LGSimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSimpleChat.swift; sourceTree = "<group>"; };
 		CEFD84551BAF3A6300410730 /* TIETrayTravelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIETrayTravelsTableViewController.h; sourceTree = "<group>"; };
@@ -496,6 +508,12 @@
 		CE093F721C7AABFB00E839D1 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				CECB0F4E1CEEC9AD002940F6 /* perfil_off-568h@2x~iphone.png */,
+				CECB0F4F1CEEC9AD002940F6 /* perfil_on-568h@2x~iphone.png */,
+				CECB0F501CEEC9AD002940F6 /* program_off-568h@2x~iphone.png */,
+				CECB0F511CEEC9AD002940F6 /* program_on-568h@2x~iphone.png */,
+				CECB0F521CEEC9AD002940F6 /* viajes_off-568h@2x~iphone.png */,
+				CECB0F531CEEC9AD002940F6 /* viajes_on-568h@2x~iphone.png */,
 				CE093F971C7ABC6400E839D1 /* program_off@2x~iphone.png */,
 				CE093F981C7ABC6400E839D1 /* program_on@2x~iphone.png */,
 				CE093F8F1C7ABC2500E839D1 /* perfil_off@2x~iphone.png */,
@@ -720,6 +738,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB0F591CEEC9AD002940F6 /* viajes_on-568h@2x~iphone.png in Resources */,
+				CECB0F551CEEC9AD002940F6 /* perfil_on-568h@2x~iphone.png in Resources */,
 				CE8F3FF61BB8A190003D8CDD /* TIEMyScheduleViewController.xib in Resources */,
 				CE093F6F1C7AA81200E839D1 /* combo_box.png in Resources */,
 				CE093F681C7A453A00E839D1 /* login_input.png in Resources */,
@@ -740,6 +760,7 @@
 				CE79AE271C83E9FE00440475 /* fondo_tab_1.png in Resources */,
 				CE79AE3A1C83F36C00440475 /* save_boton.png in Resources */,
 				CE093F941C7ABC2500E839D1 /* perfil_on@2x~iphone.png in Resources */,
+				CECB0F571CEEC9AD002940F6 /* program_on-568h@2x~iphone.png in Resources */,
 				CE79AE251C83E8F400440475 /* statistics_boton.png in Resources */,
 				CEFD84631BAF3BFE00410730 /* TIEScheduleTripViewController.xib in Resources */,
 				CE79AE331C83F1EF00440475 /* help_boton.png in Resources */,
@@ -783,8 +804,11 @@
 				CE79AE381C83F35800440475 /* add_boton.png in Resources */,
 				CE093F5A1C7A3DED00E839D1 /* login_boton.png in Resources */,
 				CE79AE411C83F95D00440475 /* conductor_on.png in Resources */,
+				CECB0F541CEEC9AD002940F6 /* perfil_off-568h@2x~iphone.png in Resources */,
+				CECB0F561CEEC9AD002940F6 /* program_off-568h@2x~iphone.png in Resources */,
 				CE093F991C7ABC6400E839D1 /* program_off@2x~iphone.png in Resources */,
 				CE093F5E1C7A3E8F00E839D1 /* email_icon.png in Resources */,
+				CECB0F581CEEC9AD002940F6 /* viajes_off-568h@2x~iphone.png in Resources */,
 				CE79AE301C83EEBE00440475 /* dia_icon.png in Resources */,
 				CE79AE2A1C83EA0900440475 /* fondo_tab_2.png in Resources */,
 				CEFD845E1BAF3B7100410730 /* TIEProfileViewController.xib in Resources */,

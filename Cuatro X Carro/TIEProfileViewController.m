@@ -35,6 +35,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    
     //Se obtiene informacion de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     userData = [defaults objectForKey:@"userData"];
@@ -222,7 +223,56 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *selectedImage = info[UIImagePickerControllerEditedImage];
-    self.profilePricture.image = selectedImage;
+    NSString *strEncoded = [UIImageJPEGRepresentation(selectedImage, 0.3) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    //Se envia imagen aservidor
+    NSString *urlServer = [NSString stringWithFormat:@"%@/upload", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"profile_picture_url=%@&id=%@&tenant_id=%@",
+                      strEncoded,
+                      [userData valueForKey:@"id" ],
+                      [userData valueForKey:@"tenant_id" ]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                NSString *resultUrlImage = [jsonData valueForKey:@"profile_picture_url"];
+                NSURL *url = [NSURL URLWithString:resultUrlImage];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                UIImage *img = [[UIImage alloc] initWithData:data];
+                self.profilePricture.image = img;
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 

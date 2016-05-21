@@ -36,12 +36,12 @@
 }
 
 -(void) userHaveOpenSession{
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
-    //    if (dataUser != nil) {
-    //        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    //        [appDelegate.window setRootViewController:appDelegate.tabBarController];
-    //    }
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
+        if (dataUser != nil) {
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            [appDelegate.window setRootViewController:appDelegate.tabBarController];
+        }
 }
 
 - (void)didReceiveMemoryWarning {
