@@ -17,6 +17,7 @@
     NSMutableDictionary *selectedApplication;
     BOOL showPassengers;
     NSString *tenantId;
+    Util *util;
 }
 
 @end
@@ -46,6 +47,8 @@
                                     action:@selector(backButton)];
     self.navigationController.navigationBar.topItem.leftBarButtonItem = newBackButton;
     
+    util=[Util getInstance];
+    
     //Seterar tag de boton
     aceptRequestButton.tag = 1;
     rejectRequestButton.tag = 0;
@@ -73,7 +76,6 @@
 
 - (void) getApplications{
     
-    Util *util=[Util getInstance];
     //Se recupera host para peticiones
     NSString *urlServer = [NSString stringWithFormat:@"%@/queryRequestTrips", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
@@ -121,7 +123,6 @@
 
 - (void) getPassengers{
     
-    Util *util=[Util getInstance];
     //Se recupera host para peticiones
     NSString *urlServer = [NSString stringWithFormat:@"%@/queryTripPassengers", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
@@ -211,13 +212,21 @@
     applicantEmail.text = [application valueForKey:@"email"];
     applicantPhone.text = ([application valueForKey:@"phone"] != (id)[NSNull null]) ? [application valueForKey:@"phone"] : @"000000000";
     applicantAddress.text = ([application valueForKey:@"address"] != (id)[NSNull null]) ? [application valueForKey:@"address"] : @"Clle XXX Nro XX-XXXX";
+    NSString *imageProfile = ([application valueForKey:@"profile_picture_url"] == (id)[NSNull null]) ? @"" : [application valueForKey:@"profile_picture_url"];
+    if(imageProfile != nil){
+        NSURL *url = [NSURL URLWithString:imageProfile];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        passengerPrictureProfile.image = img;
+    }else{
+        passengerPrictureProfile.image = [UIImage imageNamed:@"image_perfil_1.png"];
+    }
 }
 
 - (IBAction)AnswerApplication:(id)sender {
     if ([selectedApplication count] > 0) {
         
         //Se recupera host para peticiones
-        Util *util=[Util getInstance];
         NSString *urlServer = [NSString stringWithFormat:@"%@/saveRequestTripIOS", [util.getGlobalProperties valueForKey:@"host"]];
         NSLog(@"url saveUser: %@", urlServer);
         //Se configura data a enviar
@@ -257,7 +266,7 @@
                 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
                 id isValid = [jsonData valueForKey:@"valid"];
                 
-                NSString *message = @"Solicitud procesada correctamente.";
+                NSString *message = @"Solicitud enviada correctamente.";
                 if (!(isValid ? [isValid boolValue] : NO)) {
                     message = [jsonData valueForKey:@"description"];
                 }
@@ -291,6 +300,7 @@
     selectedApplication = [[NSMutableDictionary alloc] init];
     applicantName.text = @"";
     applicantEmail.text = @"";
+    passengerPrictureProfile.image = [UIImage imageNamed:@"image_perfil_1.png"];
     if(!showPassengers){
         [self getApplications];
     }else{

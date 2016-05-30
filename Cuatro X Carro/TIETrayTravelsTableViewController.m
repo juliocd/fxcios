@@ -138,6 +138,18 @@
         cell.dateMonthLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[1]];
         cell.dateYearLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[0]];
         cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
+        
+        //Configurar imagen;
+        NSString *imageProfile = ([item valueForKey:@"thumbnailUrl"] == (id)[NSNull null]) ? @"" : [item valueForKey:@"thumbnailUrl"];
+        if(imageProfile != nil){
+            NSURL *url = [NSURL URLWithString:imageProfile];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            cell.userPictureImage.image = img;
+        }else{
+            cell.userPictureImage.image = [UIImage imageNamed:@"image_perfil_1.png"];
+        }
+        
         //Datos de conductor
         if ([[item valueForKey:@"trip_type"] isEqualToString:@"Conductor"]) {
             cell.userType.text = @"CONDUCTOR";

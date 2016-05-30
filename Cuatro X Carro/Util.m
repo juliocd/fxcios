@@ -26,8 +26,8 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    [globalProperties setValue:@"http://192.168.0.10:5000" forKey:@"host"];
-    //[globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
+    //[globalProperties setValue:@"http://192.168.0.10:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
     //[globalProperties setValue:@"http://52.10.216.232:5000" forKey:@"host"];
     return globalProperties;
 }
@@ -56,6 +56,7 @@ static Util *instance =nil;
     [userDataDefault setValue:([userData valueForKey:@"is_driver"] != (id)[NSNull null]) ? [userData valueForKey:@"is_driver"]: @"" forKey:@"is_driver"];
     [userDataDefault setValue:[userData valueForKey:@"start_date"] forKey:@"start_date"];
     [userDataDefault setValue:[userData valueForKey:@"is_enabled"] forKey:@"is_enabled"];
+    [userDataDefault setValue:([userData valueForKey:@"profile_picture_url"] != (id)[NSNull null]) ? [userData valueForKey:@"profile_picture_url"]: @"" forKey:@"profile_picture_url"];
     [userDefault setObject:userDataDefault forKey:@"userData"];
     
     return userDataDefault;

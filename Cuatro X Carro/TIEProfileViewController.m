@@ -25,10 +25,19 @@
 
 @implementation TIEProfileViewController
 
-@synthesize profilePricture, rateOneIcon, rateTwoIcon, rateThreeIcon, rateFourIcon, rateFiveIcon, userName, userEmail, userPhone, schedule, mondayDepartTime, tuesdayDepartTime, wednesdayDepartTime, thursdayDepartTime, fridayDepartTime, saturdayDepartTime, mondayReturnTime,tuesdayReturnTime, wednesdayReturnTime, thursdayReturnTime, fridayReturnTime, saturdayReturnTime;
+@synthesize profilePricture, rateOneIcon, rateTwoIcon, rateThreeIcon, rateFourIcon, rateFiveIcon, userName, userEmail, userPhone, schedule, mondayDepartTime, tuesdayDepartTime, wednesdayDepartTime, thursdayDepartTime, fridayDepartTime, saturdayDepartTime, mondayReturnTime,tuesdayReturnTime, wednesdayReturnTime, thursdayReturnTime, fridayReturnTime, saturdayReturnTime, scroll;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Se habilita scroll para pantalla de 3.5
+    CGRect sizeRect=[[UIScreen mainScreen] bounds];
+    if(sizeRect.size.height == 624){
+        [scroll setScrollEnabled:YES];
+        [scroll setContentSize:CGSizeMake(320, 624)];
+    }else{
+        [scroll setContentSize:CGSizeMake(sizeRect.size.width, sizeRect.size.height)];
+    }
     
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
@@ -44,6 +53,14 @@
     [self loadUserRate:[userData valueForKey:@"rating"] == nil ? [[userData valueForKey:@"rating"] intValue] : 0];
     userName.text = [userData valueForKey:@"name"];
     userEmail.text = [userData valueForKey:@"email"];
+    if([userData valueForKey:@"profile_picture_url"] != nil){
+        NSURL *url = [NSURL URLWithString:[userData valueForKey:@"profile_picture_url"]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        self.profilePricture.image = img;
+    }else{
+        self.profilePricture.image = [UIImage imageNamed:@"image_perfil_1.png"];
+    }
     //userPhone.text = [userData valueForKey:@"phone"];
     
     //Estilo de imagen de perfil
@@ -224,17 +241,18 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *selectedImage = info[UIImagePickerControllerEditedImage];
     NSString *strEncoded = [UIImageJPEGRepresentation(selectedImage, 0.3) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    strEncoded = [strEncoded stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
     
     //Se envia imagen aservidor
     NSString *urlServer = [NSString stringWithFormat:@"%@/upload", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
+    NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:userData options:0 error:nil];
+    NSString *userDataStr = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
     NSString *post = [NSString stringWithFormat:
-                      @"profile_picture_url=%@&id=%@&tenant_id=%@",
-                      strEncoded,
-                      [userData valueForKey:@"id" ],
-                      [userData valueForKey:@"tenant_id" ]];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                      @"file=%@&user=%@",
+                      strEncoded, [NSString stringWithFormat:@"%@", userDataStr]];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
@@ -257,11 +275,13 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
-                NSString *resultUrlImage = [jsonData valueForKey:@"profile_picture_url"];
+                NSMutableDictionary *userUpdateData = [jsonData valueForKey:@"data"];
+                NSString *resultUrlImage = [userUpdateData valueForKey:@"profile_picture_url"];
                 NSURL *url = [NSURL URLWithString:resultUrlImage];
                 NSData *data = [NSData dataWithContentsOfURL:url];
                 UIImage *img = [[UIImage alloc] initWithData:data];
                 self.profilePricture.image = img;
+                [util updateUserDefaults:^(bool result){}];
             }
             else{
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"

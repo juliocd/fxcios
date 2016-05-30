@@ -100,19 +100,9 @@
 
 //Se determina numero de filas de la tabla
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(searchResults.count > 0){
-        self.resultTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.resultTableView.backgroundView   = nil;
-        return [searchResults count];
-    }else{
-        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.resultTableView.bounds.size.width, self.resultTableView.bounds.size.height)];
-        noDataLabel.text             = @"No se encontraron registros";
-        noDataLabel.textColor        = [UIColor blackColor];
-        noDataLabel.textAlignment    = NSTextAlignmentCenter;
-        self.resultTableView.backgroundView = noDataLabel;
-        self.resultTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        return 0;
-    }
+    self.resultTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.resultTableView.backgroundView   = nil;
+    return [searchResults count];
 }
 //Se configura celda a cargar en la tabla
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -151,6 +141,18 @@
         cell.dateMonthLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[1]];
         cell.dateYearLabel.text = [NSString stringWithFormat:@"%@",dateTripArray[0]];
         cell.timeLabel.text = [util militaryTimeToAMPMTime:[[[item valueForKey:@"date_hour"] substringFromIndex:11] substringToIndex:5]];
+        
+        //Configurar imagen;
+        NSString *imageProfile = ([item valueForKey:@"thumbnailUrl"] == (id)[NSNull null]) ? @"" : [item valueForKey:@"thumbnailUrl"];
+        if(imageProfile != nil){
+            NSURL *url = [NSURL URLWithString:imageProfile];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            cell.userPictureImage.image = img;
+        }else{
+            cell.userPictureImage.image = [UIImage imageNamed:@"image_perfil_1.png"];
+        }
+        
         //Sillas disponibles
         int availableSeats = [item valueForKey:@"available_seats"] != nil ? [[item valueForKey:@"available_seats"] intValue] : 0;
         int maxSeats = [item valueForKey:@"max_seats"] != nil ? [[item valueForKey:@"max_seats"] intValue] : 0;

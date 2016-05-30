@@ -106,7 +106,7 @@
                         <action selector="AnswerApplication:" destination="-1" eventType="touchUpInside" id="7DW-wh-8df"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_perfil_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="RRe-lZ-Q7B">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_perfil_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="RRe-lZ-Q7B">
                     <rect key="frame" x="86" y="310" width="148" height="148"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="148" id="0lT-KI-59V"/>
@@ -167,7 +167,7 @@
         </view>
     </objects>
     <resources>
-        <image name="image_perfil_2.png" width="598" height="598"/>
+        <image name="image_perfil_1.png" width="598" height="598"/>
         <image name="pasajero_box.png" width="2016" height="435"/>
     </resources>
 </document>
