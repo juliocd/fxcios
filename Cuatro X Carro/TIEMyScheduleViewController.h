@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RadioButton.h"
 
-@interface TIEMyScheduleViewController : UIViewController
+@class AbstractActionSheetPicker;
+@interface TIEMyScheduleViewController : UIViewController <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSDate *selectedDepartTime, *selectedReturnTime;
 @property (nonatomic, strong) NSMutableDictionary *schedule;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 
 @property (nonatomic, strong) IBOutlet RadioButton* radioButton;
 @property (weak, nonatomic) IBOutlet RadioButton *departRB;
@@ -25,9 +27,9 @@
 - (IBAction)selectReturnTime:(id)sender;
 
 //Select de horas
-@property (weak, nonatomic) IBOutlet UITextField *dayTextInput;
-@property (weak, nonatomic) IBOutlet UITextField *departTimeTextInput;
-@property (weak, nonatomic) IBOutlet UITextField *returnTimeTextInput;
+@property (weak, nonatomic) IBOutlet UIButton *dayButtonSelect;
+@property (weak, nonatomic) IBOutlet UIButton *departTimeButtonSelect;
+@property (weak, nonatomic) IBOutlet UIButton *returnTimeButtonSelect;
 
 //Hora ida
 @property (weak, nonatomic) IBOutlet UILabel *mondayDepartTime;
@@ -50,7 +52,5 @@
 - (IBAction)setDayTime:(id)sender;
 
 - (IBAction)clearTimeCombos:(id)sender;
-
-- (IBAction)saveSchedule:(id)sender;
 
 @end

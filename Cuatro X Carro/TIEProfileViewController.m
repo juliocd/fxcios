@@ -19,6 +19,7 @@
     //Se declara variable de utilidades
     Util *util;
     NSMutableDictionary *userData;
+    BOOL firstLoadScroll;
 }
 
 @end
@@ -28,22 +29,20 @@
 @synthesize profilePricture, rateOneIcon, rateTwoIcon, rateThreeIcon, rateFourIcon, rateFiveIcon, userName, userEmail, userPhone, schedule, mondayDepartTime, tuesdayDepartTime, wednesdayDepartTime, thursdayDepartTime, fridayDepartTime, saturdayDepartTime, mondayReturnTime,tuesdayReturnTime, wednesdayReturnTime, thursdayReturnTime, fridayReturnTime, saturdayReturnTime, scroll;
 
 - (void)viewDidLoad {
+    firstLoadScroll = YES;
+    [scroll setDelegate:self];
     [super viewDidLoad];
-    
-    //Se habilita scroll para pantalla de 3.5
-    CGRect sizeRect=[[UIScreen mainScreen] bounds];
-    if(sizeRect.size.height == 624){
-        [scroll setScrollEnabled:YES];
-        [scroll setContentSize:CGSizeMake(320, 624)];
-    }else{
-        [scroll setContentSize:CGSizeMake(sizeRect.size.width, sizeRect.size.height)];
-    }
-    
     //Se inicializa funcion de utilidades
     util = [Util getInstance];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    //Se realiza esto pq se presenta un inconveniente al cargar la primera vez el scroll,
+    //que no esta ajustando el contenedor, por tal motivo se reajusta nuevamente usando la funcion
+    //scrollViewWillBeginDragging una sola vez, luego lo realiza esta funcion
+    if(!firstLoadScroll){
+        [self resizeScroll];
+    }
     
     //Se obtiene informacion de usuario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -69,6 +68,25 @@
     
     //Se actualiza horario
     [self loadSchedule];
+}
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if(firstLoadScroll){
+        firstLoadScroll = NO;
+        [self resizeScroll];
+    }
+}
+
+-(void)resizeScroll{
+    //Se habilita scroll para pantalla de 3.5
+    CGRect sizeRect=[[UIScreen mainScreen] bounds];
+    [scroll setContentOffset:CGPointZero animated:YES];
+    if(sizeRect.size.height == 480){
+        [scroll setScrollEnabled:YES];
+    }else{
+        [scroll setScrollEnabled:NO];
+    }
+    [scroll setContentSize:CGSizeMake(sizeRect.size.width, sizeRect.size.height)];
 }
 
 //Funcion que carga ultimo horario configurado en vista

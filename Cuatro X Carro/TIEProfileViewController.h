@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TIEProfileViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface TIEProfileViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *schedule;
 

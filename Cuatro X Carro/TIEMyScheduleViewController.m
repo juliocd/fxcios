@@ -12,20 +12,22 @@
 #import "DefaultRequest.h"
 #import "Util.h"
 
-@class AbstractActionSheetPicker;
 @interface TIEMyScheduleViewController (){
     //Se declara variable de utilidades
     Util *util;
+    BOOL reloadScroll;
 }
 
 @end
 
 @implementation TIEMyScheduleViewController
 
-@synthesize dayTextInput, departTimeTextInput, returnTimeTextInput, selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule, radioButton, departRB, returnRB, departReturnRB, spinnerSaveEvent;
+@synthesize selectedDepartTime, selectedReturnTime,mondayDepartTime,tuesdayDepartTime,wednesdayDepartTime,thursdayDepartTime,fridayDepartTime,saturdayDepartTime,mondayReturnTime,tuesdayReturnTime,wednesdayReturnTime,thursdayReturnTime,fridayReturnTime,saturdayReturnTime, schedule, radioButton, departRB, returnRB, departReturnRB, spinnerSaveEvent, scroll, dayButtonSelect, departTimeButtonSelect, returnTimeButtonSelect;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    reloadScroll = YES;
+    [scroll setDelegate:self];
     spinnerSaveEvent.hidden = YES;
     self.navigationController.navigationBar.topItem.title = @"Mi Horario";
     UIBarButtonItem *newBackButton =
@@ -39,9 +41,6 @@
     util = [Util getInstance];
     
     //Declaro delegados de campos, con el fin de que lo encuentren en la vista
-    [self.dayTextInput delegate];
-    [self.departTimeTextInput delegate];
-    [self.returnTimeTextInput delegate];
     
     //Se inicializa calendario
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -51,6 +50,19 @@
     if (![strSchedule isEqual:@""]) {
         schedule = [NSJSONSerialization JSONObjectWithData:[strSchedule dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
         [self loadSchedule];
+    }
+}
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if(reloadScroll){
+        reloadScroll = NO;
+        CGRect sizeRect=[[UIScreen mainScreen] bounds];
+        if(sizeRect.size.height == 480){
+            [scroll setScrollEnabled:YES];
+            [scroll setContentSize:CGSizeMake(sizeRect.size.width, 510)];
+        }else{
+            [scroll setScrollEnabled:NO];
+        }
     }
 }
 
@@ -84,22 +96,20 @@
 //Combo dia
 - (IBAction)selectDay:(id)sender {
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-        if ([sender respondsToSelector:@selector(setText:)]) {
-            [sender performSelector:@selector(setText:) withObject:selectedValue];
-        }
-        [self.dayTextInput  setEnabled:YES];
+        [sender setTitle:selectedValue forState:UIControlStateNormal];
+        [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     };
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
     NSArray *dayItems = [NSArray arrayWithObjects:@"Lunes", @"Martes", @"Miercoles", @"Jueves", @"Viernes", nil];
     NSUInteger initialIndex = 0;
-    if(![self.dayTextInput.text isEqualToString:@""] && [dayItems indexOfObject:self.dayTextInput.text] != -1){
-        initialIndex = [dayItems indexOfObject:self.dayTextInput.text];
+    UIButton *resultButton = (UIButton *)sender;
+    if(![resultButton.currentTitle isEqualToString:@"Dia"] && [dayItems indexOfObject:resultButton.currentTitle] != -1){
+        initialIndex = [dayItems indexOfObject:resultButton.currentTitle];
     }
     [ActionSheetStringPicker showPickerWithTitle:@"Día" rows:dayItems initialSelection:initialIndex
                                        doneBlock:done cancelBlock:cancel origin:sender];
-    [self.dayTextInput setEnabled:NO];
 }
 
 //Combo hora de ida
@@ -115,10 +125,9 @@
     
     self.selectedDepartTime = [NSDate dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)timeRoundedTo5Minutes];
     
-    ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Select a time" datePickerMode:UIDatePickerModeTime selectedDate:self.selectedDepartTime target:self action:@selector(departedTimeWasSelected:element:) origin:sender];
+    ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Hora de salida" datePickerMode:UIDatePickerModeTime selectedDate:self.selectedDepartTime target:self action:@selector(departedTimeWasSelected:element:) origin:sender];
     datePicker.minuteInterval = minuteInterval;
     [datePicker showActionSheetPicker];
-    [self.departTimeTextInput setEnabled:NO];
 }
 
 -(void)departedTimeWasSelected:(NSDate *)selectedTime element:(id)element {
@@ -126,8 +135,8 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"h:mm a"];
-    self.departTimeTextInput.text = [dateFormatter stringFromDate:selectedDepartTime];
-    [self.departTimeTextInput setEnabled:YES];
+    [departTimeButtonSelect setTitle:[dateFormatter stringFromDate:selectedDepartTime] forState:UIControlStateNormal];
+    [departTimeButtonSelect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 //Combo hora de regreso
@@ -143,10 +152,9 @@
     
     self.selectedReturnTime = [NSDate dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)timeRoundedTo5Minutes];
     
-    ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Select a time" datePickerMode:UIDatePickerModeTime selectedDate:self.selectedReturnTime target:self action:@selector(returnTimeWasSelected:element:) origin:sender];
+    ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Hora de regreso" datePickerMode:UIDatePickerModeTime selectedDate:self.selectedReturnTime target:self action:@selector(returnTimeWasSelected:element:) origin:sender];
     datePicker.minuteInterval = minuteInterval;
     [datePicker showActionSheetPicker];
-    [self.returnTimeTextInput setEnabled:NO];
 }
 
 -(void)returnTimeWasSelected:(NSDate *)selectedTime element:(id)element {
@@ -154,8 +162,8 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"h:mm a"];
-    self.returnTimeTextInput.text = [dateFormatter stringFromDate:selectedReturnTime];
-    [self.returnTimeTextInput setEnabled:YES];
+    [returnTimeButtonSelect setTitle:[dateFormatter stringFromDate:selectedReturnTime] forState:UIControlStateNormal];
+    [returnTimeButtonSelect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 -(void)dateSelector
@@ -171,16 +179,16 @@
 #pragma Radiobutton
 - (IBAction) onRadioBtn:(id)sender {
     if ([departRB isSelected]) {
-        [returnTimeTextInput setHidden:YES];
-        [departTimeTextInput setHidden:NO];
+        [returnTimeButtonSelect setHidden:YES];
+        [departTimeButtonSelect setHidden:NO];
     }
     else if([returnRB isSelected]){
-        [departTimeTextInput setHidden:YES];
-        [returnTimeTextInput setHidden:NO];
+        [departTimeButtonSelect setHidden:YES];
+        [returnTimeButtonSelect setHidden:NO];
     }
     else{
-        [returnTimeTextInput setHidden:NO];
-        [departTimeTextInput setHidden:NO];
+        [returnTimeButtonSelect setHidden:NO];
+        [departTimeButtonSelect setHidden:NO];
     }
     [self clearCombos];
 }
@@ -189,69 +197,69 @@
 - (IBAction) setDayTime:(id)sender {
     
     //Convertir hora de ida a hora militar
-    NSString *AMPMDepartTime = [self.departTimeTextInput text];
+    NSString *AMPMDepartTime = [departTimeButtonSelect currentTitle];
     NSString *militaryDepartTime = [util ampmTimeToMilitaryTime:AMPMDepartTime];
     
     //Convertir hora de vuelta a hora militar
-    NSString *AMPMReturnTime = [self.returnTimeTextInput text];
+    NSString *AMPMReturnTime = [self.returnTimeButtonSelect currentTitle];
     NSString *militaryReturnTime = [util ampmTimeToMilitaryTime:AMPMReturnTime];
     
-    if ([[self.dayTextInput text] isEqualToString:@"Lunes"]) {
-        if (![departTimeTextInput isHidden]) {
+    if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Lunes"]) {
+        if (![departTimeButtonSelect isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"monday_going"];
             mondayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"monday_return"];
             mondayReturnTime.text = AMPMReturnTime;
         }
     }
-    else if ([[self.dayTextInput text] isEqualToString:@"Martes"]) {
-        if (![departTimeTextInput isHidden]) {
+    else if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Martes"]) {
+        if (![departTimeButtonSelect isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"tuesday_going"];
             tuesdayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"tuesday_return"];
             tuesdayReturnTime.text = AMPMReturnTime;
         }
     }
-    else if ([[self.dayTextInput text] isEqualToString:@"Miercoles"]) {
-        if (![departTimeTextInput isHidden]) {
+    else if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Miercoles"]) {
+        if (![departTimeButtonSelect isHidden]) {
         [schedule setValue:militaryDepartTime forKey:@"wednesday_going"];
         wednesdayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"wednesday_return"];
             wednesdayReturnTime.text = AMPMReturnTime;
         }
     }
-    else if ([[self.dayTextInput text] isEqualToString:@"Jueves"]) {
-        if (![departTimeTextInput isHidden]) {
+    else if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Jueves"]) {
+        if (![departTimeButtonSelect isHidden]) {
         [schedule setValue:militaryDepartTime forKey:@"thursday_going"];
         thursdayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"thursday_return"];
             thursdayReturnTime.text = AMPMReturnTime;
         }
     }
-    else if ([[self.dayTextInput text] isEqualToString:@"Viernes"]) {
-        if (![departTimeTextInput isHidden]) {
+    else if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Viernes"]) {
+        if (![departTimeButtonSelect isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"friday_going"];
             fridayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"friday_return"];
             fridayReturnTime.text = AMPMReturnTime;
         }
     }
-    else if ([[self.dayTextInput text] isEqualToString:@"Sabado"]) {
-        if (![departTimeTextInput isHidden]) {
+    else if ([[self.dayButtonSelect currentTitle] isEqualToString:@"Sabado"]) {
+        if (![departTimeButtonSelect isHidden]) {
             [schedule setValue:militaryDepartTime forKey:@"saturday_going"];
             saturdayDepartTime.text = AMPMDepartTime;
         }
-        if (![returnTimeTextInput isHidden]) {
+        if (![returnTimeButtonSelect isHidden]) {
             [schedule setValue:militaryReturnTime forKey:@"saturday_return"];
             saturdayReturnTime.text = AMPMReturnTime;
         }
@@ -264,9 +272,9 @@
 }
 
 - (void) clearCombos{
-    dayTextInput.text = @"";
-    departTimeTextInput.text = @"";
-    returnTimeTextInput.text = @"";
+    [dayButtonSelect setTitle:@"Dia" forState:UIControlStateNormal];
+    [departTimeButtonSelect setTitle:@"Hora ida" forState:UIControlStateNormal];
+    [returnTimeButtonSelect setTitle:@"Hora regreso" forState:UIControlStateNormal];
 }
 
 - (IBAction)saveSchedule:(id)sender {

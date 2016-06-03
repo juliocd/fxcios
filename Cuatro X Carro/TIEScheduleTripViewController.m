@@ -69,6 +69,7 @@
 - (void) viewWillAppear:(BOOL)animated{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     dataUser = [defaults objectForKey:@"userData"];
+    daysArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
