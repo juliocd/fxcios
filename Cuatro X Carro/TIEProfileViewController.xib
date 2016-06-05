@@ -62,7 +62,7 @@
                             </constraints>
                             <state key="normal" backgroundImage="edit_boton.png"/>
                             <connections>
-                                <action selector="updateSchedue:" destination="-1" eventType="touchUpInside" id="UfJ-Sh-2UK"/>
+                                <action selector="EditProfile:" destination="-1" eventType="touchUpInside" id="fhq-EN-TGI"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre Apellido" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9Y-6t-ghx">
@@ -437,7 +437,7 @@
                             </constraints>
                             <state key="normal" backgroundImage="edit_boton.png"/>
                             <connections>
-                                <action selector="EditProfile:" destination="-1" eventType="touchUpInside" id="IFk-SI-ikS"/>
+                                <action selector="updateSchedue:" destination="-1" eventType="touchUpInside" id="Zxn-0j-AtN"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDy-kY-ibW">
@@ -580,6 +580,7 @@
                         <constraint firstItem="GcP-Ws-GPO" firstAttribute="centerY" secondItem="Z1k-nF-GSt" secondAttribute="centerY" id="gHv-b3-uV8"/>
                         <constraint firstItem="3S5-Xc-ry7" firstAttribute="centerY" secondItem="K5t-ff-ohJ" secondAttribute="centerY" id="gMe-m8-Ext"/>
                         <constraint firstItem="Gbj-gh-nEo" firstAttribute="centerY" secondItem="qVi-eH-wkh" secondAttribute="centerY" id="gr6-3y-UxF"/>
+                        <constraint firstItem="nf2-O0-ws0" firstAttribute="centerX" secondItem="WXV-66-8oL" secondAttribute="centerX" id="h13-Po-7h9"/>
                         <constraint firstItem="Gbj-gh-nEo" firstAttribute="top" secondItem="1Ry-Qh-od0" secondAttribute="bottom" constant="3" id="hCr-ec-k56"/>
                         <constraint firstItem="3Es-da-gX7" firstAttribute="height" secondItem="14w-ot-OtJ" secondAttribute="height" id="hKR-t7-QN2"/>
                         <constraint firstItem="AYP-bo-mKV" firstAttribute="centerX" secondItem="qVi-eH-wkh" secondAttribute="centerX" id="hVl-mW-hZO"/>

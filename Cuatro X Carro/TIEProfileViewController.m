@@ -52,7 +52,7 @@
     [self loadUserRate:[userData valueForKey:@"rating"] == nil ? [[userData valueForKey:@"rating"] intValue] : 0];
     userName.text = [userData valueForKey:@"name"];
     userEmail.text = [userData valueForKey:@"email"];
-    if([userData valueForKey:@"profile_picture_url"] != nil){
+    if(![[userData valueForKey:@"profile_picture_url"] isEqualToString:@""]){
         NSURL *url = [NSURL URLWithString:[userData valueForKey:@"profile_picture_url"]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [[UIImage alloc] initWithData:data];
@@ -69,6 +69,8 @@
     //Se actualiza horario
     [self loadSchedule];
 }
+
+
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if(firstLoadScroll){
@@ -161,7 +163,8 @@
     [util userNotifications: @"true"];
     //Se borran datos de usuario deslogueado
     NSUserDefaults *defaultProperties = [NSUserDefaults standardUserDefaults];
-    [defaultProperties setObject:nil forKey:@"userData"];
+    NSMutableDictionary *empty = [[NSMutableDictionary alloc] init];
+    [defaultProperties setObject:empty forKey:@"userData"];
     
     //Se envia a primera vista
     [self.tabBarController setSelectedIndex:0];

@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *messengerTable;
 @property (weak, nonatomic) IBOutlet UIButton *finishTripPassengerButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelTripButton;
+@property (weak, nonatomic) IBOutlet UIButton *showPassengerButton;
 
 - (IBAction)startTripButton:(id)sender;
 - (IBAction)finishTripButton:(id)sender;

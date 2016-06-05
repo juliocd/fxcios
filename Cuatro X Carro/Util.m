@@ -26,8 +26,8 @@ static Util *instance =nil;
 }
 -(NSMutableDictionary *) getGlobalProperties{
     globalProperties = [NSMutableDictionary new];
-    //[globalProperties setValue:@"http://192.168.0.10:5000" forKey:@"host"];
-    [globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
+    [globalProperties setValue:@"http://192.168.0.16:5000" forKey:@"host"];
+    //[globalProperties setValue:@"http://localhost:5000" forKey:@"host"];
     //[globalProperties setValue:@"http://52.10.216.232:5000" forKey:@"host"];
     return globalProperties;
 }
@@ -232,7 +232,7 @@ static Util *instance =nil;
     NSMutableDictionary *deviceTokenData = [defaults objectForKey:@"deviceTokenData"];
     if(userData != nil && deviceTokenData != nil){
         //2.Validar que el token no se encuentre asignado al usuario logueado
-        if([[deviceTokenData valueForKey:@"associateToUser"] isEqualToString:@"false"]){
+        if([[deviceTokenData valueForKey:@"associateToUser"] isEqualToString:@"false"] || [deleteToken isEqualToString:@"true"]){
             
             //Se ejecuta validacion de usuario
             NSLog(@"Se inicia actualizacion de token de usuario");
@@ -268,9 +268,16 @@ static Util *instance =nil;
                     id isValid = [jsonData valueForKey:@"valid"];
                     
                     if (isValid ? [isValid boolValue] : NO) {
-                        [self updateUserDefaults:^(bool result){}];
-                        [deviceTokenData setValue:@"true" forKey:@"associateToUser"];
-                        [defaults setObject:deviceTokenData forKey:@"deviceTokenData"];
+                        NSMutableDictionary *updateDeviceTokenData = [NSMutableDictionary new];
+                        [updateDeviceTokenData setValue:[deviceTokenData valueForKey:@"deviceToken"] forKey:@"deviceToken"];
+                        if([deleteToken isEqualToString:@"false"]){
+                            [updateDeviceTokenData setValue:@"true" forKey:@"associateToUser"];
+                            [defaults setObject:updateDeviceTokenData forKey:@"deviceTokenData"];
+                            [self updateUserDefaults:^(bool result){}];
+                        }else{
+                            [updateDeviceTokenData setValue:@"false" forKey:@"associateToUser"];
+                            [defaults setObject:updateDeviceTokenData forKey:@"deviceTokenData"];
+                        }
                     }
                 });
             }] resume];

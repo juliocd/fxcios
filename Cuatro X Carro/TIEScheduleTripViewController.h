@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LRouteController.h"
 
-@interface TIEScheduleTripViewController : UIViewController <GMSMapViewDelegate>{
+@interface TIEScheduleTripViewController : UIViewController <GMSMapViewDelegate, UITextFieldDelegate>{
     UIButton *buttonMonday;
     UIButton *buttonTuesday;
     UIButton *buttonWednesday;
@@ -24,8 +24,10 @@
     GMSPolyline *_polyline;
     GMSMarker *_markerStart;
     GMSMarker *_markerFinish;
+    int contField;
 }
 - (IBAction)searchRoute:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *myView;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *selectRouteMap;
 @property (weak, nonatomic) IBOutlet UISwitch *switchUserType;

@@ -26,7 +26,6 @@
     NSTimer *updateCommentaries;
     CLLocationManager *locationManager;
     BOOL _isAvalibleLocation;
-    BOOL _isFinishedTrip;
     double currentLatitude;
     double currentLongitude;
     float testMore;
@@ -55,7 +54,6 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     _isAvalibleLocation = NO;
-    _isFinishedTrip = NO;
     currentLatitude = 0;
     currentLongitude = 0;
     testMore = 0.000001;
@@ -125,7 +123,12 @@
         NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
         result = [messages objectAtIndex:indexPath.row];
         cell.textLabel.text = [result valueForKey:@"comment"];
-        cell.detailTextLabel.text = [result valueForKey:@"name"];
+        NSString *currentDate = [result valueForKey:@"date_hour"];
+        NSString *date = [currentDate substringToIndex:10];
+        NSRange range = NSMakeRange(11, 5);
+        NSString *militaryHour = [currentDate substringWithRange:range];
+        NSString *hour = [util militaryTimeToAMPMTime:militaryHour];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@    %@ %@",[result valueForKey:@"name"],date, hour];
         cell.detailTextLabel.font = [UIFont italicSystemFontOfSize:9];
         cell.detailTextLabel.textColor = [UIColor colorWithRed:139/255.0 green:137/255.0 blue:137/255.0 alpha:1];
         if([result valueForKey:@"user_id"] == [dataUser valueForKey:@"id"]){
@@ -228,6 +231,13 @@
                                                                           selector: @selector(getDriverPosition)
                                                                           userInfo:nil
                                                                            repeats:YES];
+                }else{
+                    id isConfirmed = [tripInfo valueForKey:@"is_confirmed"];
+                    if(isConfirmed ? [isConfirmed boolValue] : NO){
+                        [self startDriverTrip];
+                    }else{
+                        cancelTripButton.hidden = NO;
+                    }
                 }
                 
                 //Se coloca punto de pasajero en el mapa
@@ -261,19 +271,19 @@
 
 //Personalizar boton atras
 -(void)backButton{
-    if(_isFinishedTrip == NO && _isAvalibleLocation == YES){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alerta" message:@"Ya se ha iniciado un viaje. Al salir de este debe volver a ingresar para reiniciarlo. ¿Desea salir?" preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }else{
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+//    if(_isFinishedTrip == NO && _isAvalibleLocation == YES){
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alerta" message:@"Ya se ha iniciado un viaje. Al salir de este debe volver a ingresar para reiniciarlo. ¿Desea salir?" preferredStyle:UIAlertControllerStyleAlert];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleDefault handler:nil]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        }]];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }else{
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
     [updateDriverPosition invalidate];
     [updateCommentaries invalidate];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -373,6 +383,66 @@
                                                   otherButtonTitles:nil];
     [alertSaveUser show];
     isPassengerOnTrip = true;
+    
+    //Finalizar viaje de pasajero
+    NSString *urlServer = [NSString stringWithFormat:@"%@/finishPassengerTrip", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    //Capturar el passenger_trip_id
+    NSString *passengerTripId = 0;
+    NSMutableArray *passengers = [trackTripData valueForKey:@"passengers"];
+    for(int r=0 ; r<[passengers count] ; r++){
+        NSMutableDictionary *passenger = passengers[r];
+        if([passenger valueForKey:@"id"] == [dataUser valueForKey:@"id"]){
+            passengerTripId = [passenger valueForKey:@"passenger_trip_id"];
+        }
+    }
+    
+    //Se configura data a enviar
+    NSString *post =[NSString stringWithFormat:
+                     @"id=%@&passenger_trip_id=%@&tenant_id=%@",
+                     [tripData valueForKey:@"id"],
+                     passengerTripId,
+                     [dataUser valueForKey:@"tenant_id"]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero de deparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        NSLog(@"requestReply: %@", requestReply);
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                [updateDriverPosition invalidate];
+                [updateCommentaries invalidate];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else{
+                UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                          message:@"Error al cancelar viaje. Intente mas tarde."
+                                                                         delegate:nil
+                                                                cancelButtonTitle:@"OK"
+                                                                otherButtonTitles:nil];
+                [alertErrorLogin show];
+            }
+        });
+    }] resume];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)cancelTrip:(id)sender {
@@ -553,8 +623,6 @@
 - (IBAction)startTripButton:(id)sender {
     
     //Se recupera posición incial del conductor y se carga en mapa
-    
-    //se recupera posicion actual del usuario
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -564,6 +632,57 @@
         [self->locationManager requestWhenInUseAuthorization];
     }
     
+    //Se recupera host para peticiones
+    NSString *urlServer = [NSString stringWithFormat:@"%@/startDriverTrip", [util.getGlobalProperties valueForKey:@"host"]];
+    NSLog(@"url saveUser: %@", urlServer);
+    //Se configura data a enviar
+    NSString *post = [NSString stringWithFormat:
+                      @"id=%@&driver_id=%@&tenant_id=%@",
+                      [tripData valueForKey:@"id"],
+                      [dataUser objectForKey:@"id"],
+                      [dataUser objectForKey:@"tenant_id"]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    //Se captura numero d eparametros a enviar
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    //Se configura request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlServer]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    //Se ejecuta request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        dispatch_async(dispatch_get_main_queue(),^{
+            //Se convierte respuesta en JSON
+            NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
+            id isValid = [jsonData valueForKey:@"valid"];
+            
+            if (isValid ? [isValid boolValue] : NO) {
+                [self startDriverTrip];
+            }
+            else{
+                UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
+                                                                        message:[jsonData valueForKey:@"description"]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                [alertSaveUser show];
+            }
+        });
+    }] resume];
+}
+
+-(void) startDriverTrip{
+    //Se incia alamcenamiento de datos de conductor
+    startTripUIButton.hidden = YES;
+    finishTripUIButton.hidden = NO;
+    requestUIButton.hidden = YES;
     [locationManager startUpdatingLocation];
 }
 
@@ -604,7 +723,6 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
-                _isFinishedTrip = YES;
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                         message:@"Viaje fianlizado correctamente"
                                                                        delegate:nil
@@ -718,8 +836,8 @@
 -(void) getDriverPosition{
     
     //Se recupera informacion de usuario
-    long userId = [[dataUser objectForKey:@"id"] intValue];
-    long tenantId = [[dataUser objectForKey:@"tenant_id"] intValue];
+    long userId = [[tripData objectForKey:@"user_id"] intValue];
+    long tenantId = [[tripData objectForKey:@"tenant_id"] intValue];
     //Se recupera host para peticiones
     NSString *urlServer = [NSString stringWithFormat:@"%@/queryDriverLocation", [util.getGlobalProperties valueForKey:@"host"]];
     NSLog(@"url saveUser: %@", urlServer);
@@ -766,6 +884,7 @@
                     [routeMap animateToLocation:CLLocationCoordinate2DMake(driverCurrentLatitude, driverCurrentLongitude)];
                 }else{
                     animmationPositionDiver.hidden = NO;
+                    cancelTripButton.hidden = NO;
                     [animmationPositionDiver startAnimating];
                 }
             }

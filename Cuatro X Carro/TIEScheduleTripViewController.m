@@ -20,11 +20,16 @@
     NSString *lastTripTypeSelected;
 }
 
-@synthesize  selectRouteMap, travelTypeSelect, searchPassengerTravels, switchUserType, saveDriverTravel, availableSeats, availableSeatsLabel;
+@synthesize  selectRouteMap, travelTypeSelect, searchPassengerTravels, switchUserType, saveDriverTravel, availableSeats, availableSeatsLabel,myView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     lastTripTypeSelected = @"Ida";
+    
+    self.availableSeats.delegate = self;
+    contField = 1;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
     //Se inicializa selector de filtro de dias
     daysArray = [[NSMutableArray alloc] init];
@@ -74,6 +79,48 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification*)aNotification {
+    contField++;
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         CGRect newFrame = [myView frame];
+         newFrame.origin.y = -160;
+         [myView setFrame:newFrame];
+         
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         CGRect newFrame = [myView frame];
+         newFrame.origin.y = 0;
+         [myView setFrame:newFrame];
+         
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)searchRoute:(id)sender {
@@ -268,7 +315,8 @@
         isGoing = [NSNumber numberWithInt:0];
     }
     //Se valida que los cupos no sean cero o mayor a seis
-    if ([availableSeats.text intValue] > 0 && [availableSeats.text intValue] < 5) {
+    //if ([availableSeats.text intValue] > 0 && [availableSeats.text intValue] < 10) {
+    if ([availableSeats.text intValue] > 0) {
     
         //Construir formato de hora a parti de horario
         NSString *strSchedule = [dataUser objectForKey:@"schedule"];
@@ -366,7 +414,7 @@
     }
     else{
         UIAlertView *alertErrorLogin = [[UIAlertView alloc] initWithTitle:@"Mensaje"
-                                                                  message:@"El número de cupos no debe ser inferior a 1 o superior a 4."
+                                                                  message:@"El número de cupos no debe ser inferior a 1."
                                                                  delegate:nil
                                                         cancelButtonTitle:@"OK"
                                                         otherButtonTitles:nil];

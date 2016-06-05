@@ -119,7 +119,7 @@
                 <constraint firstItem="e4G-La-NAM" firstAttribute="leading" secondItem="prj-Gm-DoY" secondAttribute="leading" id="xyW-iO-gQe"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="391" y="-54"/>
+            <point key="canvasLocation" x="-10" y="-82"/>
         </view>
     </objects>
     <resources>

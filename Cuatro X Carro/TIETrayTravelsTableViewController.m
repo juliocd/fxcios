@@ -13,6 +13,7 @@
 
 @interface TIETrayTravelsTableViewController (){
     Util *util;
+    UIActivityIndicatorView *spinner;
 }
 
 @end
@@ -41,6 +42,11 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated{
+    
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.view addSubview:spinner];
+    [spinner setFrame:CGRectMake((self.view.frame.size.width/2)-(spinner.frame.size.width/2), (self.view.frame.size.height/2)-(spinner.frame.size.height/2), spinner.frame.size.width, spinner.frame.size.height)];
+    [spinner startAnimating];
     [self loadTrips];
 }
 
@@ -85,6 +91,7 @@
             if (isValid ? [isValid boolValue] : NO) {
                 items = [jsonData valueForKey:@"result"];
                 [self.tableView reloadData];
+                [spinner stopAnimating];
             }
             else{
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"

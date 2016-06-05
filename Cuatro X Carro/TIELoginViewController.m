@@ -38,7 +38,7 @@
 -(void) userHaveOpenSession{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableDictionary *dataUser = [defaults objectForKey:@"userData"];
-        if (dataUser != nil) {
+        if ([dataUser count] != 0) {
             AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
             [appDelegate.window setRootViewController:appDelegate.tabBarController];
         }

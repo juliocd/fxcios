@@ -18,6 +18,7 @@
                 <outlet property="messengerTable" destination="U4j-Q6-vf7" id="pBt-nN-E06"/>
                 <outlet property="requestUIButton" destination="LeP-Vz-4qD" id="IlY-tc-6on"/>
                 <outlet property="routeMap" destination="7UK-hW-g6m" id="L1L-xy-BwU"/>
+                <outlet property="showPassengerButton" destination="4NP-Uh-DWP" id="Jub-ga-JPM"/>
                 <outlet property="startTripUIButton" destination="xpk-mt-A0d" id="blh-bO-lg8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -163,7 +164,7 @@
                         <action selector="finishTripButton:" destination="-1" eventType="touchUpInside" id="UnA-JD-rBH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rkl-PZ-OIh">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rkl-PZ-OIh">
                     <rect key="frame" x="187" y="528" width="52" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Rkl-PZ-OIh" secondAttribute="height" multiplier="13:8" id="ta3-RA-UDW"/>
@@ -179,6 +180,7 @@
                 <constraint firstItem="Rkl-PZ-OIh" firstAttribute="top" secondItem="U4j-Q6-vf7" secondAttribute="bottom" constant="4" id="0dS-XM-Fex"/>
                 <constraint firstItem="U4j-Q6-vf7" firstAttribute="top" secondItem="7UK-hW-g6m" secondAttribute="bottom" constant="25" id="1S0-t7-qor"/>
                 <constraint firstItem="yCm-SH-ei7" firstAttribute="leading" secondItem="LeP-Vz-4qD" secondAttribute="trailing" constant="10" id="22S-Iy-PdW"/>
+                <constraint firstItem="gBJ-sA-wBD" firstAttribute="height" secondItem="4NP-Uh-DWP" secondAttribute="height" id="25J-xF-43H"/>
                 <constraint firstItem="LeP-Vz-4qD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="6" id="2IS-DO-xOp"/>
                 <constraint firstAttribute="bottom" secondItem="4NP-Uh-DWP" secondAttribute="bottom" constant="8" id="2JI-Vi-XV4"/>
                 <constraint firstItem="U4j-Q6-vf7" firstAttribute="centerX" secondItem="7UK-hW-g6m" secondAttribute="centerX" id="3fI-Hu-fud"/>
@@ -230,11 +232,6 @@
                 <constraint firstItem="gBJ-sA-wBD" firstAttribute="leading" secondItem="4NP-Uh-DWP" secondAttribute="trailing" constant="7" id="xtW-KV-R9n"/>
             </constraints>
             <point key="canvasLocation" x="306" y="229"/>
-        </view>
-        <view contentMode="scaleToFill" id="xzU-7H-F58">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
