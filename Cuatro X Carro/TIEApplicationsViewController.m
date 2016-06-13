@@ -213,7 +213,7 @@
     applicantPhone.text = ([application valueForKey:@"phone"] != (id)[NSNull null]) ? [application valueForKey:@"phone"] : @"000000000";
     applicantAddress.text = ([application valueForKey:@"address"] != (id)[NSNull null]) ? [application valueForKey:@"address"] : @"Clle XXX Nro XX-XXXX";
     NSString *imageProfile = ([application valueForKey:@"profile_picture_url"] == (id)[NSNull null]) ? @"" : [application valueForKey:@"profile_picture_url"];
-    if(imageProfile != nil){
+    if(![imageProfile isEqualToString:@""]){
         NSURL *url = [NSURL URLWithString:imageProfile];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [[UIImage alloc] initWithData:data];

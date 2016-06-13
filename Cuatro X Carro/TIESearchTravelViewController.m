@@ -144,7 +144,7 @@
         
         //Configurar imagen;
         NSString *imageProfile = ([item valueForKey:@"thumbnailUrl"] == (id)[NSNull null]) ? @"" : [item valueForKey:@"thumbnailUrl"];
-        if(imageProfile != nil){
+        if(![imageProfile isEqualToString:@""]){
             NSURL *url = [NSURL URLWithString:imageProfile];
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [[UIImage alloc] initWithData:data];

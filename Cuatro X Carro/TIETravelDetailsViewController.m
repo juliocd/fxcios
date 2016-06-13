@@ -518,10 +518,11 @@
             
             //Se configura data a enviar
             NSString *post =[NSString stringWithFormat:
-                             @"id=%@&driver_id=%@&passenger_trip_id=%@",
+                             @"id=%@&driver_id=%@&passenger_trip_id=%@&tenant_id=%@",
                              [tripData valueForKey:@"id"],
                              [trackTripData valueForKey:@"driver_id"],
-                             passengerTripId];
+                             passengerTripId,
+                             [dataUser valueForKey:@"tenant_id"]];
             NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
             
             //Se captura numero de deparametros a enviar
@@ -614,12 +615,6 @@
     }] resume];
 }
 
--(void) viewPassengerDetails:(NSString *) passengerId{
-    TIEStatisticsViewController *passangerDetailsVC =[[TIEStatisticsViewController alloc] initWithTripId:passengerId];
-    UINavigationController *trasformerNavC = [[UINavigationController alloc]initWithRootViewController:passangerDetailsVC];
-    [self presentViewController:trasformerNavC animated:YES completion:nil];
-}
-
 - (IBAction)startTripButton:(id)sender {
     
     //Se recupera posición incial del conductor y se carga en mapa
@@ -683,6 +678,7 @@
     startTripUIButton.hidden = YES;
     finishTripUIButton.hidden = NO;
     requestUIButton.hidden = YES;
+    cancelTripButton.hidden = YES;
     [locationManager startUpdatingLocation];
 }
 
@@ -698,8 +694,10 @@
     NSLog(@"url saveUser: %@", urlServer);
     //Se configura data a enviar
     NSString *post = [NSString stringWithFormat:
-                      @"id=%@",
-                      [tripData valueForKey:@"id"]];
+                      @"id=%@&user_id=%@&tenant_id=%@",
+                      [tripData valueForKey:@"id"],
+                      [dataUser valueForKey:@"id"],
+                      [dataUser valueForKey:@"tenant_id"]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     //Se captura numero d eparametros a enviar
@@ -723,6 +721,7 @@
             id isValid = [jsonData valueForKey:@"valid"];
             
             if (isValid ? [isValid boolValue] : NO) {
+                [self dismissViewControllerAnimated:YES completion:nil];
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
                                                                         message:@"Viaje fianlizado correctamente"
                                                                        delegate:nil

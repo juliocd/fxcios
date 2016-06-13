@@ -10,11 +10,16 @@
 
 @interface TIEStatisticsViewController : ViewController
 
-- (id)initWithTripId:(NSString *) passengerId;
+- (id)initWithUserId:(NSString *) _userId;
 
 @property (weak, nonatomic) IBOutlet UILabel *startedTripsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *finishedTripsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cancelTripLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *rateOneIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateTwoIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateThreeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateFourIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *rateFiveIcon;
 
 @end

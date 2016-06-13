@@ -83,15 +83,15 @@
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         dispatch_async(dispatch_get_main_queue(),^{
+            [spinner stopAnimating];
             //Se convierte respuesta en JSON
             NSData *dataResult = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:dataResult options:0 error:nil];
             id isValid = [jsonData valueForKey:@"valid"];
-            
+
             if (isValid ? [isValid boolValue] : NO) {
                 items = [jsonData valueForKey:@"result"];
                 [self.tableView reloadData];
-                [spinner stopAnimating];
             }
             else{
                 UIAlertView *alertSaveUser = [[UIAlertView alloc] initWithTitle:@"Mensaje"
@@ -148,7 +148,7 @@
         
         //Configurar imagen;
         NSString *imageProfile = ([item valueForKey:@"thumbnailUrl"] == (id)[NSNull null]) ? @"" : [item valueForKey:@"thumbnailUrl"];
-        if(imageProfile != nil){
+        if(![imageProfile isEqualToString:@""]){
             NSURL *url = [NSURL URLWithString:imageProfile];
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [[UIImage alloc] initWithData:data];

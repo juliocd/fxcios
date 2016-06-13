@@ -153,7 +153,7 @@
 }
 
 - (IBAction)passengerStatistics:(id)sender {
-    TIEStatisticsViewController *myStatisticsVC = [[TIEStatisticsViewController alloc] init];
+    TIEStatisticsViewController *myStatisticsVC = [[TIEStatisticsViewController alloc] initWithUserId:[userData objectForKey:@"id"]];
     UINavigationController *trasformerNavC = [[UINavigationController alloc] initWithRootViewController:myStatisticsVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
 }
@@ -186,42 +186,42 @@
         switch (i) {
             case 0:
                 if(loadStar){
-                    [rateOneIcon setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [rateOneIcon setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [rateOneIcon setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [rateOneIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 1:
                 if(loadStar){
-                    [rateTwoIcon setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [rateTwoIcon setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [rateTwoIcon setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [rateTwoIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 2:
                 if(loadStar){
-                    [rateThreeIcon setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [rateThreeIcon setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [rateThreeIcon setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [rateThreeIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 3:
                 if(loadStar){
-                    [rateFourIcon setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [rateFourIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 else{
-                    [rateFourIcon setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [rateFourIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
             case 4:
                 if(loadStar){
-                    [rateFiveIcon setImage:[UIImage imageNamed:@"rate_full.png"]];
+                    [rateFiveIcon setImage:[UIImage imageNamed:@"star_on.png"]];
                 }
                 else{
-                    [rateFiveIcon setImage:[UIImage imageNamed:@"rate_empty.png"]];
+                    [rateFiveIcon setImage:[UIImage imageNamed:@"star_off.png"]];
                 }
                 break;
                 
