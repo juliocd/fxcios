@@ -14,6 +14,7 @@
 #import "TIELoginViewController.h"
 #import "ActionSheetPicker.h"
 #import "TIEStatisticsViewController.h"
+#import "TIERatingDriverViewController.h"
 
 @interface TIEProfileViewController (){
     //Se declara variable de utilidades
@@ -65,6 +66,9 @@
     //Estilo de imagen de perfil
     profilePricture.layer.cornerRadius = profilePricture.frame.size.width / 2;
     profilePricture.clipsToBounds = YES;
+    
+    //Se actualiza calificacion
+    [self userRating:[userData valueForKey:@"rating"]];
     
     //Se actualiza horario
     [self loadSchedule];
@@ -156,6 +160,26 @@
     TIEStatisticsViewController *myStatisticsVC = [[TIEStatisticsViewController alloc] initWithUserId:[userData objectForKey:@"id"]];
     UINavigationController *trasformerNavC = [[UINavigationController alloc] initWithRootViewController:myStatisticsVC];
     [self presentViewController:trasformerNavC animated:YES completion:nil];
+}
+
+- (IBAction)showInformation:(id)sender {
+    TIERatingDriverViewController *ratingDriverViewController = [[TIERatingDriverViewController alloc]init];
+    [self addChildViewController:ratingDriverViewController];
+    //TIERatingUserViewController.view.frame = self.view.frame;
+    ratingDriverViewController.view.frame = CGRectMake(15, (self.view.frame.size.height - 150) / 2, 290, 180);
+    ratingDriverViewController.view.layer.cornerRadius = 15.f;
+    ratingDriverViewController.view.alpha = 0.80; /// set as per your requirement
+    ratingDriverViewController.view.clipsToBounds = YES;
+    ratingDriverViewController.view.backgroundColor = [UIColor whiteColor];
+    ratingDriverViewController.view.opaque = YES;
+    [self.view addSubview:ratingDriverViewController.view];
+    ratingDriverViewController.view.alpha = 0;
+    [ratingDriverViewController didMoveToParentViewController:self];
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         ratingDriverViewController.view.alpha = 0.9;
+     }
+    completion:nil];
 }
 
 - (IBAction)LogOut:(id)sender {
@@ -320,4 +344,53 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+-(void) userRating:(NSString*) ratingStr{
+    long rating = [ratingStr longLongValue];
+    switch (rating) {
+        case 1:
+            rateOneIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_off.png"];
+            break;
+        case 2:
+            rateOneIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_off.png"];
+            break;
+        case 3:
+            rateOneIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_off.png"];
+            break;
+        case 4:
+            rateOneIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_off.png"];
+            break;
+        case 5:
+            rateOneIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_on.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_oon.png"];
+            break;
+            
+        default:
+            rateOneIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateTwoIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateThreeIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFourIcon.image = [UIImage imageNamed:@"star_off.png"];
+            rateFiveIcon.image = [UIImage imageNamed:@"star_off.png"];
+    }
+}
+
 @end

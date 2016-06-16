@@ -14,8 +14,8 @@
                 <outlet property="mondayDepartTime" destination="bEw-wh-HzF" id="mj7-xc-Xg5"/>
                 <outlet property="mondayReturnTime" destination="eDV-Lh-O79" id="sR8-3v-JvX"/>
                 <outlet property="profilePricture" destination="WXV-66-8oL" id="x8S-gX-kcU"/>
-                <outlet property="rateFiveIcon" destination="V1Z-K9-jlw" id="MiF-sW-CjL"/>
-                <outlet property="rateFourIcon" destination="8ig-S2-0Ay" id="sRt-GI-OON"/>
+                <outlet property="rateFiveIcon" destination="8ig-S2-0Ay" id="esG-A8-EgA"/>
+                <outlet property="rateFourIcon" destination="V1Z-K9-jlw" id="2Ca-LF-l3G"/>
                 <outlet property="rateOneIcon" destination="13s-oD-Gd2" id="Ndm-mC-feT"/>
                 <outlet property="rateThreeIcon" destination="YNS-8a-z5C" id="hGt-TC-j2a"/>
                 <outlet property="rateTwoIcon" destination="GuL-O6-K97" id="TWv-rL-hQ8"/>
@@ -429,6 +429,9 @@
                                 <constraint firstAttribute="width" secondItem="7lo-e3-cjA" secondAttribute="height" multiplier="1:1" id="EUE-Oc-ZO3"/>
                             </constraints>
                             <state key="normal" backgroundImage="help_boton.png"/>
+                            <connections>
+                                <action selector="showInformation:" destination="-1" eventType="touchUpInside" id="VoM-ub-4Ve"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcP-Ws-GPO">
                             <rect key="frame" x="245" y="447" width="35" height="35"/>
@@ -662,7 +665,7 @@
                 <constraint firstItem="pVb-Pv-5Qi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="NyZ-zz-Fym"/>
                 <constraint firstAttribute="bottom" secondItem="pVb-Pv-5Qi" secondAttribute="bottom" id="ntg-ky-2lJ"/>
             </constraints>
-            <point key="canvasLocation" x="-1365" y="-635"/>
+            <point key="canvasLocation" x="-1585" y="-626"/>
         </view>
     </objects>
     <resources>

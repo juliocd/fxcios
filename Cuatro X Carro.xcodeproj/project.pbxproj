@@ -45,6 +45,8 @@
 		CE093F9E1C7AC4AD00E839D1 /* viajes_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE093F9D1C7AC4AD00E839D1 /* viajes_box.png */; };
 		CE0ADCA11C02DD3F004B22DD /* LRouteController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0ADCA01C02DD3F004B22DD /* LRouteController.m */; };
 		CE11ACAD1CA796AC005FC4CB /* logo_menu@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */; };
+		CE474DE51D10E11B00ABE51F /* TIERatingDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE474DE31D10E11B00ABE51F /* TIERatingDriverViewController.m */; };
+		CE474DE61D10E11B00ABE51F /* TIERatingDriverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE474DE41D10E11B00ABE51F /* TIERatingDriverViewController.xib */; };
 		CE4AAB9E1BEED90F00C321DF /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AAB9D1BEED90F00C321DF /* Util.m */; };
 		CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AABA31BEEDCA300C321DF /* DefaultRequest.m */; };
 		CE5DAAF91CD5975B001D7985 /* TIEMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5DAAF71CD5975B001D7985 /* TIEMessageViewController.m */; };
@@ -192,6 +194,9 @@
 		CE0ADC9F1C02DD3F004B22DD /* LRouteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRouteController.h; sourceTree = "<group>"; };
 		CE0ADCA01C02DD3F004B22DD /* LRouteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRouteController.m; sourceTree = "<group>"; };
 		CE11ACAC1CA796AC005FC4CB /* logo_menu@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_menu@2x~iphone.png"; sourceTree = "<group>"; };
+		CE474DE21D10E11B00ABE51F /* TIERatingDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIERatingDriverViewController.h; sourceTree = "<group>"; };
+		CE474DE31D10E11B00ABE51F /* TIERatingDriverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIERatingDriverViewController.m; sourceTree = "<group>"; };
+		CE474DE41D10E11B00ABE51F /* TIERatingDriverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIERatingDriverViewController.xib; sourceTree = "<group>"; };
 		CE4AAB9C1BEED90F00C321DF /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		CE4AAB9D1BEED90F00C321DF /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		CE4AABA21BEEDCA300C321DF /* DefaultRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRequest.h; sourceTree = "<group>"; };
@@ -337,6 +342,7 @@
 		0ECD1FDD1B5C510700D6CFA5 /* Cuatro X Carro */ = {
 			isa = PBXGroup;
 			children = (
+				CE2351F71D0F9D23000C33BD /* views */,
 				0ECD20151B5CBFAF00D6CFA5 /* Utils */,
 				0ECD20051B5C516B00D6CFA5 /* Controllers */,
 				0ECD20041B5C515B00D6CFA5 /* Resources */,
@@ -546,6 +552,13 @@
 			name = CustomCell;
 			sourceTree = "<group>";
 		};
+		CE2351F71D0F9D23000C33BD /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
 		CE5DAAF51CD5972C001D7985 /* SwipeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +663,9 @@
 				CE8F40011BB8C081003D8CDD /* TIEApplicationsViewController.h */,
 				CE8F40021BB8C081003D8CDD /* TIEApplicationsViewController.m */,
 				CE8F40031BB8C081003D8CDD /* TIEApplicationsViewController.xib */,
+				CE474DE21D10E11B00ABE51F /* TIERatingDriverViewController.h */,
+				CE474DE31D10E11B00ABE51F /* TIERatingDriverViewController.m */,
+				CE474DE41D10E11B00ABE51F /* TIERatingDriverViewController.xib */,
 			);
 			name = TrayTravels;
 			sourceTree = "<group>";
@@ -772,6 +788,7 @@
 				CE8F40101BB8D2C1003D8CDD /* TIESearchTravelViewController.xib in Resources */,
 				CE79AE4E1C83FC5500440475 /* check_off.png in Resources */,
 				CE093F9E1C7AC4AD00E839D1 /* viajes_box.png in Resources */,
+				CE474DE61D10E11B00ABE51F /* TIERatingDriverViewController.xib in Resources */,
 				CE5DAB021CD597AF001D7985 /* TIEPassengerViewController.xib in Resources */,
 				CEFD84741BAF4DA200410730 /* seat_full.png in Resources */,
 				0ECD20101B5C534100D6CFA5 /* TIESingUpViewController.xib in Resources */,
@@ -871,6 +888,7 @@
 				CEFD845D1BAF3B7100410730 /* TIEProfileViewController.m in Sources */,
 				CE4AABA41BEEDCA300C321DF /* DefaultRequest.m in Sources */,
 				CEFD84581BAF3A6300410730 /* TIETrayTravelsTableViewController.m in Sources */,
+				CE474DE51D10E11B00ABE51F /* TIERatingDriverViewController.m in Sources */,
 				0ECD20491B5CC44200D6CFA5 /* ActionSheetDistancePicker.m in Sources */,
 				CE6D6E4D1CC2911C000CCA0D /* TIEStatisticsViewController.m in Sources */,
 				0ECD204B1B5CC44200D6CFA5 /* ActionSheetStringPicker.m in Sources */,

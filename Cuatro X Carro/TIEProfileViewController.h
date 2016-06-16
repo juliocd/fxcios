@@ -15,6 +15,7 @@
 - (IBAction)EditProfile:(id)sender;
 - (IBAction)updateSchedue:(id)sender;
 - (IBAction)passengerStatistics:(id)sender;
+- (IBAction)showInformation:(id)sender;
 
 //Tomar foto
 @property (weak, nonatomic) IBOutlet UIImageView *profilePricture;

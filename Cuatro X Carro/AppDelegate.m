@@ -119,22 +119,20 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     UIApplicationState state = [application applicationState];
     
-    if (state == UIApplicationStateActive)
-    {
-        
-        NSLog(@"User Info : %@", [userInfo description]);
-        
-        NSLog(@"User Info Alert Message : %@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
-        
-        NSString *messageString = [NSString stringWithFormat:@"%@", [[userInfo objectForKey:@"aps"] objectForKey:@"alert"]];
-        
-        NSString *playSoundOnAlert = [NSString stringWithFormat:@"%@", [[userInfo objectForKey:@"aps"] objectForKey:@"sound"]];
-        
-        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@",[[NSBundle mainBundle] resourcePath],playSoundOnAlert]];
-        
-        NSError *error;
-        
+    NSString *group = [userInfo objectForKey:@"group"];
+    if([group isEqualToString:@"FINISH_TRIP"]){
+            application.applicationIconBadgeNumber = 0;
+            
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"Push Notification"
+                                                                message:@"hola"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"NO"
+                                                      otherButtonTitles:@"YES", nil];
+            [alertview show];
     }
+    
+        NSLog(@"User group : %@", [userInfo objectForKey:@"group"]);
+        NSLog(@"User params : %@", [userInfo objectForKey:@"params"]);
 }
 
 @end
